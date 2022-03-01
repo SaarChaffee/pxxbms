@@ -3,14 +3,8 @@ package com.chaffee.entity;
 import java.util.Date;
 import java.io.Serializable;
 
-/**
- * (User)实体类
- *
- * @author SaarChaffee
- * @since 2022-03-01 15:48:57
- */
+
 public class User implements Serializable {
-  private static final long serialVersionUID = -20839496765469667L;
   /**
    * 主键ID
    */
@@ -18,7 +12,7 @@ public class User implements Serializable {
   /**
    * 用户编码
    */
-  private String usercode;
+  private String userCode;
   /**
    * 用户名称
    */
@@ -26,7 +20,7 @@ public class User implements Serializable {
   /**
    * 用户密码
    */
-  private String userpassword;
+  private String userPassword;
   /**
    * 性别（1:女、 2:男）
    */
@@ -46,128 +40,62 @@ public class User implements Serializable {
   /**
    * 用户角色（取自角色表-角色id）
    */
-  private Integer userrole;
+  private Integer userRole;
   /**
    * 创建者（userId）
    */
-  private Integer createdby;
+  private Integer createdBy;
   /**
    * 创建时间
    */
-  private Date creationdate;
+  private Date creationDate;
   /**
    * 更新者（userId）
    */
-  private Integer modifyby;
+  private Integer modifyBy;
   /**
    * 更新时间
    */
-  private Date modifydate;
+  private Date modifyDate;
   
-  
-  public Integer getId() {
-    return id;
+  public User() {
   }
   
-  public void setId( Integer id ) {
+  public User( Integer id, String userCode, String username, String userPassword, Integer gender, Date birthday,
+               String phone, String address, Integer userRole, Integer createdBy, Date creationDate, Integer modifyBy
+      , Date modifyDate ) {
     this.id = id;
-  }
-  
-  public String getUsercode() {
-    return usercode;
-  }
-  
-  public void setUsercode( String usercode ) {
-    this.usercode = usercode;
-  }
-  
-  public String getUsername() {
-    return username;
-  }
-  
-  public void setUsername( String username ) {
+    this.userCode = userCode;
     this.username = username;
-  }
-  
-  public String getUserpassword() {
-    return userpassword;
-  }
-  
-  public void setUserpassword( String userpassword ) {
-    this.userpassword = userpassword;
-  }
-  
-  public Integer getGender() {
-    return gender;
-  }
-  
-  public void setGender( Integer gender ) {
+    this.userPassword = userPassword;
     this.gender = gender;
-  }
-  
-  public Date getBirthday() {
-    return birthday;
-  }
-  
-  public void setBirthday( Date birthday ) {
     this.birthday = birthday;
-  }
-  
-  public String getPhone() {
-    return phone;
-  }
-  
-  public void setPhone( String phone ) {
     this.phone = phone;
-  }
-  
-  public String getAddress() {
-    return address;
-  }
-  
-  public void setAddress( String address ) {
     this.address = address;
+    this.userRole = userRole;
+    this.createdBy = createdBy;
+    this.creationDate = creationDate;
+    this.modifyBy = modifyBy;
+    this.modifyDate = modifyDate;
   }
   
-  public Integer getUserrole() {
-    return userrole;
+  @Override
+  public String toString() {
+    return "User{" +
+        "id=" + id +
+        ", userCode='" + userCode + '\'' +
+        ", username='" + username + '\'' +
+        ", userPassword='" + userPassword + '\'' +
+        ", gender=" + gender +
+        ", birthday=" + birthday +
+        ", phone='" + phone + '\'' +
+        ", address='" + address + '\'' +
+        ", userRole=" + userRole +
+        ", createdBy=" + createdBy +
+        ", creationDate=" + creationDate +
+        ", modifyBy=" + modifyBy +
+        ", modifyDate=" + modifyDate +
+        '}';
   }
-  
-  public void setUserrole( Integer userrole ) {
-    this.userrole = userrole;
-  }
-  
-  public Integer getCreatedby() {
-    return createdby;
-  }
-  
-  public void setCreatedby( Integer createdby ) {
-    this.createdby = createdby;
-  }
-  
-  public Date getCreationdate() {
-    return creationdate;
-  }
-  
-  public void setCreationdate( Date creationdate ) {
-    this.creationdate = creationdate;
-  }
-  
-  public Integer getModifyby() {
-    return modifyby;
-  }
-  
-  public void setModifyby( Integer modifyby ) {
-    this.modifyby = modifyby;
-  }
-  
-  public Date getModifydate() {
-    return modifydate;
-  }
-  
-  public void setModifydate( Date modifydate ) {
-    this.modifydate = modifydate;
-  }
-  
 }
 

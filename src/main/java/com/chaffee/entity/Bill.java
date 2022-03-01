@@ -3,14 +3,8 @@ package com.chaffee.entity;
 import java.util.Date;
 import java.io.Serializable;
 
-/**
- * (Bill)实体类
- *
- * @author SaarChaffee
- * @since 2022-03-01 15:48:56
- */
+
 public class Bill implements Serializable {
-  private static final long serialVersionUID = 925895349705147816L;
   /**
    * 主键ID
    */
@@ -18,15 +12,15 @@ public class Bill implements Serializable {
   /**
    * 订单号
    */
-  private String billcode;
+  private String billCode;
   /**
    * 商品名
    */
-  private String goodname;
+  private String goodName;
   /**
    * 商品编号
    */
-  private String goodcode;
+  private String goodCode;
   /**
    * 购买数量
    */
@@ -34,15 +28,15 @@ public class Bill implements Serializable {
   /**
    * 商品单价
    */
-  private Integer goodprice;
+  private Integer goodPrice;
   /**
    * 总价
    */
-  private Integer totalprice;
+  private Integer totalPrice;
   /**
    * 顾客编号
    */
-  private String customercode;
+  private String customerCode;
   /**
    * 配送地址
    */
@@ -50,32 +44,55 @@ public class Bill implements Serializable {
   /**
    * 下单时间
    */
-  private Date billtime;
+  private Date billTime;
   /**
    * 支付方式
    */
-  private Integer paymentmethod;
+  private Integer paymentMethod;
   /**
    * 配送时间
    */
-  private Date deliverytime;
+  private Date deliveryTime;
   /**
    * 创建者
    */
-  private Integer createdby;
+  private Integer createdBy;
   /**
    * 创建时间
    */
-  private Date creationdate;
+  private Date creationDate;
   /**
    * 修改者
    */
-  private Integer modifyby;
+  private Integer modifyBy;
   /**
    * 修改时间
    */
-  private Date modifydate;
+  private Date modifyDate;
   
+  public Bill() {
+  }
+  
+  public Bill( Integer id, String billCode, String goodName, String goodCode, Integer quantity, Integer goodPrice,
+               Integer totalPrice, String customerCode, String address, Date billTime, Integer paymentMethod,
+               Date deliveryTime, Integer createdBy, Date creationDate, Integer modifyBy, Date modifyDate ) {
+    this.id = id;
+    this.billCode = billCode;
+    this.goodName = goodName;
+    this.goodCode = goodCode;
+    this.quantity = quantity;
+    this.goodPrice = goodPrice;
+    this.totalPrice = totalPrice;
+    this.customerCode = customerCode;
+    this.address = address;
+    this.billTime = billTime;
+    this.paymentMethod = paymentMethod;
+    this.deliveryTime = deliveryTime;
+    this.createdBy = createdBy;
+    this.creationDate = creationDate;
+    this.modifyBy = modifyBy;
+    this.modifyDate = modifyDate;
+  }
   
   public Integer getId() {
     return id;
@@ -85,28 +102,28 @@ public class Bill implements Serializable {
     this.id = id;
   }
   
-  public String getBillcode() {
-    return billcode;
+  public String getBillCode() {
+    return billCode;
   }
   
-  public void setBillcode( String billcode ) {
-    this.billcode = billcode;
+  public void setBillCode( String billCode ) {
+    this.billCode = billCode;
   }
   
-  public String getGoodname() {
-    return goodname;
+  public String getGoodName() {
+    return goodName;
   }
   
-  public void setGoodname( String goodname ) {
-    this.goodname = goodname;
+  public void setGoodName( String goodName ) {
+    this.goodName = goodName;
   }
   
-  public String getGoodcode() {
-    return goodcode;
+  public String getGoodCode() {
+    return goodCode;
   }
   
-  public void setGoodcode( String goodcode ) {
-    this.goodcode = goodcode;
+  public void setGoodCode( String goodCode ) {
+    this.goodCode = goodCode;
   }
   
   public Integer getQuantity() {
@@ -117,28 +134,28 @@ public class Bill implements Serializable {
     this.quantity = quantity;
   }
   
-  public Integer getGoodprice() {
-    return goodprice;
+  public Integer getGoodPrice() {
+    return goodPrice;
   }
   
-  public void setGoodprice( Integer goodprice ) {
-    this.goodprice = goodprice;
+  public void setGoodPrice( Integer goodPrice ) {
+    this.goodPrice = goodPrice;
   }
   
-  public Integer getTotalprice() {
-    return totalprice;
+  public Integer getTotalPrice() {
+    return totalPrice;
   }
   
-  public void setTotalprice( Integer totalprice ) {
-    this.totalprice = totalprice;
+  public void setTotalPrice( Integer totalPrice ) {
+    this.totalPrice = totalPrice;
   }
   
-  public String getCustomercode() {
-    return customercode;
+  public String getCustomerCode() {
+    return customerCode;
   }
   
-  public void setCustomercode( String customercode ) {
-    this.customercode = customercode;
+  public void setCustomerCode( String customerCode ) {
+    this.customerCode = customerCode;
   }
   
   public String getAddress() {
@@ -149,61 +166,82 @@ public class Bill implements Serializable {
     this.address = address;
   }
   
-  public Date getBilltime() {
-    return billtime;
+  public Date getBillTime() {
+    return billTime;
   }
   
-  public void setBilltime( Date billtime ) {
-    this.billtime = billtime;
+  public void setBillTime( Date billTime ) {
+    this.billTime = billTime;
   }
   
-  public Integer getPaymentmethod() {
-    return paymentmethod;
+  public Integer getPaymentMethod() {
+    return paymentMethod;
   }
   
-  public void setPaymentmethod( Integer paymentmethod ) {
-    this.paymentmethod = paymentmethod;
+  public void setPaymentMethod( Integer paymentMethod ) {
+    this.paymentMethod = paymentMethod;
   }
   
-  public Date getDeliverytime() {
-    return deliverytime;
+  public Date getDeliveryTime() {
+    return deliveryTime;
   }
   
-  public void setDeliverytime( Date deliverytime ) {
-    this.deliverytime = deliverytime;
+  public void setDeliveryTime( Date deliveryTime ) {
+    this.deliveryTime = deliveryTime;
   }
   
-  public Integer getCreatedby() {
-    return createdby;
+  public Integer getCreatedBy() {
+    return createdBy;
   }
   
-  public void setCreatedby( Integer createdby ) {
-    this.createdby = createdby;
+  public void setCreatedBy( Integer createdBy ) {
+    this.createdBy = createdBy;
   }
   
-  public Date getCreationdate() {
-    return creationdate;
+  public Date getCreationDate() {
+    return creationDate;
   }
   
-  public void setCreationdate( Date creationdate ) {
-    this.creationdate = creationdate;
+  public void setCreationDate( Date creationDate ) {
+    this.creationDate = creationDate;
   }
   
-  public Integer getModifyby() {
-    return modifyby;
+  public Integer getModifyBy() {
+    return modifyBy;
   }
   
-  public void setModifyby( Integer modifyby ) {
-    this.modifyby = modifyby;
+  public void setModifyBy( Integer modifyBy ) {
+    this.modifyBy = modifyBy;
   }
   
-  public Date getModifydate() {
-    return modifydate;
+  public Date getModifyDate() {
+    return modifyDate;
   }
   
-  public void setModifydate( Date modifydate ) {
-    this.modifydate = modifydate;
+  public void setModifyDate( Date modifyDate ) {
+    this.modifyDate = modifyDate;
   }
   
+  @Override
+  public String toString() {
+    return "Bill{" +
+        "id=" + id +
+        ", billCode='" + billCode + '\'' +
+        ", goodName='" + goodName + '\'' +
+        ", goodCode='" + goodCode + '\'' +
+        ", quantity=" + quantity +
+        ", goodPrice=" + goodPrice +
+        ", totalPrice=" + totalPrice +
+        ", customerCode='" + customerCode + '\'' +
+        ", address='" + address + '\'' +
+        ", billTime=" + billTime +
+        ", paymentMethod=" + paymentMethod +
+        ", deliveryTime=" + deliveryTime +
+        ", createdBy=" + createdBy +
+        ", creationDate=" + creationDate +
+        ", modifyBy=" + modifyBy +
+        ", modifyDate=" + modifyDate +
+        '}';
+  }
 }
 

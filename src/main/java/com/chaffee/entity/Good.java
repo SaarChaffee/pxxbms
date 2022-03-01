@@ -3,14 +3,9 @@ package com.chaffee.entity;
 import java.util.Date;
 import java.io.Serializable;
 
-/**
- * (Good)实体类
- *
- * @author SaarChaffee
- * @since 2022-03-01 15:48:56
- */
+
 public class Good implements Serializable {
-  private static final long serialVersionUID = 802854959466692710L;
+  
   /**
    * 主键ID
    */
@@ -18,15 +13,15 @@ public class Good implements Serializable {
   /**
    * 商品名
    */
-  private String goodname;
+  private String goodName;
   /**
    * 商品编号
    */
-  private String goodcode;
+  private String goodCode;
   /**
    * 商品类别
    */
-  private Integer goodtype;
+  private Integer goodType;
   /**
    * 商品库存
    */
@@ -38,20 +33,36 @@ public class Good implements Serializable {
   /**
    * 创建者
    */
-  private Integer createdby;
+  private Integer createdBy;
   /**
    * 创建时间
    */
-  private Date creationdate;
+  private Date creationDate;
   /**
    * 修改者
    */
-  private Integer modifyby;
+  private Integer modifyBy;
   /**
    * 修改时间
    */
-  private Date modifydate;
+  private Date modifyDate;
   
+  public Good() {
+  }
+  
+  public Good( Integer id, String goodName, String goodCode, Integer goodType, Integer inventory, String owner,
+               Integer createdBy, Date creationDate, Integer modifyBy, Date modifyDate ) {
+    this.id = id;
+    this.goodName = goodName;
+    this.goodCode = goodCode;
+    this.goodType = goodType;
+    this.inventory = inventory;
+    this.owner = owner;
+    this.createdBy = createdBy;
+    this.creationDate = creationDate;
+    this.modifyBy = modifyBy;
+    this.modifyDate = modifyDate;
+  }
   
   public Integer getId() {
     return id;
@@ -61,28 +72,28 @@ public class Good implements Serializable {
     this.id = id;
   }
   
-  public String getGoodname() {
-    return goodname;
+  public String getGoodName() {
+    return goodName;
   }
   
-  public void setGoodname( String goodname ) {
-    this.goodname = goodname;
+  public void setGoodName( String goodName ) {
+    this.goodName = goodName;
   }
   
-  public String getGoodcode() {
-    return goodcode;
+  public String getGoodCode() {
+    return goodCode;
   }
   
-  public void setGoodcode( String goodcode ) {
-    this.goodcode = goodcode;
+  public void setGoodCode( String goodCode ) {
+    this.goodCode = goodCode;
   }
   
-  public Integer getGoodtype() {
-    return goodtype;
+  public Integer getGoodType() {
+    return goodType;
   }
   
-  public void setGoodtype( Integer goodtype ) {
-    this.goodtype = goodtype;
+  public void setGoodType( Integer goodType ) {
+    this.goodType = goodType;
   }
   
   public Integer getInventory() {
@@ -101,37 +112,52 @@ public class Good implements Serializable {
     this.owner = owner;
   }
   
-  public Integer getCreatedby() {
-    return createdby;
+  public Integer getCreatedBy() {
+    return createdBy;
   }
   
-  public void setCreatedby( Integer createdby ) {
-    this.createdby = createdby;
+  public void setCreatedBy( Integer createdBy ) {
+    this.createdBy = createdBy;
   }
   
-  public Date getCreationdate() {
-    return creationdate;
+  public Date getCreationDate() {
+    return creationDate;
   }
   
-  public void setCreationdate( Date creationdate ) {
-    this.creationdate = creationdate;
+  public void setCreationDate( Date creationDate ) {
+    this.creationDate = creationDate;
   }
   
-  public Integer getModifyby() {
-    return modifyby;
+  public Integer getModifyBy() {
+    return modifyBy;
   }
   
-  public void setModifyby( Integer modifyby ) {
-    this.modifyby = modifyby;
+  public void setModifyBy( Integer modifyBy ) {
+    this.modifyBy = modifyBy;
   }
   
-  public Date getModifydate() {
-    return modifydate;
+  public Date getModifyDate() {
+    return modifyDate;
   }
   
-  public void setModifydate( Date modifydate ) {
-    this.modifydate = modifydate;
+  public void setModifyDate( Date modifyDate ) {
+    this.modifyDate = modifyDate;
   }
   
+  @Override
+  public String toString() {
+    return "Good{" +
+        "id=" + id +
+        ", goodName='" + goodName + '\'' +
+        ", goodCode='" + goodCode + '\'' +
+        ", goodType=" + goodType +
+        ", inventory=" + inventory +
+        ", owner='" + owner + '\'' +
+        ", createdBy=" + createdBy +
+        ", creationDate=" + creationDate +
+        ", modifyBy=" + modifyBy +
+        ", modifyDate=" + modifyDate +
+        '}';
+  }
 }
 

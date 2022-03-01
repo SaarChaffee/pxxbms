@@ -3,14 +3,8 @@ package com.chaffee.entity;
 import java.util.Date;
 import java.io.Serializable;
 
-/**
- * (UserRole)实体类
- *
- * @author SaarChaffee
- * @since 2022-03-01 15:48:57
- */
+
 public class UserRole implements Serializable {
-  private static final long serialVersionUID = 439607195758693454L;
   /**
    * 主键ID
    */
@@ -18,28 +12,41 @@ public class UserRole implements Serializable {
   /**
    * 角色编码
    */
-  private String rolecode;
+  private String roleCode;
   /**
    * 角色名称
    */
-  private String rolename;
+  private String roleName;
   /**
    * 创建者
    */
-  private Integer createdby;
+  private Integer createdBy;
   /**
    * 创建时间
    */
-  private Date creationdate;
+  private Date creationDate;
   /**
    * 修改者
    */
-  private Integer modifyby;
+  private Integer modifyBy;
   /**
    * 修改时间
    */
-  private Date modifydate;
+  private Date modifyDate;
   
+  public UserRole() {
+  }
+  
+  public UserRole( Integer id, String roleCode, String roleName, Integer createdBy, Date creationDate,
+                   Integer modifyBy, Date modifyDate ) {
+    this.id = id;
+    this.roleCode = roleCode;
+    this.roleName = roleName;
+    this.createdBy = createdBy;
+    this.creationDate = creationDate;
+    this.modifyBy = modifyBy;
+    this.modifyDate = modifyDate;
+  }
   
   public Integer getId() {
     return id;
@@ -49,53 +56,65 @@ public class UserRole implements Serializable {
     this.id = id;
   }
   
-  public String getRolecode() {
-    return rolecode;
+  public String getRoleCode() {
+    return roleCode;
   }
   
-  public void setRolecode( String rolecode ) {
-    this.rolecode = rolecode;
+  public void setRoleCode( String roleCode ) {
+    this.roleCode = roleCode;
   }
   
-  public String getRolename() {
-    return rolename;
+  public String getRoleName() {
+    return roleName;
   }
   
-  public void setRolename( String rolename ) {
-    this.rolename = rolename;
+  public void setRoleName( String roleName ) {
+    this.roleName = roleName;
   }
   
-  public Integer getCreatedby() {
-    return createdby;
+  public Integer getCreatedBy() {
+    return createdBy;
   }
   
-  public void setCreatedby( Integer createdby ) {
-    this.createdby = createdby;
+  public void setCreatedBy( Integer createdBy ) {
+    this.createdBy = createdBy;
   }
   
-  public Date getCreationdate() {
-    return creationdate;
+  public Date getCreationDate() {
+    return creationDate;
   }
   
-  public void setCreationdate( Date creationdate ) {
-    this.creationdate = creationdate;
+  public void setCreationDate( Date creationDate ) {
+    this.creationDate = creationDate;
   }
   
-  public Integer getModifyby() {
-    return modifyby;
+  public Integer getModifyBy() {
+    return modifyBy;
   }
   
-  public void setModifyby( Integer modifyby ) {
-    this.modifyby = modifyby;
+  public void setModifyBy( Integer modifyBy ) {
+    this.modifyBy = modifyBy;
   }
   
-  public Date getModifydate() {
-    return modifydate;
+  public Date getModifyDate() {
+    return modifyDate;
   }
   
-  public void setModifydate( Date modifydate ) {
-    this.modifydate = modifydate;
+  public void setModifyDate( Date modifyDate ) {
+    this.modifyDate = modifyDate;
   }
   
+  @Override
+  public String toString() {
+    return "UserRole{" +
+        "id=" + id +
+        ", roleCode='" + roleCode + '\'' +
+        ", roleName='" + roleName + '\'' +
+        ", createdBy=" + createdBy +
+        ", creationDate=" + creationDate +
+        ", modifyBy=" + modifyBy +
+        ", modifyDate=" + modifyDate +
+        '}';
+  }
 }
 
