@@ -92,7 +92,7 @@ public class DaoUtils {
   
   public void Test() {
     try{
-      System.out.println( dataSource.getConnection(););
+      System.out.println( dataSource.getConnection() );
     }catch( SQLException e ){
       e.printStackTrace();
     }
