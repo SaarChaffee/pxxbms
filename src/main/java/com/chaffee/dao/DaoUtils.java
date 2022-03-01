@@ -7,6 +7,7 @@
 package com.chaffee.dao;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
+import org.junit.Test;
 
 import javax.sql.DataSource;
 import java.io.InputStream;
@@ -26,7 +27,7 @@ public class DaoUtils {
       //1. 创建Properties对象
       Properties properties = new Properties();
       //2. 将配置文件转换成字节输入流
-      InputStream is = DaoUtils.class.getClassLoader().getResourceAsStream( "druid.properties" );
+      InputStream is = DaoUtils.class.getClassLoader().getResourceAsStream( "config/druid.properties" );
       //3. 使用properties对象加载is
       properties.load( is );
       //druid底层是使用的工厂设计模式，去加载配置文件，创建DruidDataSource对象
@@ -90,11 +91,10 @@ public class DaoUtils {
     return flag;
   }
   
-  public void Test() {
-    try{
-      System.out.println( dataSource.getConnection() );
-    }catch( SQLException e ){
-      e.printStackTrace();
-    }
+  @Test
+  public void Test() throws Exception {
+    System.out.println( dataSource );
+    System.out.println( dataSource.getConnection() );
+    System.out.println( dataSource );
   }
 }
