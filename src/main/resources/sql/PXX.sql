@@ -27,7 +27,7 @@ CREATE TABLE `user`
 CREATE TABLE `user_role`
 (
     `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    `roleCode`     varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色编码',
+    `roleCode`     bigint(20)                          DEFAULT NULL COMMENT '角色编码',
     `roleName`     varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '角色名称',
     `createdBy`    bigint(20)                          DEFAULT NULL COMMENT '创建者',
     `creationDate` datetime                            DEFAULT NULL COMMENT '创建时间',
@@ -45,7 +45,7 @@ CREATE TABLE `good`
     `goodCode`     varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品编号',
     `goodType`     bigint(20)                          DEFAULT NULL COMMENT '商品类别',
     `inventory`    bigint(20)                          DEFAULT NULL COMMENT '商品库存',
-    `owner`        varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品拥有者(取自用户表)',
+    `owner`        bigint(20)                          DEFAULT NULL COMMENT '商品拥有者(取自用户表)',
     `createdBy`    bigint(20)                          DEFAULT NULL COMMENT '创建者',
     `creationDate` datetime                            DEFAULT NULL COMMENT '创建时间',
     `modifyBy`     bigint(20)                          DEFAULT NULL COMMENT '修改者',
@@ -58,7 +58,7 @@ CREATE TABLE `good`
 CREATE TABLE `good_type`
 (
     `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    `typeCode`     varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品类别编号',
+    `typeCode`     bigint(20)                          DEFAULT NULL COMMENT '商品类别编号',
     `typeName`     varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品类别名称',
     `createdBy`    bigint(20)                          DEFAULT NULL COMMENT '创建者',
     `creationDate` datetime                            DEFAULT NULL COMMENT '创建时间',
@@ -81,7 +81,7 @@ CREATE TABLE `bill`
     `customerCode`  varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '顾客编号',
     `address`       varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '配送地址',
     `billTime`      datetime                            DEFAULT NULL COMMENT '下单时间',
-    `paymentMethod` int(10)                             DEFAULT NULL COMMENT '支付方式',
+    `paymentMethod` bigint(10)                          DEFAULT NULL COMMENT '支付方式',
     `deliveryTime`  datetime                            DEFAULT NULL COMMENT '配送时间',
     `createdBy`     bigint(20)                          DEFAULT NULL COMMENT '创建者',
     `creationDate`  datetime                            DEFAULT NULL COMMENT '创建时间',
@@ -95,7 +95,7 @@ CREATE TABLE `bill`
 CREATE TABLE `payment_method`
 (
     `id`           bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-    `typeCode`     varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '支付方式编号',
+    `typeCode`     bigint(20)                          DEFAULT NULL COMMENT '支付方式编号',
     `typeName`     varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '支付方式名称',
     `createdBy`    bigint(20)                          DEFAULT NULL COMMENT '创建者',
     `creationDate` datetime                            DEFAULT NULL COMMENT '创建时间',
@@ -108,6 +108,27 @@ CREATE TABLE `payment_method`
 
 insert into user_role
 values (0, '0', 'admin', null, null, null, null);
-
+INSERT INTO pxx.user_role (id, roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (2, '1', 'user', null, null, null, null);
+INSERT INTO pxx.user_role (id, roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (3, '2', 'business', null, null, null, null);
 insert into user
 values (0, '000000', 'admin', '123', null, null, null, null, 0, null, null, null, null);
+INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
+                      creationDate, modifyBy, modifyDate)
+VALUES (2, '100001', 'seller', '123', null, null, null, null, 1, null, null, null, null);
+INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
+                      creationDate, modifyBy, modifyDate)
+VALUES (3, '100002', 'customer', '123', null, null, null, null, 2, null, null, null, null);
+INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (1, '001', '微信', null, null, null, null);
+INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (2, '002', '支付宝', null, null, null, null);
+INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (3, '003', '信用卡', null, null, null, null);
+INSERT INTO pxx.bill (id, billCode, goodName, goodCode, quantity, goodPrice, totalPrice, customerCode, address,
+                      billTime, paymentMethod, deliveryTime, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (0, '12313', 'mmmm', '12313', 111, 1321, 131231, '133', null, null, null, null, null, null, null, null);
+UPDATE pxx.bill t
+SET t.paymentMethod = 1
+WHERE t.id = 1;
