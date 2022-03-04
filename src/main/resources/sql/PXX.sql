@@ -73,7 +73,6 @@ CREATE TABLE `bill`
 (
     `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `billCode`      varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '订单号',
-    `goodName`      varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品名',
     `goodCode`      varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品编号',
     `quantity`      bigint(20)                          DEFAULT NULL COMMENT '购买数量',
     `goodPrice`     bigint(20)                          DEFAULT NULL COMMENT '商品单价',
@@ -113,15 +112,15 @@ VALUES (2, '1', 'user', null, null, null, null);
 INSERT INTO pxx.user_role (id, roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
 VALUES (3, '2', 'business', null, null, null, null);
 insert into user
-values (0, '000000', 'admin', '123', null, '2022-03-04 09:22:57', null, null, 0, null, '2022-03-04 09:22:57', null,
+values (0, '000000', 'admin', '123', null, '2001-02-09 09:22:57', null, null, 0, null, '2022-03-04 09:22:57', null,
         '2022-03-04 09:22:57');
 INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
                       creationDate, modifyBy, modifyDate)
-VALUES (2, '100001', 'seller', '123', null, '2022-03-04 09:22:57', null, null, 1, null, '2022-03-04 09:22:57', null,
+VALUES (2, '100001', 'seller', '123', null, '2001-08-12 09:22:57', null, null, 1, null, '2022-03-04 09:22:57', null,
         '2022-03-04 09:22:57');
 INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
                       creationDate, modifyBy, modifyDate)
-VALUES (3, '100002', 'customer', '123', null, '2022-03-04 09:22:57', null, null, 2, null, '2022-03-04 09:22:57', null,
+VALUES (3, '100002', 'customer', '123', null, '1919-08-10 09:22:57', null, null, 2, null, '2022-03-04 09:22:57', null,
         '2022-03-04 09:22:57');
 INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
 VALUES (1, '001', '微信', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
@@ -129,10 +128,7 @@ INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate,
 VALUES (2, '002', '支付宝', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
 INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
 VALUES (3, '003', '信用卡', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
-INSERT INTO pxx.bill (id, billCode, goodName, goodCode, quantity, goodPrice, totalPrice, customerCode, address,
+INSERT INTO pxx.bill (id, billCode, goodCode, quantity, goodPrice, totalPrice, customerCode, address,
                       billTime, paymentMethod, deliveryTime, createdBy, creationDate, modifyBy, modifyDate)
-VALUES (0, '12313', 'mmmm', '12313', 111, 1321, 131231, '133', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57',
+VALUES (0, '12313', '12313', 111, 1321, 131231, '133', null, '2022-03-04 09:22:57', 1, '2022-03-04 09:22:57',
         null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
-UPDATE pxx.bill t
-SET t.paymentMethod = 1
-WHERE t.id = 1;
