@@ -6,5 +6,14 @@
  */
 package com.chaffee.dao.user;
 
+import com.chaffee.entity.User;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
 public interface UserDao {
+  
+  public List<User> getUserList( Connection connection, String userName, int userRole, int currentPageNo,
+                                 int pageSize ) throws SQLException;
 }
