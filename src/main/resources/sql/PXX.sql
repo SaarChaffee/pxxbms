@@ -113,22 +113,26 @@ VALUES (2, '1', 'user', null, null, null, null);
 INSERT INTO pxx.user_role (id, roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
 VALUES (3, '2', 'business', null, null, null, null);
 insert into user
-values (0, '000000', 'admin', '123', null, null, null, null, 0, null, null, null, null);
+values (0, '000000', 'admin', '123', null, '2022-03-04 09:22:57', null, null, 0, null, '2022-03-04 09:22:57', null,
+        '2022-03-04 09:22:57');
 INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
                       creationDate, modifyBy, modifyDate)
-VALUES (2, '100001', 'seller', '123', null, null, null, null, 1, null, null, null, null);
+VALUES (2, '100001', 'seller', '123', null, '2022-03-04 09:22:57', null, null, 1, null, '2022-03-04 09:22:57', null,
+        '2022-03-04 09:22:57');
 INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
                       creationDate, modifyBy, modifyDate)
-VALUES (3, '100002', 'customer', '123', null, null, null, null, 2, null, null, null, null);
+VALUES (3, '100002', 'customer', '123', null, '2022-03-04 09:22:57', null, null, 2, null, '2022-03-04 09:22:57', null,
+        '2022-03-04 09:22:57');
 INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
-VALUES (1, '001', '微信', null, null, null, null);
+VALUES (1, '001', '微信', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
 INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
-VALUES (2, '002', '支付宝', null, null, null, null);
+VALUES (2, '002', '支付宝', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
 INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
-VALUES (3, '003', '信用卡', null, null, null, null);
+VALUES (3, '003', '信用卡', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
 INSERT INTO pxx.bill (id, billCode, goodName, goodCode, quantity, goodPrice, totalPrice, customerCode, address,
                       billTime, paymentMethod, deliveryTime, createdBy, creationDate, modifyBy, modifyDate)
-VALUES (0, '12313', 'mmmm', '12313', 111, 1321, 131231, '133', null, null, null, null, null, null, null, null);
+VALUES (0, '12313', 'mmmm', '12313', 111, 1321, 131231, '133', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57',
+        null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
 UPDATE pxx.bill t
 SET t.paymentMethod = 1
 WHERE t.id = 1;
