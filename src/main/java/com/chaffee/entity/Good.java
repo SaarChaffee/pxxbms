@@ -49,6 +49,14 @@ public class Good {
    * 修改时间
    */
   private Date modifyDate;
+  /**
+   * 商品类型
+   */
+  private String goodTypeName;
+  /**
+   * 商家名
+   */
+  private String ownerName;
   
   public Integer getId() {
     return id;
@@ -130,6 +138,22 @@ public class Good {
     this.modifyDate = modifyDate;
   }
   
+  public String getGoodTypeName() {
+    return goodTypeName;
+  }
+  
+  public void setGoodTypeName( String goodTypeName ) {
+    this.goodTypeName = goodTypeName;
+  }
+  
+  public String getOwnerName() {
+    return ownerName;
+  }
+  
+  public void setOwnerName( String ownerName ) {
+    this.ownerName = ownerName;
+  }
+  
   @Override
   public String toString() {
     return "Good{" +
@@ -143,6 +167,8 @@ public class Good {
         ", creationDate=" + creationDate +
         ", modifyBy=" + modifyBy +
         ", modifyDate=" + modifyDate +
+        ", goodTypeName='" + goodTypeName + '\'' +
+        ", ownerName='" + ownerName + '\'' +
         '}';
   }
 }
