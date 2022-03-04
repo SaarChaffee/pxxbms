@@ -8,7 +8,7 @@ import java.util.Date;
  * @author SaarChaffee
  * @since 2022-03-02 16:29:23
  */
-public class PaymentMethod{
+public class PaymentMethod {
   /**
    * 主键ID
    */
@@ -38,6 +38,73 @@ public class PaymentMethod{
    */
   private Date modifyDate;
   
+  public Integer getId() {
+    return id;
+  }
   
+  public void setId( Integer id ) {
+    this.id = id;
+  }
+  
+  public Integer getTypeCode() {
+    return typeCode;
+  }
+  
+  public void setTypeCode( Integer typeCode ) {
+    this.typeCode = typeCode;
+  }
+  
+  public String getTypeName() {
+    return typeName;
+  }
+  
+  public void setTypeName( String typeName ) {
+    this.typeName = typeName;
+  }
+  
+  public Integer getCreatedBy() {
+    return createdBy;
+  }
+  
+  public void setCreatedBy( Integer createdBy ) {
+    this.createdBy = createdBy;
+  }
+  
+  public Date getCreationDate() {
+    return creationDate;
+  }
+  
+  public void setCreationDate( Date creationDate ) {
+    this.creationDate = creationDate;
+  }
+  
+  public Integer getModifyBy() {
+    return modifyBy;
+  }
+  
+  public void setModifyBy( Integer modifyBy ) {
+    this.modifyBy = modifyBy;
+  }
+  
+  public Date getModifyDate() {
+    return modifyDate;
+  }
+  
+  public void setModifyDate( Date modifyDate ) {
+    this.modifyDate = modifyDate;
+  }
+  
+  @Override
+  public String toString() {
+    return "PaymentMethod{" +
+        "id=" + id +
+        ", typeCode=" + typeCode +
+        ", typeName='" + typeName + '\'' +
+        ", createdBy=" + createdBy +
+        ", creationDate=" + creationDate +
+        ", modifyBy=" + modifyBy +
+        ", modifyDate=" + modifyDate +
+        '}';
+  }
 }
 
