@@ -28,11 +28,11 @@ public class Bill {
   /**
    * 商品单价
    */
-  private Integer goodPrice;
+  private Double goodPrice;
   /**
    * 总价
    */
-  private Integer totalPrice;
+  private Double totalPrice;
   /**
    * 顾客编号
    */
@@ -83,7 +83,6 @@ public class Bill {
    */
   private String paymentMethodName;
   
-  
   public Integer getId() {
     return id;
   }
@@ -116,19 +115,19 @@ public class Bill {
     this.quantity = quantity;
   }
   
-  public Integer getGoodPrice() {
+  public Double getGoodPrice() {
     return goodPrice;
   }
   
-  public void setGoodPrice( Integer goodPrice ) {
+  public void setGoodPrice( Double goodPrice ) {
     this.goodPrice = goodPrice;
   }
   
-  public Integer getTotalPrice() {
+  public Double getTotalPrice() {
     return totalPrice;
   }
   
-  public void setTotalPrice( Integer totalPrice ) {
+  public void setTotalPrice( Double totalPrice ) {
     this.totalPrice = totalPrice;
   }
   

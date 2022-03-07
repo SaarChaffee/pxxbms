@@ -75,8 +75,8 @@ CREATE TABLE `bill`
     `billCode`      varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '订单号',
     `goodCode`      varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品编号',
     `quantity`      bigint(20)                          DEFAULT NULL COMMENT '购买数量',
-    `goodPrice`     bigint(20)                          DEFAULT NULL COMMENT '商品单价',
-    `totalPrice`    bigint(20)                          DEFAULT NULL COMMENT '总价',
+    `goodPrice`     double                              DEFAULT NULL COMMENT '商品单价',
+    `totalPrice`    double                              DEFAULT NULL COMMENT '总价',
     `customerCode`  varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '顾客编号',
     `address`       varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '配送地址',
     `billTime`      datetime                            DEFAULT NULL COMMENT '下单时间',
@@ -130,5 +130,17 @@ INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate,
 VALUES (3, '003', '信用卡', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
 INSERT INTO pxx.bill (id, billCode, goodCode, quantity, goodPrice, totalPrice, customerCode, address,
                       billTime, paymentMethod, deliveryTime, createdBy, creationDate, modifyBy, modifyDate)
-VALUES (0, '12313', '12313', 111, 1321, 131231, '133', null, '2022-03-04 09:22:57', 1, '2022-03-04 09:22:57',
+VALUES (1, '12313', '1', 11, 10, 110, '3', null, '2022-03-04 09:22:57', 1, '2022-03-04 09:22:57',
         null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
+INSERT INTO pxx.bill (id, billCode, goodCode, quantity, goodPrice, totalPrice, customerCode, address,
+                      billTime, paymentMethod, deliveryTime, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (2, '12', '2', 2, 5, 10, '3', null, '2022-03-04 09:22:57', 1, '2022-03-04 09:22:57',
+        null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
+INSERT INTO pxx.good_type (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (1, 1, '饮料', null, null, null, null);
+INSERT INTO pxx.good_type (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (2, 2, '食物', null, null, null, null);
+INSERT INTO pxx.good (id, goodName, goodCode, goodType, inventory, owner, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (1, '脉动', '1', 1, 50, 2, null, null, null, null);
+INSERT INTO pxx.good (id, goodName, goodCode, goodType, inventory, owner, createdBy, creationDate, modifyBy, modifyDate)
+VALUES (2, '辣条', '2', 2, 100, 2, null, null, null, null);
