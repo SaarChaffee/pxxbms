@@ -27,4 +27,4 @@ config/**
 hs_err_pid*
 replay_pid*
 
-/src/main/resources/config/*
+/src/main/resources/config/*.properties
