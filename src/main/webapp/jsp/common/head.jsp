@@ -5,14 +5,14 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>超市订单管理系统</title>
+    <title>拼夕夕商家后台管理系统</title>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css"/>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath }/css/public.css"/>
 </head>
 <body>
 <!--头部-->
 <header class="publicHeader">
-    <h1>超市订单管理系统</h1>
+    <h1>拼夕夕商家后台管理系统</h1>
     <div class="publicHeaderR">
         <p><span>下午好！</span><span style="color: #fff21b"> ${userSession.userName }</span> , 欢迎你！</p>
         <a href="${pageContext.request.contextPath }/jsp/logout.do">退出</a>
