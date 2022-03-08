@@ -71,5 +71,41 @@ public class UserDaoImpl implements UserDao {
     return userList;
   }
   
+  @Override
+  public User getUserById( Connection connection, String userCode ) throws SQLException {
+    
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    User user = null;
+    String sql = "select u.*,ur.roleName as roleName " +
+        "from user u,user_role ur " +
+        "where u.userRole = ur.roleCode and u.userCode = ?";
+    
+    if( connection != null ){
+      Object[] param = { userCode };
+      rs = DaoUtils.execute( connection, pstm, rs, sql, param );
+      if( rs.next() ){
+        user = new User();
+        user.setId( rs.getInt( "id" ) );
+        user.setUserCode( rs.getString( "userCode" ) );
+        user.setUserName( rs.getString( "userName" ) );
+        user.setUserPassword( rs.getString( "userPassword" ) );
+        user.setGender( rs.getInt( "gender" ) );
+        user.setBirthday( rs.getDate( "birthday" ) );
+        user.setPhone( rs.getString( "phone" ) );
+        user.setAddress( rs.getString( "address" ) );
+        user.setUserRole( rs.getInt( "userRole" ) );
+        user.setCreatedBy( rs.getInt( "createdBy" ) );
+        user.setCreationDate( rs.getDate( "creationDate" ) );
+        user.setModifyBy( rs.getInt( "modifyBy" ) );
+        user.setModifyDate( rs.getDate( "modifyDate" ) );
+        user.setUserRoleName( rs.getString( "roleName" ) );
+      }
+      DaoUtils.close( null, pstm, rs );
+    }
+    
+    return user;
+  }
+  
 
 }
