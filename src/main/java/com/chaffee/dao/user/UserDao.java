@@ -20,4 +20,6 @@ public interface UserDao {
   public User getLoginUser( Connection connection, String userCode ) throws SQLException;
   
   public int updateUser( Connection connection, int id, User user ) throws SQLException;
+  
+  public int updatePwd( Connection connection, int id, String userPassword ) throws SQLException;
 }

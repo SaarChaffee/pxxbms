@@ -113,7 +113,7 @@ public class UserDaoImpl implements UserDao {
     int result = 0;
     
     if( connection != null ){
-      String sql = "update smbms_user u set u.userCode = ?,u.userName = ?,u.userPassword = ?,u.gender = ?,u.birthday " +
+      String sql = "update user u set u.userCode = ?,u.userName = ?,u.userPassword = ?,u.gender = ?,u.birthday " +
           "= ?,u.phone = ?,u.address = ?,u.userRole = ?,u.createdBy = ?,u.creationDate = ?,u.modifyBy = ?,u" +
           ".modifyDate = ? where u.id = ?";
       Object[] param = { user.getUserCode(), user.getUserName(), user.getUserPassword(),
@@ -124,6 +124,20 @@ public class UserDaoImpl implements UserDao {
     DaoUtils.close( null, pstm, null );
     
     return result;
+  }
+  
+  @Override
+  public int updatePwd( Connection connection, int id, String userPassword ) throws SQLException {
+    String sql = "update user set userPassword = ? where id = ?";
+    PreparedStatement pstm = null;
+    Object[] param = { userPassword, id };
+    
+    int i = 0;
+    if( connection != null ){
+      i = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    return i;
   }
   
   @Test
