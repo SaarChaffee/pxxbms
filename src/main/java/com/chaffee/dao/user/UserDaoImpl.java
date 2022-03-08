@@ -171,6 +171,25 @@ public class UserDaoImpl implements UserDao {
     return count;
   }
   
+  @Override
+  public int addUser( Connection connection, User user ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "insert into user(userCode, userName, userPassword, gender, birthday, phone, address, " +
+          "userRole, createdBy, creationDate, modifyBy, modifyDate) " +
+          "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      Object[] param = { user.getUserCode(), user.getUserName(), user.getUserPassword(),
+          user.getGender(), user.getBirthday(), user.getPhone(), user.getAddress(), user.getUserRole(),
+          user.getCreatedBy(), user.getCreationDate(), user.getModifyBy(), user.getModifyDate() };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
   @Test
   public void test() throws Exception {
     Connection connection = DaoUtils.getConnection();

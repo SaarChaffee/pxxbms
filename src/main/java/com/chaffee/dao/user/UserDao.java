@@ -25,4 +25,6 @@ public interface UserDao {
   
   public int getUserCount( Connection connection, String userName, int userRole ) throws SQLException;
   
+  public int addUser( Connection connection, User user ) throws SQLException;
+  
 }
