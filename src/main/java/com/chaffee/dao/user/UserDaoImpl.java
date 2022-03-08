@@ -107,5 +107,33 @@ public class UserDaoImpl implements UserDao {
     return user;
   }
   
-
+  @Override
+  public int updateUser( Connection connection, int id, User user ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "update smbms_user u set u.userCode = ?,u.userName = ?,u.userPassword = ?,u.gender = ?,u.birthday " +
+          "= ?,u.phone = ?,u.address = ?,u.userRole = ?,u.createdBy = ?,u.creationDate = ?,u.modifyBy = ?,u" +
+          ".modifyDate = ? where u.id = ?";
+      Object[] param = { user.getUserCode(), user.getUserName(), user.getUserPassword(),
+          user.getGender(), user.getBirthday(), user.getPhone(), user.getAddress(), user.getUserRole(),
+          user.getCreatedBy(), user.getCreationDate(), id, new Date( System.currentTimeMillis() ), user.getId() };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
+  @Test
+  public void test() throws Exception {
+    Connection connection = DaoUtils.getConnection();
+    UserDao userDao = new UserDaoImpl();
+    List<User> users = new ArrayList<>();
+    //users = userDao.getUserList( connection, null, 0, 1, 5 );
+    User user = getUserById( connection, "100001" );
+    //users.forEach( user -> System.out.println( user ) );
+    System.out.println( user );
+  }
 }
