@@ -22,4 +22,7 @@ public interface UserDao {
   public int updateUser( Connection connection, int id, User user ) throws SQLException;
   
   public int updatePwd( Connection connection, int id, String userPassword ) throws SQLException;
+  
+  public int getUserCount( Connection connection, String userName, int userRole ) throws SQLException;
+  
 }

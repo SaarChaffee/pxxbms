@@ -140,6 +140,37 @@ public class UserDaoImpl implements UserDao {
     return i;
   }
   
+  @Override
+  public int getUserCount( Connection connection, String userName, int userRole ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    StringBuilder sql = new StringBuilder();
+    List<Object> list = new ArrayList<>();
+    int count = 0;
+    
+    if( connection != null ){
+      sql.append( "select count(*) as count from user u,user_role r where u.userRole = r.id" );
+      
+      if( !com.mysql.cj.util.StringUtils.isNullOrEmpty( userName ) ){
+        sql.append( " and u.userName like ?" );
+        list.add( "%" + userName + "%" ); //index : 0
+      }
+      if( userRole > 0 ){
+        sql.append( " and u.userRole = ?" );
+        list.add( userRole ); //index : 1
+      }
+      
+      String s = sql.toString();
+      Object[] param = list.toArray();
+      rs = DaoUtils.execute( connection, pstm, rs, s, param );
+      if( rs.next() ){
+        count = rs.getInt( "count" );
+      }
+      DaoUtils.close( null, pstm, rs );
+    }
+    return count;
+  }
+  
   @Test
   public void test() throws Exception {
     Connection connection = DaoUtils.getConnection();
