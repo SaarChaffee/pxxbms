@@ -38,7 +38,7 @@
   </filter-mapping>
   <filter-mapping>
     <filter-name>SysFilter</filter-name>
-    <url-pattern>/smbms/jsp/*</url-pattern>
+    <url-pattern>/pxxbms/jsp/*</url-pattern>
   </filter-mapping>
 
 
