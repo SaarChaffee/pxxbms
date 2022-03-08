@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
@@ -70,10 +71,5 @@ public class UserDaoImpl implements UserDao {
     return userList;
   }
   
-  @Test
-  public void test() throws Exception {
-    Connection connection = DaoUtils.getConnection();
-    UserDao userDao = new UserDaoImpl();
-    System.out.println( userDao.getUserList( connection, null, 0, 1, 5 ) );
-  }
+
 }
