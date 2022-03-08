@@ -17,7 +17,7 @@ public interface UserDao {
   public List<User> getUserList( Connection connection, String userName, int userRole, int currentPageNo,
                                  int pageSize ) throws SQLException;
   
-  public User getUserById( Connection connection, String userCode ) throws SQLException;
+  public User getLoginUser( Connection connection, String userCode ) throws SQLException;
   
   public int updateUser( Connection connection, int id, User user ) throws SQLException;
 }
