@@ -245,8 +245,8 @@ public class UserDaoImpl implements UserDao {
     UserDao userDao = new UserDaoImpl();
     List<User> users = new ArrayList<>();
     //users = userDao.getUserList( connection, null, 0, 1, 5 );
-    User user = getLoginUser( connection, "100001" );
+    //User user = getUserById( connection, 1 );
     //users.forEach( user -> System.out.println( user ) );
-    System.out.println( user );
+    System.out.println( deleteUser( connection, 3 ) );
   }
 }
