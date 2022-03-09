@@ -1,6 +1,7 @@
 package com.chaffee.filter;
 
 import com.chaffee.util.Constants;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,13 +27,13 @@ public class SysFilter implements Filter {
     
     Object o = request.getSession().getAttribute( Constants.USER_SESSION );
     
-    if( o == null ){
-      System.out.println( "------------拦截成功-------------" );
-      response.sendRedirect( request.getContextPath() + "/error.jsp" );
-    }
-    else{
-      filterChain.doFilter( servletRequest, servletResponse );
-    }
+    //if( o == null ){
+    //  System.out.println( "------------拦截成功-------------" );
+    //  response.sendRedirect( request.getContextPath() + "/error.jsp" );
+    //}
+    //else{
+    //  filterChain.doFilter( servletRequest, servletResponse );
+    //}
     
   }
 }
