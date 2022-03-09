@@ -32,7 +32,7 @@ public class SysFilter implements Filter {
     //  response.sendRedirect( request.getContextPath() + "/error.jsp" );
     //}
     //else{
-    //  filterChain.doFilter( servletRequest, servletResponse );
+      filterChain.doFilter( servletRequest, servletResponse );
     //}
     
   }
