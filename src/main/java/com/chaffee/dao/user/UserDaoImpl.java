@@ -182,7 +182,7 @@ public class UserDaoImpl implements UserDao {
           "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       Object[] param = { user.getUserCode(), user.getUserName(), user.getUserPassword(),
           user.getGender(), user.getBirthday(), user.getPhone(), user.getAddress(), user.getUserRole(),
-          user.getCreatedBy(), user.getCreationDate(), user.getModifyBy(), user.getModifyDate() };
+          user.getCreatedBy(), new Date( System.currentTimeMillis() ), user.getModifyBy(), user.getModifyDate() };
       result = DaoUtils.execute( connection, pstm, sql, param );
     }
     DaoUtils.close( null, pstm, null );
