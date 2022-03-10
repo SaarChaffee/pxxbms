@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
     
     String userCode = req.getParameter( "userCode" );
     String userPassword = req.getParameter( "userPassword" );
-    User user = userService.userLogin( userCode, userPassword );
+    User user = userService.Login( userCode, userPassword );
     if( user != null ){
       req.getSession().setAttribute( Constants.USER_SESSION, user );
       resp.sendRedirect( req.getContextPath() + "/jsp/frame.jsp" );

@@ -9,7 +9,9 @@ package com.chaffee.service.user;
 import com.chaffee.entity.User;
 
 public interface UserService {
-  public User userLogin(String userCode,String userPwd);
+  public User Login(String userCode,String userPwd);
   
   public boolean updatePwd(String userCode,int id,String userPwd);
+  
+  
 }

@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override
-  public User userLogin( String userCode, String userPwd ) {
+  public User Login( String userCode, String userPwd ) {
     Connection connection = null;
     User user = null;
     
