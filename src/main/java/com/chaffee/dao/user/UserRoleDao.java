@@ -6,5 +6,12 @@
  */
 package com.chaffee.dao.user;
 
+import com.chaffee.entity.UserRole;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
 public interface UserRoleDao {
+  public List<UserRole> getRoleList( Connection connection ) throws SQLException;
 }
