@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     StringBuffer sql = new StringBuffer();
     
     if( connection != null ){
-      sql.append( "select u.*, ur.roleName from user u, user_role ur where u.userRole = ur.roleCode" );
+      sql.append( "select u.*, ur.roleName from user u, user_role ur where u.userRole = ur.id" );
       if( !StringUtils.isEmpty( userName ) ){
         sql.append( " and u.userName like ?" );
         list.add( "%" + userName + "%" );
