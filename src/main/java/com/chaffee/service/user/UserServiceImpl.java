@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
   private final UserDao userDao;
@@ -94,8 +95,29 @@ public class UserServiceImpl implements UserService {
     return count;
   }
   
+  @Override
+  public List<User> getUserList( String userName, int userRole, int currentPage, int pageSize ) {
+    Connection connection = null;
+    List<User> userList = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      userList = userDao.getUserList( connection, userName, userRole, currentPage, pageSize );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      System.out.println( "------------getUserList-service--------------" );
+      System.out.println( userList );
+      System.out.println( "=============================================" );
+      System.out.println();
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return userList;
+  }
+  
   @Test
-  public void test(){
-    System.out.println(this.getUserCount(null,0));
+  public void test() {
+    System.out.println( this.getUserList( null, 0, 1, 5 ) );
   }
 }

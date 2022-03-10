@@ -8,6 +8,8 @@ package com.chaffee.service.user;
 
 import com.chaffee.entity.User;
 
+import java.util.List;
+
 public interface UserService {
   public User Login(String userCode,String userPwd);
   
@@ -15,4 +17,5 @@ public interface UserService {
   
   public int getUserCount( String userName, int userRole );
   
+  public List<User> getUserList( String userName, int userRole, int currentPage, int pageSize );
 }
