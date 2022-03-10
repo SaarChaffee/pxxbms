@@ -10,6 +10,7 @@ import com.chaffee.dao.DaoUtils;
 import com.chaffee.dao.user.UserDao;
 import com.chaffee.dao.user.UserDaoImpl;
 import com.chaffee.entity.User;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -70,5 +71,31 @@ public class UserServiceImpl implements UserService {
     if( result > 0 ) flag = true;
     
     return flag;
+  }
+  
+  @Override
+  public int getUserCount( String userName, int userRole ) {
+    Connection connection = null;
+    int count = 0;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      count = userDao.getUserCount( connection, userName, userRole );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      System.out.println( "------------getUserCount-service--------------" );
+      System.out.println( count );
+      System.out.println( "==============================================" );
+      System.out.println();
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return count;
+  }
+  
+  @Test
+  public void test(){
+    System.out.println(this.getUserCount(null,0));
   }
 }
