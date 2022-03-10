@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -116,8 +117,153 @@ public class UserServiceImpl implements UserService {
     return userList;
   }
   
+  @Override
+  public boolean addUser( User user ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''addUser''''Open transaction''''''''''" );
+      int i = userDao.addUser( connection, user );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''addUser''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''addUser''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''addUser''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+        System.out.println( "'''''''''addUser''''Close transaction''''''''''" );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+  }
+  
+  @Override
+  public boolean delUser( int id ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''delUser''''Open transaction''''''''''" );
+      int i = userDao.deleteUser( connection, id );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''delUser''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''delUser''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''delUser''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+        System.out.println( "'''''''''delUser''''Close transaction''''''''''" );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+  }
+  
+  @Override
+  public boolean updateUser( int id, User user ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''updateUser''''Open transaction''''''''''" );
+      int i = userDao.updateUser( connection, id, user );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''updateUser''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''updateUser''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''updateUser''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+        System.out.println( "'''''''''updateUser''''Close transaction''''''''''" );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+    
+  }
+  
+  @Override
+  public User getUserById( int id ) {
+    Connection connection = null;
+    User user = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      user = userDao.getUserById( connection, id );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      System.out.println( "------------getUserById-service--------------" );
+      System.out.println( user );
+      System.out.println( "=======================================" );
+      System.out.println();
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return user;
+  }
+  
   @Test
   public void test() {
-    System.out.println( this.getUserList( null, 0, 1, 5 ) );
+    User user = new User();
+    user.setId( 5 );
+    user.setUserCode( "test1" );
+    user.setUserPassword( "123" );
+    user.setUserRole( 1 );
+    user.setBirthday( new Date( System.currentTimeMillis() ) );
+    System.out.println( this.getUserById( 1) );
   }
 }
