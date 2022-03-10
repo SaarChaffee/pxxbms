@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserService {
   public User Login( String userCode, String userPwd );
   
-  public boolean updatePwd( String userCode, int id, String userPwd );
+  public boolean updatePwd(  int id, String userPwd );
   
   public int getUserCount( String userName, int userRole );
   

@@ -48,28 +48,27 @@ public class UserServiceImpl implements UserService {
   }
   
   @Override
-  public boolean updatePwd( String userCode, int id, String userPwd ) {
+  public boolean updatePwd( int id, String userPwd ) {
     boolean flag = false;
     Connection connection = null;
     int result = 0;
     
-    if( userCode != null ){
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      result = userDao.updatePwd( connection, id, userPwd );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
       try{
-        connection = DaoUtils.getConnection();
-        connection.setAutoCommit( false );
-        result = userDao.updatePwd( connection, id, userPwd );
+        assert connection != null;
+        connection.setAutoCommit( true );
       }catch( SQLException e ){
         e.printStackTrace();
-      }finally{
-        try{
-          assert connection != null;
-          connection.setAutoCommit( true );
-        }catch( SQLException e ){
-          e.printStackTrace();
-        }
-        DaoUtils.close( connection, null, null );
       }
+      DaoUtils.close( connection, null, null );
     }
+    
     if( result > 0 ) flag = true;
     
     return flag;
@@ -264,6 +263,6 @@ public class UserServiceImpl implements UserService {
     user.setUserPassword( "123" );
     user.setUserRole( 1 );
     user.setBirthday( new Date( System.currentTimeMillis() ) );
-    System.out.println( this.getUserById( 1) );
+    System.out.println( this.updatePwd( 1, "123" ) );
   }
 }
