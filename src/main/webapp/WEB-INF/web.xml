@@ -25,6 +25,15 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/jsp/logout.do</url-pattern>
   </servlet-mapping>
+  <!--用户-->
+  <servlet>
+    <servlet-name>UserServlet</servlet-name>
+    <servlet-class>com.chaffee.servlet.UserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserServlet</servlet-name>
+    <url-pattern>/jsp/user.do</url-pattern>
+  </servlet-mapping>
   <!--Filter-->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
