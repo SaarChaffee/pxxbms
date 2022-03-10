@@ -32,7 +32,7 @@ public interface UserDao {
    *
    * @param connection
    * @param userCode
-   * @return
+   * @return User
    * @throws SQLException
    */
   public User getLoginUser( Connection connection, String userCode ) throws SQLException;
@@ -43,7 +43,7 @@ public interface UserDao {
    * @param connection
    * @param id
    * @param user
-   * @return
+   * @return int
    * @throws SQLException
    */
   public int updateUser( Connection connection, int id, User user ) throws SQLException;
@@ -54,7 +54,7 @@ public interface UserDao {
    * @param connection
    * @param id
    * @param userPassword
-   * @return
+   * @return int
    * @throws SQLException
    */
   public int updatePwd( Connection connection, int id, String userPassword ) throws SQLException;
@@ -65,7 +65,7 @@ public interface UserDao {
    * @param connection
    * @param userName
    * @param userRole
-   * @return
+   * @return int
    * @throws SQLException
    */
   public int getUserCount( Connection connection, String userName, int userRole ) throws SQLException;
@@ -75,7 +75,7 @@ public interface UserDao {
    *
    * @param connection
    * @param user
-   * @return
+   * @return int
    * @throws SQLException
    */
   public int addUser( Connection connection, User user ) throws SQLException;
@@ -85,7 +85,7 @@ public interface UserDao {
    *
    * @param connection
    * @param id
-   * @return
+   * @return int
    * @throws SQLException
    */
   public int deleteUser( Connection connection, int id ) throws SQLException;
@@ -95,7 +95,7 @@ public interface UserDao {
    *
    * @param connection
    * @param id
-   * @return
+   * @return User
    * @throws SQLException
    */
   public User getUserById( Connection connection, int id ) throws SQLException;
