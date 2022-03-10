@@ -21,7 +21,7 @@ public interface UserDao {
    * @param userRole
    * @param currentPageNo
    * @param pageSize
-   * @return
+   * @return List<User>
    * @throws SQLException
    */
   public List<User> getUserList( Connection connection, String userName, int userRole, int currentPageNo,
