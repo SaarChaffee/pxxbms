@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +56,9 @@ public class UserServlet extends HttpServlet {
         }
         case "modify" -> {
           this.modify( req, resp );
+        }
+        case "modifyexe" -> {
+          this.modifyexe( req, resp );
         }
       }
     }
@@ -283,14 +287,39 @@ public class UserServlet extends HttpServlet {
   
   //应用修改
   protected void modifyexe( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
-    
-    
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    String userId = req.getParameter( "uid" );
+    String userName = req.getParameter( "userName" );
+    String gender = req.getParameter( "gender" );
+    String birthday = req.getParameter( "birthday" );
+    String phone = req.getParameter( "phone" );
+    String address = req.getParameter( "address" );
+    String userRole = req.getParameter( "userRole" );
     UserServiceImpl userService = new UserServiceImpl();
-//    if( userService.updateUser(  )){
-//      resp.sendRedirect( req.getContextPath() + "/jsp/user.do?method=query" );
-//    }
-//    else{
-//      req.getRequestDispatcher( "/useradd.jsp" ).forward( req, resp );
-//    }
+    int getId = 0;
+    int uGender = 0;
+    int roleCode = 0;
+    Date uBir = null;
+    try{
+      getId = Integer.parseInt( userId );
+      uGender = Integer.parseInt( gender );
+      roleCode = Integer.parseInt( userRole );
+      uBir = new SimpleDateFormat( "yyyy-MM-dd" ).parse( birthday );
+    }catch( Exception e ){
+      e.printStackTrace();
+    }
+    
+    User user = userService.getUserById( getId );
+    user.setUserName( userName );
+    user.setGender( uGender );
+    user.setBirthday( uBir );
+    user.setPhone( phone );
+    user.setAddress( address );
+    user.setUserRole( roleCode );
+    
+    userService.updateUser( currentUser, user );
+    
+    resp.sendRedirect( req.getContextPath() + "/jsp/user.do?method=query" );
   }
 }
