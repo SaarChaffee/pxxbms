@@ -79,7 +79,7 @@ public class UserDaoImpl implements UserDao {
     User user = null;
     String sql = "select u.*,ur.roleName as roleName " +
         "from user u,user_role ur " +
-        "where u.userRole = ur.roleCode and u.userCode = ?";
+        "where u.userRole = ur.id and u.userCode = ?";
     
     if( connection != null ){
       Object[] param = { userCode };
