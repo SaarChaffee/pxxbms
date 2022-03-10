@@ -6,5 +6,10 @@
  */
 package com.chaffee.service.user;
 
+import com.chaffee.entity.UserRole;
+
+import java.util.List;
+
 public interface UserRoleService {
+  public List<UserRole> getRoleList();
 }
