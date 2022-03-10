@@ -13,5 +13,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserRoleDao {
+  /**
+   * 获取用户角色列表
+   *
+   * @param connection
+   * @return
+   * @throws SQLException
+   */
   public List<UserRole> getRoleList( Connection connection ) throws SQLException;
 }
