@@ -13,22 +13,91 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao {
-  
+  /**
+   * 获取用户列表
+   *
+   * @param connection
+   * @param userName
+   * @param userRole
+   * @param currentPageNo
+   * @param pageSize
+   * @return
+   * @throws SQLException
+   */
   public List<User> getUserList( Connection connection, String userName, int userRole, int currentPageNo,
                                  int pageSize ) throws SQLException;
   
+  /**
+   * 获取登录的用户
+   *
+   * @param connection
+   * @param userCode
+   * @return
+   * @throws SQLException
+   */
   public User getLoginUser( Connection connection, String userCode ) throws SQLException;
   
+  /**
+   * 修改用户数据
+   *
+   * @param connection
+   * @param id
+   * @param user
+   * @return
+   * @throws SQLException
+   */
   public int updateUser( Connection connection, int id, User user ) throws SQLException;
   
+  /**
+   * 修改密码
+   *
+   * @param connection
+   * @param id
+   * @param userPassword
+   * @return
+   * @throws SQLException
+   */
   public int updatePwd( Connection connection, int id, String userPassword ) throws SQLException;
   
+  /**
+   * 获取用户数量
+   *
+   * @param connection
+   * @param userName
+   * @param userRole
+   * @return
+   * @throws SQLException
+   */
   public int getUserCount( Connection connection, String userName, int userRole ) throws SQLException;
   
+  /**
+   * 增加用户
+   *
+   * @param connection
+   * @param user
+   * @return
+   * @throws SQLException
+   */
   public int addUser( Connection connection, User user ) throws SQLException;
   
+  /**
+   * 删除用户
+   *
+   * @param connection
+   * @param id
+   * @return
+   * @throws SQLException
+   */
   public int deleteUser( Connection connection, int id ) throws SQLException;
   
+  /**
+   * 通过Id获取用户
+   *
+   * @param connection
+   * @param id
+   * @return
+   * @throws SQLException
+   */
   public User getUserById( Connection connection, int id ) throws SQLException;
   
 }
