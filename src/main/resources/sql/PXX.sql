@@ -73,11 +73,11 @@ CREATE TABLE `bill`
 (
     `id`            bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
     `billCode`      varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '订单号',
-    `goodCode`      varchar(15) COLLATE utf8_general_ci DEFAULT NULL COMMENT '商品编号',
+    `goodCode`      bigint(20)                          DEFAULT NULL COMMENT '商品编号',
     `quantity`      bigint(20)                          DEFAULT NULL COMMENT '购买数量',
     `goodPrice`     double                              DEFAULT NULL COMMENT '商品单价',
     `totalPrice`    double                              DEFAULT NULL COMMENT '总价',
-    `customerCode`  varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '顾客编号',
+    `customerCode`  bigint(20)                          DEFAULT NULL COMMENT '顾客编号',
     `address`       varchar(20) COLLATE utf8_general_ci DEFAULT NULL COMMENT '配送地址',
     `billTime`      datetime                            DEFAULT NULL COMMENT '下单时间',
     `paymentMethod` bigint(10)                          DEFAULT NULL COMMENT '支付方式',
