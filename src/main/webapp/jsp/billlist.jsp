@@ -20,14 +20,15 @@
             <select name="queryPaymentMethod">
                 <c:if test="${paymentMethodList != null }">
                     <option value="0">--请选择--</option>
-                    <c:forEach var="paymentMethods" items="${paymentMethodList}">
+                    <c:forEach var="paymentMethod" items="${paymentMethodList}">
                         <option
-                                <c:if test="${paymentMethods.id == paymentMethod}">selected="selected"</c:if>
-                                value="${paymentMethods.id}">${paymentMethods.typeName}</option>
+                                <c:if test="${paymentMethod.id == queryPaymentMethod}">selected="selected"</c:if>
+                                value="${paymentMethod.id}">${paymentMethod.typeName}</option>
                     </c:forEach>
                 </c:if>
             </select>
 
+            <input type="hidden" name="pageIndex" value="1"/>
             <input value="查 询" type="submit" id="searchbutton">
             <a href="${pageContext.request.contextPath }/jsp/billadd.jsp">添加订单</a>
         </form>
