@@ -20,7 +20,7 @@ public class Bill {
   /**
    * 商品编号
    */
-  private String goodCode;
+  private Integer goodCode;
   /**
    * 购买数量
    */
@@ -36,7 +36,7 @@ public class Bill {
   /**
    * 顾客编号
    */
-  private String customerCode;
+  private Integer customerCode;
   /**
    * 配送地址
    */
@@ -99,11 +99,11 @@ public class Bill {
     this.billCode = billCode;
   }
   
-  public String getGoodCode() {
+  public Integer getGoodCode() {
     return goodCode;
   }
   
-  public void setGoodCode( String goodCode ) {
+  public void setGoodCode( Integer goodCode ) {
     this.goodCode = goodCode;
   }
   
@@ -131,11 +131,11 @@ public class Bill {
     this.totalPrice = totalPrice;
   }
   
-  public String getCustomerCode() {
+  public Integer getCustomerCode() {
     return customerCode;
   }
   
-  public void setCustomerCode( String customerCode ) {
+  public void setCustomerCode( Integer customerCode ) {
     this.customerCode = customerCode;
   }
   
@@ -232,11 +232,11 @@ public class Bill {
     return "Bill{" +
         "id=" + id +
         ", billCode='" + billCode + '\'' +
-        ", goodCode='" + goodCode + '\'' +
+        ", goodCode=" + goodCode +
         ", quantity=" + quantity +
         ", goodPrice=" + goodPrice +
         ", totalPrice=" + totalPrice +
-        ", customerCode='" + customerCode + '\'' +
+        ", customerCode=" + customerCode +
         ", address='" + address + '\'' +
         ", billTime=" + billTime +
         ", paymentMethod=" + paymentMethod +
