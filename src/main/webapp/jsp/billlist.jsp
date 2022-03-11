@@ -38,7 +38,7 @@
         <tr class="firstTr">
             <th width="10%">订单编码</th>
             <th width="20%">商品名称</th>
-            <th width="10%">顾客账号</th>
+            <th width="10%">顾客姓名</th>
             <th width="10%">订单金额</th>
             <th width="10%">付款方式</th>
             <th width="10%">创建时间</th>
@@ -53,7 +53,7 @@
                     <span>${bill.goodName }</span>
                 </td>
                 <td>
-                    <span>${bill.customerCode}</span>
+                    <span>${bill.customerName}</span>
                 </td>
                 <td>
                     <span>${bill.totalPrice}</span>
