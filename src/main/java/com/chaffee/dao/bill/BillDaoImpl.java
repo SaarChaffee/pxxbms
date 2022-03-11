@@ -63,7 +63,7 @@ public class BillDaoImpl implements BillDao {
         bill.setId( rs.getInt( "id" ) );
         bill.setBillCode( rs.getString( "billCode" ) );
         bill.setGoodCode( rs.getInt( "goodCode" ) );
-        bill.setQuantity( rs.getInt( "quality" ) );
+        bill.setQuantity( rs.getInt( "quantity" ) );
         bill.setGoodPrice( rs.getDouble( "goodPrice" ) );
         bill.setTotalPrice( rs.getDouble( "totalPrice" ) );
         bill.setCustomerCode( rs.getInt( "customerCode" ) );

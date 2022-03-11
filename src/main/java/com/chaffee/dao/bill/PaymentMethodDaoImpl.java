@@ -32,7 +32,7 @@ public class PaymentMethodDaoImpl implements PaymentMethodDao {
         _paymentMethod = new PaymentMethod();
         _paymentMethod.setId( rs.getInt( "id" ) );
         _paymentMethod.setTypeCode( rs.getInt( "typeCode" ) );
-        _paymentMethod.setCreatedBy( rs.getInt( "createBy" ) );
+        _paymentMethod.setCreatedBy( rs.getInt( "createdBy" ) );
         _paymentMethod.setCreationDate( rs.getDate( "creationDate" ) );
         _paymentMethod.setModifyBy( rs.getInt( "modifyBy" ) );
         _paymentMethod.setModifyDate( rs.getDate( "modifyDate" ) );
