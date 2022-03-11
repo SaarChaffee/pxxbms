@@ -77,7 +77,7 @@ public class BillDaoImpl implements BillDao {
         bill.setModifyDate( rs.getDate( "modifyDate" ) );
         bill.setPaymentMethodName( rs.getString( "paymentMethodName" ) );
         bill.setCustomerName( rs.getString( "customerName" ) );
-        bill.setGoodName( rs.getString( "goodNane" ) );
+        bill.setGoodName( rs.getString( "goodName" ) );
         bills.add( bill );
       }
       DaoUtils.close( null, pstm, rs );
