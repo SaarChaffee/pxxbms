@@ -34,6 +34,17 @@
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/jsp/user.do</url-pattern>
   </servlet-mapping>
+  <!--订单-->
+  <servlet>
+    <servlet-name>BillServlet</servlet-name>
+    <servlet-class>com.chaffee.servlet.BillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BillServlet</servlet-name>
+    <url-pattern>/jsp/bill.do</url-pattern>
+  </servlet-mapping>
+
+
   <!--Filter-->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
