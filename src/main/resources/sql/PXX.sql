@@ -112,15 +112,15 @@ VALUES (2, '1', 'user', null, null, null, null);
 INSERT INTO pxx.user_role (id, roleCode, roleName, createdBy, creationDate, modifyBy, modifyDate)
 VALUES (3, '2', 'business', null, null, null, null);
 insert into user
-values (0, '000000', 'admin', '123', null, '2001-02-09 09:22:57', null, null, 1, null, '2022-03-04 09:22:57', null,
+values (0, 'admin', 'admin', '123', null, '2001-02-09 09:22:57', null, null, 1, null, '2022-03-04 09:22:57', null,
         '2022-03-04 09:22:57');
 INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
                       creationDate, modifyBy, modifyDate)
-VALUES (2, '100001', 'seller', '123', null, '2001-08-12 09:22:57', null, null, 2, null, '2022-03-04 09:22:57', null,
+VALUES (2, 'seller', 'seller', '123', null, '2001-08-12 09:22:57', null, null, 2, null, '2022-03-04 09:22:57', null,
         '2022-03-04 09:22:57');
 INSERT INTO pxx.user (id, userCode, userName, userPassword, gender, birthday, phone, address, userRole, createdBy,
                       creationDate, modifyBy, modifyDate)
-VALUES (3, '100002', 'customer', '123', null, '1919-08-10 09:22:57', null, null, 3, null, '2022-03-04 09:22:57', null,
+VALUES (3, 'customer', 'customer', '123', null, '1919-08-10 09:22:57', null, null, 3, null, '2022-03-04 09:22:57', null,
         '2022-03-04 09:22:57');
 INSERT INTO pxx.payment_method (id, typeCode, typeName, createdBy, creationDate, modifyBy, modifyDate)
 VALUES (1, '001', '微信', null, '2022-03-04 09:22:57', null, '2022-03-04 09:22:57');
