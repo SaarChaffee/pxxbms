@@ -37,17 +37,17 @@ public class BillDaoImpl implements BillDao {
       bills = new ArrayList<>();
       sql.append( "select b.*,p.typeName as paymentMethodName,u.userName as customerName,g.goodName as goodName " +
                       "from bill b,payment_method p,user u,good g " +
-                      "where b.paymentMethod=p.id and b.customerCode=u.id and b.goodCode = g.id" );
+                      "where b.paymentMethod = p.id and b.customerCode=u.id and b.goodCode = g.id" );
       if( !StringUtils.isNullOrEmpty( goodName ) ){
         sql.append( " and g.goodName like ?" );
         list.add( "%" + goodName + "%" );
       }
       if( !StringUtils.isNullOrEmpty( customerName ) ){
-        sql.append( "and u.userName like ?" );
+        sql.append( " and u.userName like ?" );
         list.add( "%" + customerName + "%" );
       }
       if( paymentMethod > 0 ){
-        sql.append( "and b.paymentMethod = ?" );
+        sql.append( " and b.paymentMethod = ?" );
         list.add( paymentMethod );
       }
       sql.append( " order by p.id ASC limit ?,?" );
@@ -98,7 +98,7 @@ public class BillDaoImpl implements BillDao {
     if( connection != null ){
       sql.append( "select count(*) as count " +
                       "from bill b,user u,good g,payment_method p " +
-                      "where b.paymentMethod=p.id and b.customerCode = u.id and b.goodCode = g.id" );
+                      "where b.paymentMethod = p.id and b.customerCode = u.id and b.goodCode = g.id" );
       
       if( !StringUtils.isNullOrEmpty( goodName ) ){
         sql.append( " and g.goodName like ?" );
