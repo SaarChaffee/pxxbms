@@ -17,4 +17,6 @@ public interface BillDao {
   public List<Bill> getBillList( Connection connection, String goodName, String customerName, int paymentMethod,
                                  int currentPageNo,
                                  int pageSize ) throws SQLException;
+  
+  public int getBillCount( Connection connection , String goodName, String customerName, int paymentMethod) throws SQLException;
 }

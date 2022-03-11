@@ -9,11 +9,13 @@ package com.chaffee.dao.bill;
 import com.chaffee.dao.DaoUtils;
 import com.chaffee.entity.Bill;
 import com.mysql.cj.util.StringUtils;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BillDaoImpl implements BillDao {
@@ -31,10 +33,11 @@ public class BillDaoImpl implements BillDao {
     StringBuffer sql = new StringBuffer();
     
     if( connection != null ){
+      list = new ArrayList<>();
+      bills = new ArrayList<>();
       sql.append( "select b.*,p.typeName as paymentMethodName,u.userName as customerName,g.goodName as goodName " +
-                      "from bill b,payment_method p,user u,good g where b.paymentMethod=p.id and b.customerCode=u.id " +
-                      "and b" +
-                      ".goodCode = g.id" );
+                      "from bill b,payment_method p,user u,good g " +
+                      "where b.paymentMethod=p.id and b.customerCode=u.id and b.goodCode = g.id" );
       if( !StringUtils.isNullOrEmpty( goodName ) ){
         sql.append( " and g.goodName like ?" );
         list.add( "%" + goodName + "%" );
@@ -83,4 +86,47 @@ public class BillDaoImpl implements BillDao {
     
     return bills;
   }
+  
+  @Override
+  public int getBillCount( Connection connection, String goodName, String customerName, int paymentMethod ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    StringBuffer sql = new StringBuffer();
+    List<Object> list = new ArrayList<>();
+    int count = 0;
+    
+    if( connection != null ){
+      sql.append( "select count(*) as count " +
+                      "from bill b,user u,good g,payment_method p " +
+                      "where b.paymentMethod=p.id and b.customerCode = u.id and b.goodCode = g.id" );
+      
+      if( !StringUtils.isNullOrEmpty( goodName ) ){
+        sql.append( " and g.goodName like ?" );
+        list.add( "%" + goodName + "%" );
+      }
+      if( !StringUtils.isNullOrEmpty( customerName ) ){
+        sql.append( " and u.userName like ?" );
+        list.add( "%" + customerName + "%" );
+      }
+      if( paymentMethod > 0 ){
+        sql.append( " and b.paymentMethod = ?" );
+        list.add( paymentMethod );
+      }
+      String s = sql.toString();
+      Object[] param = list.toArray();
+      rs = DaoUtils.execute( connection, pstm, rs, s, param );
+      if( rs.next() ){
+        count = rs.getInt( "count" );
+      }
+      DaoUtils.close( null, pstm, rs );
+    }
+    return count;
+    
+  }
+  
+  @Test
+  public void test() throws Exception {
+    System.out.println( this.getBillCount( DaoUtils.getConnection(), "", "", 2 ) );
+  }
 }
+
