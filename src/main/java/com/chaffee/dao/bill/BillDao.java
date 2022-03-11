@@ -14,5 +14,7 @@ import java.util.List;
 
 public interface BillDao {
   //获取订单列表
-  public List<Bill> getBillList( Connection connection,String goodCode,String customerCode,String paymentMethod ) throws SQLException;
+  public List<Bill> getBillList( Connection connection, String goodName, String customerName, int paymentMethod,
+                                 int currentPageNo,
+                                 int pageSize ) throws SQLException;
 }
