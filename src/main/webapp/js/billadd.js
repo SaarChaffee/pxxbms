@@ -1,9 +1,9 @@
 ﻿var billCode = null;
-var productName = null;
-var productUnit = null;
-var productCount = null;
+var goodName = null;
+var customerCode = null;
+var quality = null;
 var totalPrice = null;
-var providerId = null;
+var paymentMethod = null;
 var addBtn = null;
 var backBtn = null;
 
@@ -21,25 +21,25 @@ function priceReg(value) {
 
 $(function () {
   billCode = $("#billCode");
-  productName = $("#productName");
-  productUnit = $("#productUnit");
-  productCount = $("#productCount");
+  goodName = $("#goodName");
+  customerCode = $("#customerCode");
+  quality = $("#quality");
   totalPrice = $("#totalPrice");
-  providerId = $("#providerId");
+  paymentMethod = $("#paymentMethod");
   addBtn = $("#add");
   backBtn = $("#back");
   //初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
   billCode.next().html("*");
-  productName.next().html("*");
-  productUnit.next().html("*");
-  productCount.next().html("*");
+  goodName.next().html("*");
+  customerCode.next().html("*");
+  quality.next().html("*");
   totalPrice.next().html("*");
-  providerId.next().html("*");
+  paymentMethod.next().html("*");
   
   $.ajax({
     type: "GET",//请求类型
     url: path + "/jsp/bill.do",//请求的url
-    data: {method: "getproviderlist"},//请求参数
+    data: {method: "getPaymentMethodList"},//请求参数
     dataType: "json",//ajax接口（请求url）返回的数据类型
     success: function (data) {//data：返回数据（json对象）
       if (data != null) {
@@ -54,7 +54,7 @@ $(function () {
       }
     },
     error: function (data) {//当访问时候，404，500 等非200的错误状态码
-      validateTip(providerId.next(), {"color": "red"}, imgNo + " 获取供应商列表error", false);
+      validateTip(paymentMethod.next(), {"color": "red"}, imgNo + " 获取支付方式列表error", false);
     }
   });
   /*
@@ -73,41 +73,41 @@ $(function () {
     validateTip(billCode.next(), {"color": "#666666"}, "* 请输入订单编码", false);
   }).focus();
   
-  productName.on("focus", function () {
-    validateTip(productName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
+  goodName.on("focus", function () {
+    validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
   }).on("blur", function () {
-    if (productName.val() != null && productName.val() != "") {
-      validateTip(productName.next(), {"color": "green"}, imgYes, true);
+    if (goodName.val() != null && goodName.val() != "") {
+      validateTip(goodName.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(productName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
+      validateTip(goodName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
     }
     
   });
   
-  productUnit.on("focus", function () {
-    validateTip(productUnit.next(), {"color": "#666666"}, "* 请输入商品单位", false);
+  customerCode.on("focus", function () {
+    validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
   }).on("blur", function () {
-    if (productUnit.val() != null && productUnit.val() != "") {
-      validateTip(productUnit.next(), {"color": "green"}, imgYes, true);
+    if (customerCode.val() != null && customerCode.val() != "") {
+      validateTip(customerCode.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(productUnit.next(), {"color": "red"}, imgNo + " 单位不能为空，请重新输入", false);
+      validateTip(customerCode.next(), {"color": "red"}, imgNo + " 顾客账户不能为空，请重新输入", false);
     }
     
   });
   
-  providerId.on("focus", function () {
-    validateTip(providerId.next(), {"color": "#666666"}, "* 请选择供应商", false);
+  paymentMethod.on("focus", function () {
+    validateTip(paymentMethod.next(), {"color": "#666666"}, "* 请选择支付方式", false);
   }).on("blur", function () {
-    if (providerId.val() != null && providerId.val() != "" && providerId.val() != 0) {
-      validateTip(providerId.next(), {"color": "green"}, imgYes, true);
+    if (paymentMethod.val() != null && paymentMethod.val() != "" && paymentMethod.val() != 0) {
+      validateTip(paymentMethod.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(providerId.next(), {"color": "red"}, imgNo + " 供应商不能为空，请选择", false);
+      validateTip(paymentMethod.next(), {"color": "red"}, imgNo + " 支付方式不能为空，请选择", false);
     }
     
   });
   
-  productCount.on("focus", function () {
-    validateTip(productCount.next(), {"color": "#666666"}, "* 请输入大于0的正自然数，小数点后保留2位", false);
+  quality.on("focus", function () {
+    validateTip(quality.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("keyup", function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
@@ -125,12 +125,12 @@ $(function () {
   addBtn.on("click", function () {
     if (billCode.attr("validateStatus") != "true") {
       billCode.blur();
-    } else if (productName.attr("validateStatus") != "true") {
-      productName.blur();
-    } else if (productUnit.attr("validateStatus") != "true") {
-      productUnit.blur();
-    } else if (providerId.attr("validateStatus") != "true") {
-      providerId.blur();
+    } else if (goodName.attr("validateStatus") != "true") {
+      goodName.blur();
+    } else if (customerCode.attr("validateStatus") != "true") {
+      customerCode.blur();
+    } else if (paymentMethod.attr("validateStatus") != "true") {
+      paymentMethod.blur();
     } else {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();
