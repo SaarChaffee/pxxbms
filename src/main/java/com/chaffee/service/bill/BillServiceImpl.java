@@ -41,4 +41,20 @@ public class BillServiceImpl implements BillService {
     
     return bills;
   }
+  
+  @Override
+  public int getBillCount( String goodName, String customerName, int paymentMethod ) {
+    Connection connection = null;
+    int count = 0;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      count = billDao.getBillCount( connection, goodName, customerName, paymentMethod );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    return count;
+  }
 }

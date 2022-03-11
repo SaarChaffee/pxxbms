@@ -13,5 +13,7 @@ import java.util.List;
 public interface BillService {
   public List<Bill> getBillList( String goodName, String customerName, int paymentMethod,
                                  int currentPageNo,
-                                 int pageSize);
+                                 int pageSize );
+  
+  public int getBillCount( String goodName, String customerName, int paymentMethod );
 }
