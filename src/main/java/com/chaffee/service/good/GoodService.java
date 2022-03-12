@@ -6,5 +6,12 @@
  */
 package com.chaffee.service.good;
 
+import com.chaffee.entity.Good;
+
+import java.util.List;
+
 public interface GoodService {
+  public List<Good> getGoodList( String goodName, String ownerName, int goodType, int currentPageNo, int pageSize );
+  
+  public int getGoodCount( String goodName, String ownerName, int goodType );
 }
