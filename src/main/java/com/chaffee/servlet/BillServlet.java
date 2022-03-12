@@ -121,6 +121,13 @@ public class BillServlet extends HttpServlet {
     
   }
   
+  /**
+   * @param req
+   * @param resp
+   * @throws ServletException
+   * @throws IOException
+   * @TODO 修改顾客账号
+   */
   protected void modify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String billId = req.getParameter( "billid" );
     int id = 0;
