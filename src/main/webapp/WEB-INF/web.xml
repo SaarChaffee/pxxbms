@@ -43,6 +43,15 @@
     <servlet-name>BillServlet</servlet-name>
     <url-pattern>/jsp/bill.do</url-pattern>
   </servlet-mapping>
+  <!--商品-->
+  <servlet>
+    <servlet-name>GoodServlet</servlet-name>
+    <servlet-class>com.chaffee.servlet.GoodServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GoodServlet</servlet-name>
+    <url-pattern>/jsp/good.do</url-pattern>
+  </servlet-mapping>
 
 
   <!--Filter-->
