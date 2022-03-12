@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BillDaoImpl implements BillDao {
@@ -124,9 +125,70 @@ public class BillDaoImpl implements BillDao {
     
   }
   
+  @Override
+  public int updateBill( Connection connection, int id, Bill bill ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "update bill b set b.billCode = ?,b.goodCode = ?,b.quantity = ?,b.goodPrice = ?,b.totalPrice = ?," +
+          "b.customerCode = ?,b.address = ?,b.billTime = ?,b.paymentMethod = ?,b.deliveryTime = ?,b.createdBy = ?,b" +
+          ".creationDate = ?,b.modifyBy = ?,b.modifyDate = ? where b.id = ?";
+      Object[] param = {
+          bill.getBillCode(), bill.getGoodCode(), bill.getQuantity(), bill.getGoodPrice(), bill.getTotalPrice(),
+          bill.getCustomerCode(), bill.getAddress(), bill.getBillTime(), bill.getPaymentMethod(),
+          bill.getDeliveryTime(), bill.getCreatedBy(), bill.getCreationDate(), id,
+          new Date( System.currentTimeMillis() ), bill.getId()
+      };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
+  @Override
+  public Bill getBillById( Connection connection, int id ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    Bill bill = null;
+    
+    if( connection != null ){
+      String sql = "select b.*,p.typeName as paymentMethodName,u.userName as customerName,g.goodName as goodName " +
+          "from bill b,payment_method p,user u,good g " +
+          "where b.paymentMethod = p.id and b.customerCode=u.id and b.goodCode = g.id and b.id = ?";
+      Object[] param = { id };
+      rs = DaoUtils.execute( connection, pstm, rs, sql, param );
+      while( rs.next() ){
+        bill = new Bill();
+        bill.setId( rs.getInt( "id" ) );
+        bill.setBillCode( rs.getString( "billCode" ) );
+        bill.setGoodCode( rs.getInt( "goodCode" ) );
+        bill.setQuantity( rs.getInt( "quantity" ) );
+        bill.setGoodPrice( rs.getDouble( "goodPrice" ) );
+        bill.setTotalPrice( rs.getDouble( "totalPrice" ) );
+        bill.setCustomerCode( rs.getInt( "customerCode" ) );
+        bill.setAddress( rs.getString( "address" ) );
+        bill.setBillTime( rs.getDate( "billTime" ) );
+        bill.setPaymentMethod( rs.getInt( "paymentMethod" ) );
+        bill.setDeliveryTime( rs.getDate( "deliveryTime" ) );
+        bill.setCreatedBy( rs.getInt( "createdBy" ) );
+        bill.setCreationDate( rs.getDate( "creationDate" ) );
+        bill.setModifyBy( rs.getInt( "modifyBy" ) );
+        bill.setModifyDate( rs.getDate( "modifyDate" ) );
+        bill.setPaymentMethodName( rs.getString( "paymentMethodName" ) );
+        bill.setCustomerName( rs.getString( "customerName" ) );
+        bill.setGoodName( rs.getString( "goodName" ) );
+      }
+    }
+    DaoUtils.close( null, pstm, rs );
+    
+    return bill;
+  }
+  
   @Test
   public void test() throws Exception {
-    System.out.println( this.getBillCount( DaoUtils.getConnection(), "", "", 2 ) );
+    System.out.println( this.getBillById( DaoUtils.getConnection(), 1 ) );
   }
 }
 

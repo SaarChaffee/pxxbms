@@ -16,4 +16,8 @@ public interface BillService {
                                  int pageSize );
   
   public int getBillCount( String goodName, String customerName, int paymentMethod );
+  
+  public boolean updateUser( int id, Bill bill );
+  
+  public Bill getBillById(int id);
 }

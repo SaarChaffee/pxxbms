@@ -10,6 +10,7 @@ import com.chaffee.dao.DaoUtils;
 import com.chaffee.dao.bill.BillDao;
 import com.chaffee.dao.bill.BillDaoImpl;
 import com.chaffee.entity.Bill;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -56,5 +57,65 @@ public class BillServiceImpl implements BillService {
       DaoUtils.close( connection, null, null );
     }
     return count;
+  }
+  
+  @Override
+  public boolean updateUser( int id, Bill bill ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''updateBill''''Open transaction''''''''''" );
+      int i = billDao.updateBill( connection, id, bill );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''updateBill''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''updateBill''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''updateBill''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+        System.out.println( "'''''''''updateBill''''Close transaction''''''''''" );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+  }
+  
+  @Override
+  public Bill getBillById( int id ) {
+    Connection connection = null;
+    Bill bill = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      bill = billDao.getBillById( connection, id );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    return bill;
+  }
+  
+  @Test
+  public void test(){
+    System.out.println(this.getBillById( 1 ));
   }
 }
