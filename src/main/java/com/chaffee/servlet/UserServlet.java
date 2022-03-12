@@ -37,10 +37,10 @@ public class UserServlet extends HttpServlet {
     if( method != null ){
       switch( method ){
         case "savepwd" -> {
-          this.savepwd( req, resp );
+          this.savePwd( req, resp );
         }
         case "pwdmodify" -> {
-          this.pwdmodify( req, resp );
+          this.pwdModify( req, resp );
         }
         case "query" -> {
           this.query( req, resp );
@@ -49,16 +49,16 @@ public class UserServlet extends HttpServlet {
           this.add( req, resp );
         }
         case "getrolelist" -> {
-          this.getrolelist( req, resp );
+          this.getRoleList( req, resp );
         }
         case "deluser" -> {
-          this.deluser( req, resp );
+          this.delUser( req, resp );
         }
         case "modify" -> {
           this.modify( req, resp );
         }
         case "modifyexe" -> {
-          this.modifyexe( req, resp );
+          this.modifyExe( req, resp );
         }
       }
     }
@@ -70,7 +70,7 @@ public class UserServlet extends HttpServlet {
   }
   
   //修改密码
-  protected void savepwd( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+  protected void savePwd( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     Object o = req.getSession().getAttribute( Constants.USER_SESSION );
     String newpassword = req.getParameter( "newpassword" );
     boolean flag = false;
@@ -98,7 +98,7 @@ public class UserServlet extends HttpServlet {
   }
   
   //查询旧密码
-  protected void pwdmodify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+  protected void pwdModify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     Object o = req.getSession().getAttribute( Constants.USER_SESSION );
     String oldpassword = req.getParameter( "oldpassword" );
     Map<String, String> resultMap = new HashMap<>();
@@ -214,7 +214,7 @@ public class UserServlet extends HttpServlet {
   }
   
   //查询角色列表
-  protected void getrolelist( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+  protected void getRoleList( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     UserRoleService roleService = new UserRoleServiceImpl();
     List<UserRole> roleList = roleService.getRoleList();
     
@@ -231,7 +231,7 @@ public class UserServlet extends HttpServlet {
   }
   
   //删除用户
-  protected void deluser( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+  protected void delUser( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String uid = req.getParameter( "uid" );
     Map<String, String> resultMap = new HashMap<>();
     int delId = 0;
@@ -272,7 +272,7 @@ public class UserServlet extends HttpServlet {
   protected void modify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String uid = req.getParameter( "uid" );
     int getId = 0;
-    UserServiceImpl userService = new UserServiceImpl();
+    UserService userService = new UserServiceImpl();
     User user;
     
     try{
@@ -286,7 +286,7 @@ public class UserServlet extends HttpServlet {
   }
   
   //应用修改
-  protected void modifyexe( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+  protected void modifyExe( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
     int currentUser = o.getId();
     String userId = req.getParameter( "uid" );
