@@ -73,16 +73,16 @@ $(function () {
    * jquery的方法传递
    */
   
-  goodName.on("focus", function () {
-    validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
-  }).on("blur", function () {
-    if (goodName.val() != null && goodName.val() != "") {
-      validateTip(goodName.next(), {"color": "green"}, imgYes, true);
-    } else {
-      validateTip(goodName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
-    }
-    
-  });
+  // goodName.on("focus", function () {
+  //   validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
+  // }).on("blur", function () {
+  //   if (goodName.val() != null && goodName.val() != "") {
+  //     validateTip(goodName.next(), {"color": "green"}, imgYes, true);
+  //   } else {
+  //     validateTip(goodName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
+  //   }
+  //
+  // });
   
   customerCode.on("focus", function () {
     validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
@@ -134,8 +134,7 @@ $(function () {
     goodName.blur();
     customerCode.blur();
     paymentMethod.blur();
-    if (goodName.attr("validateStatus") == "true"
-        && customerCode.attr("validateStatus") == "true"
+    if (customerCode.attr("validateStatus") == "true"
         && paymentMethod.attr("validateStatus") == "true") {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();

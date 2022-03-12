@@ -18,8 +18,7 @@
             </div>
             <div>
                 <label for="goodName">商品名称：</label>
-                <input type="text" name="goodName" id="goodName" value="${bill.goodName }">
-                <font color="red"></font>
+                <span style="color: black" id="goodName">${bill.goodName }</span>
             </div>
             <div>
                 <label for="quantity">商品数量：</label>
@@ -37,9 +36,8 @@
                 <font color="red"></font>
             </div>
             <div>
-                <label>顾客账号：</label>
-                <input type="text" name="customerCode" id="customerCode" value="${bill.customerCode }">
-                <font color="red"></font>
+                <label>顾客姓名：</label>
+                <span style="color: black" id="customerCode">${bill.customerName }</span>
             </div>
             <div>
                 <label>付款方式：</label>
