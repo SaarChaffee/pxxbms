@@ -6,5 +6,16 @@
  */
 package com.chaffee.dao.good;
 
+import com.chaffee.entity.Good;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+
 public interface GoodDao {
+  public List<Good> getGoodList( Connection connection, String goodName, String ownerName, int goodType,
+                                 int currentPageNo,
+                                 int pageSize ) throws SQLException;
+  
+  public int getGoodCount( Connection connection, String goodName, String ownerName, int goodType ) throws SQLException;
 }
