@@ -13,6 +13,7 @@ import com.chaffee.service.bill.BillServiceImpl;
 import com.chaffee.service.bill.PaymentMethodService;
 import com.chaffee.service.bill.PaymentMethodServiceImpl;
 import com.chaffee.util.PageSupport;
+import com.google.gson.Gson;
 import com.mysql.cj.util.StringUtils;
 
 import javax.servlet.ServletException;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class BillServlet extends HttpServlet {
@@ -29,7 +31,13 @@ public class BillServlet extends HttpServlet {
     
     switch( method ){
       case "query" -> {
-        query( req, resp );
+        this.query( req, resp );
+      }
+      case "modify" -> {
+        this.modify( req, resp );
+      }
+      case "getPaymentMethodList" -> {
+        this.getPaymentMethodList( req, resp );
       }
     }
     
@@ -95,5 +103,38 @@ public class BillServlet extends HttpServlet {
     req.getRequestDispatcher( "/jsp/billlist.jsp" ).forward( req, resp );
   }
   
+  protected void getPaymentMethodList( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    PaymentMethodService paymentMethodService = new PaymentMethodServiceImpl();
+    List<PaymentMethod> paymentMethodList = paymentMethodService.getPaynentMethodList();
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( paymentMethodList );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
+    
+  }
+  
+  protected void modify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String billId = req.getParameter( "billid" );
+    int id = 0;
+    BillService billService = new BillServiceImpl();
+    Bill bill;
+    
+    try{
+      id = Integer.parseInt( billId );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    bill = billService.getBillById( id );
+    req.setAttribute( "bill", bill );
+    req.getRequestDispatcher( "/jsp/billmodify.jsp" ).forward( req, resp );
+  }
   
 }
