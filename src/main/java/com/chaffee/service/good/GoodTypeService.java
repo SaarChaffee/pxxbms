@@ -6,5 +6,10 @@
  */
 package com.chaffee.service.good;
 
+import com.chaffee.entity.GoodType;
+
+import java.util.List;
+
 public interface GoodTypeService {
+  public List<GoodType> getGoodTypeList();
 }
