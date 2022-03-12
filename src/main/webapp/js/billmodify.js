@@ -1,7 +1,8 @@
 ﻿var billCode = null;
 var goodName = null;
-var userCode = null;
-var quality = null;
+var customerCode = null;
+var quantity = null;
+var goodPrice = null;
 var totalPrice = null;
 var paymentMethod = null;
 var saveBtn = null;
@@ -22,9 +23,10 @@ function priceReg(value) {
 $(function () {
   billCode = $("#billCode");
   goodName = $("#goodName");
-  userCode = $("#userCode");
-  quality = $("#quality");
-  totalPrice = $("#totalPrice");
+  customerCode = $("#customerCode");
+  quantity = $("#quantity");
+  goodPrice = $("#goodPrice");
+  totalPrice = $("#totalPrice")
   paymentMethod = $("#paymentMethod");
   addBtn = $("#save");
   backBtn = $("#back");
@@ -32,9 +34,10 @@ $(function () {
   //初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
   billCode.next().html("*");
   goodName.next().html("*");
-  userCode.next().html("*");
-  quality.next().html("*");
-  totalPrice.next().html("*");
+  customerCode.next().html("*");
+  quantity.next().html("*");
+  goodPrice.next().html("*");
+  totalPrice.next().html("*")
   paymentMethod.next().html("*");
   
   $.ajax({
@@ -45,7 +48,7 @@ $(function () {
     success: function (data) {//data：返回数据（json对象）
       if (data != null) {
         var rid = $("#rid").val();
-        userRole.html("");
+        paymentMethod.html("");
         var options = "<option value=\"0\">请选择</option>";
         for (var i = 0; i < data.length; i++) {
           //alert(data[i].id);
@@ -81,13 +84,13 @@ $(function () {
     
   });
   
-  userCode.on("focus", function () {
-    validateTip(userCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
+  customerCode.on("focus", function () {
+    validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
   }).on("blur", function () {
-    if (userCode.val() != null && userCode.val() != "") {
-      validateTip(userCode.next(), {"color": "green"}, imgYes, true);
+    if (customerCode.val() != null && customerCode.val() != "") {
+      validateTip(customerCode.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(userCode.next(), {"color": "red"}, imgNo + " 顾客账户不能为空，请重新输入", false);
+      validateTip(customerCode.next(), {"color": "red"}, imgNo + " 顾客账户不能为空，请重新输入", false);
     }
     
   });
@@ -103,28 +106,36 @@ $(function () {
     
   });
   
-  quality.on("focus", function () {
-    validateTip(quality.next(), {"color": "#666666"}, "* 请输入正整数", false);
+  quantity.on("focus", function () {
+    validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("keyup", function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
+    if (this.value != null && goodPrice.value != null) {
+      totalPrice.value = this.value * goodPrice.value;
+    }
   });
   
-  totalPrice.on("focus", function () {
-    validateTip(totalPrice.next(), {"color": "#666666"}, "* 请输入大于0的正自然数，小数点后保留2位", false);
+  goodPrice.on("focus", function () {
+    validateTip(goodPrice.next(), {"color": "#666666"}, "* 请输入大于0的正自然数，小数点后保留2位", false);
   }).on("keyup", function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
+    this.value = priceReg(this.value);
+    if (this.value != null && quantity.value != null) {
+      totalPrice.value = this.value * quantity.value;
+    }
   });
+  
   
   addBtn.on("click", function () {
     goodName.blur();
-    userCode.blur();
+    customerCode.blur();
     paymentMethod.blur();
     if (goodName.attr("validateStatus") == "true"
-        && userCode.attr("validateStatus") == "true"
+        && customerCode.attr("validateStatus") == "true"
         && paymentMethod.attr("validateStatus") == "true") {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();

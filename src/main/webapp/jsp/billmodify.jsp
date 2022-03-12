@@ -22,19 +22,23 @@
                 <font color="red"></font>
             </div>
             <div>
-                <label for="productCount">商品数量：</label>
-                <input type="text" name="productCount" id="productCount" value="${bill.productCount }">
+                <label for="quantity">商品数量：</label>
+                <input type="text" name="quantity" id="quantity" value="${bill.quantity }">
+                <font color="red"></font>
+            </div>
+            <div>
+                <label for="goodPrice">商品价格：</label>
+                <input type="text" name="goodPrice" id="goodPrice" value="${bill.goodPrice }">
                 <font color="red"></font>
             </div>
             <div>
                 <label for="totalPrice">总金额：</label>
-                <input type="text" name="totalPrice" id="totalPrice" value="${bill.totalPrice }">
+                <input type="text" name="totalPrice" id="totalPrice" value="${bill.totalPrice}">
                 <font color="red"></font>
             </div>
             <div>
                 <label>顾客账号：</label>
-                <select name="customerCode" id="customerCode">
-                </select>
+                <input type="text" name="customerCode" id="customerCode" value="${bill.customerCode }">
                 <font color="red"></font>
             </div>
             <div>
