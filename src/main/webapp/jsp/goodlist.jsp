@@ -16,12 +16,12 @@
 
             <span>商品类型：</span>
             <select name="queryGoodType">
-                <c:if test="${goodType != null }">
+                <c:if test="${goodTypeList != null }">
                     <option value="0">--请选择--</option>
-                    <c:forEach var="type" items="${goodType}">
+                    <c:forEach var="type" items="${goodTypeList}">
                         <option
-                                <c:if test="${goodType.id == queryGoodType}">selected="selected"</c:if>
-                                value="${goodType.id}">${goodType.typeName}</option>
+                                <c:if test="${type.id == queryGoodType}">selected="selected"</c:if>
+                                value="${type.id}">${type.typeName}</option>
                     </c:forEach>
                 </c:if>
             </select>
