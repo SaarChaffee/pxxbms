@@ -96,7 +96,7 @@ public class GoodDaoImpl implements GoodDao {
         list.add( "%" + ownerName + "%" );
       }
       if( goodType != 0 ){
-        sql.append( " nd g.goodType = ?" );
+        sql.append( " and g.goodType = ?" );
         list.add( goodType );
       }
       Object[] param = list.toArray();
