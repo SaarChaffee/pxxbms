@@ -16,7 +16,7 @@ public class Good {
   /**
    * 商品名
    */
-  private String goodCame;
+  private String goodName;
   /**
    * 商品编号
    */
@@ -66,12 +66,12 @@ public class Good {
     this.id = id;
   }
   
-  public String getGoodCame() {
-    return goodCame;
+  public String getGoodName() {
+    return goodName;
   }
   
-  public void setGoodCame( String goodCame ) {
-    this.goodCame = goodCame;
+  public void setGoodName( String goodName ) {
+    this.goodName = goodName;
   }
   
   public String getGoodCode() {
@@ -158,7 +158,7 @@ public class Good {
   public String toString() {
     return "Good{" +
         "id=" + id +
-        ", goodCame='" + goodCame + '\'' +
+        ", goodName='" + goodName + '\'' +
         ", goodCode='" + goodCode + '\'' +
         ", goodType=" + goodType +
         ", inventory=" + inventory +
