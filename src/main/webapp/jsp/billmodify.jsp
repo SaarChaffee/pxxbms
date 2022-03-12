@@ -13,8 +13,12 @@
             <input type="hidden" name="id" value="${bill.id }">
             <!--div的class 为error是验证错误，ok是验证成功-->
             <div class="">
-                <label for="billCode">订单编码：</label>
+                <label for="billCode">订单编号：</label>
                 <input type="text" name="billCode" id="billCode" value="${bill.billCode }" readonly="readonly">
+            </div>
+            <div>
+                <label>顾客姓名：</label>
+                <span style="color: black" id="customerCode">${bill.customerName }</span>
             </div>
             <div>
                 <label for="goodName">商品名称：</label>
@@ -33,10 +37,6 @@
             <div>
                 <label for="totalPrice">总金额：</label>
                 <input type="text" name="totalPrice" id="totalPrice" value="${bill.totalPrice}">
-            </div>
-            <div>
-                <label>顾客姓名：</label>
-                <span style="color: black" id="customerCode">${bill.customerName }</span>
             </div>
             <div>
                 <label>付款方式：</label>
