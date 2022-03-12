@@ -36,7 +36,7 @@
     <!--账单表格 样式和供应商公用-->
     <table class="providerTable" cellpadding="0" cellspacing="0">
         <tr class="firstTr">
-            <th width="10%">订单编码</th>
+            <th width="10%">订单编号</th>
             <th width="20%">商品名称</th>
             <th width="10%">顾客姓名</th>
             <th width="10%">订单金额</th>
