@@ -33,8 +33,8 @@ $(function () {
   
   //初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
   billCode.next().html("*");
-  goodName.next().html("*");
-  customerCode.next().html("*");
+  // goodName.next().html("*");
+  // customerCode.next().html("*");
   quantity.next().html("*");
   goodPrice.next().html("*");
   totalPrice.next().html("*")
@@ -84,16 +84,16 @@ $(function () {
   //
   // });
   
-  customerCode.on("focus", function () {
-    validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
-  }).on("blur", function () {
-    if (customerCode.val() != null && customerCode.val() != "") {
-      validateTip(customerCode.next(), {"color": "green"}, imgYes, true);
-    } else {
-      validateTip(customerCode.next(), {"color": "red"}, imgNo + " 顾客账户不能为空，请重新输入", false);
-    }
-    
-  });
+  // customerCode.on("focus", function () {
+  //   validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
+  // }).on("blur", function () {
+  //   if (customerCode.val() != null && customerCode.val() != "") {
+  //     validateTip(customerCode.next(), {"color": "green"}, imgYes, true);
+  //   } else {
+  //     validateTip(customerCode.next(), {"color": "red"}, imgNo + " 顾客账户不能为空，请重新输入", false);
+  //   }
+  //
+  // });
   
   paymentMethod.on("focus", function () {
     validateTip(paymentMethod.next(), {"color": "#666666"}, "* 请选择付款方式", false);
@@ -112,8 +112,8 @@ $(function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
-    if (this.value != null && goodPrice.value != null) {
-      totalPrice.value = this.value * goodPrice.value;
+    if (this.value != null && goodPrice.val() != null) {
+      totalPrice.val(priceReg(this.value * goodPrice.val() + ""));
     }
   });
   
@@ -123,9 +123,8 @@ $(function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
-    this.value = priceReg(this.value);
-    if (this.value != null && quantity.value != null) {
-      totalPrice.value = this.value * quantity.value;
+    if (this.value != null && quantity.val() != null) {
+      totalPrice.val(priceReg(this.value * quantity.val() + ""));
     }
   });
   
@@ -134,8 +133,7 @@ $(function () {
     goodName.blur();
     customerCode.blur();
     paymentMethod.blur();
-    if (customerCode.attr("validateStatus") == "true"
-        && paymentMethod.attr("validateStatus") == "true") {
+    if (paymentMethod.attr("validateStatus") == "true") {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();
       }
