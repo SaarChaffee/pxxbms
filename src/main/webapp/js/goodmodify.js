@@ -86,15 +86,30 @@ $(function () {
     
   });
   
-  goodCode.on("focus", function () {
-    validateTip(goodCode.next(), {"color": "#666666"}, "* 商品编号", false);
-  }).on("blur", function () {
-    if (goodCode.val() != null && goodCode.val() !== "") {
-      validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
+  goodCode.on("blur", function () {
+    if (goodCode.val() !== null && goodCode.val() !== "" && /^\w/.test(goodCode.val())) {
+      $.ajax({
+        type: "GET",
+        url: path + "/jsp/good.do",
+        data: {method: "getGoodByCode"},
+        dataType: "json",
+        success: function (data) {
+          if (data != null) {
+            if (data.flag === false) {
+              validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
+            } else {
+              validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号已存在，请重新输入", false);
+            }
+          }
+        }
+      })
     } else {
-      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号输入的不符合规范，请重新输入", false);
+      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号不能为空或格式错误，请重新输入", false);
     }
-  });
+  }).on("focus", function () {
+    //显示友情提示
+    validateTip(goodCode.next(), {"color": "#666666"}, "* 请输入商品编号，由字母和数字组成", false);
+  }).focus();
   
   inventory.on("focus", function () {
     validateTip(inventory.next(), {"color": "#666666"}, "* 请输入库存，必须为0或正整数", false);

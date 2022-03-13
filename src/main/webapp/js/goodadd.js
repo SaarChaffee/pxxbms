@@ -66,7 +66,21 @@ $(function () {
    */
   goodCode.on("blur", function () {
     if (goodCode.val() !== null && goodCode.val() !== "" && /^\w/.test(goodCode.val())) {
-      validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
+      $.ajax({
+        type: "GET",
+        url: path + "/jsp/good.do",
+        data: {method: "getGoodByCode"},
+        dataType: "json",
+        success: function (data) {
+          if (data != null) {
+            if (data.flag === false) {
+              validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
+            } else {
+              validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号已存在，请重新输入", false);
+            }
+          }
+        }
+      })
     } else {
       validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号不能为空或格式错误，请重新输入", false);
     }
