@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BillServlet extends HttpServlet {
   @Override
@@ -47,6 +49,9 @@ public class BillServlet extends HttpServlet {
       }
       case "add" -> {
         this.add( req, resp );
+      }
+      case "delbill" -> {
+        this.del( req, resp );
       }
     }
     
@@ -192,6 +197,43 @@ public class BillServlet extends HttpServlet {
     else{
       req.getRequestDispatcher( "/useradd.jsp" ).forward( req, resp );
     }
+  }
+  
+  protected void del( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String billId = req.getParameter( "billid" );
+    Map<String, Object> resultMap = new HashMap<>();
+    int delId = 0;
+    BillService billService = new BillServiceImpl();
+    
+    try{
+      delId = Integer.parseInt( billId );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    if( delId < 0 ){
+      resultMap.put( "delResult", "notexist" );
+    }
+    else{
+      boolean flag = billService.deleteBill( delId );
+      if( flag ){
+        resultMap.put( "delResult", "true" );
+      }
+      else{
+        resultMap.put( "delResult", "false" );
+      }
+    }
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
+    
   }
   
   protected void modifyExec( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {

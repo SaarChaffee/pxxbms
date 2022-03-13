@@ -52,6 +52,9 @@ public class GoodServlet extends HttpServlet {
       case "add" -> {
         this.add( req, resp );
       }
+      case "delGood" -> {
+        this.delGood( req, resp );
+      }
     }
     
   }
@@ -189,6 +192,43 @@ public class GoodServlet extends HttpServlet {
     }
     else{
       req.getRequestDispatcher( "/goodadd.jsp" ).forward( req, resp );
+    }
+    
+  }
+  
+  protected void delGood( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String goodId = req.getParameter( "goodid" );
+    Map<String, Object> resultMap = new HashMap<>();
+    int delId = 0;
+    GoodService goodService = new GoodServiceImpl();
+    
+    try{
+      delId = Integer.parseInt( goodId );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    if( delId < 0 ){
+      resultMap.put( "delResult", "notexist" );
+    }
+    else{
+      boolean flag = goodService.deleteGood( delId );
+      if( flag ){
+        resultMap.put( "delResult", "true" );
+      }
+      else{
+        resultMap.put( "delResult", "false" );
+      }
+    }
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
     }
     
   }
