@@ -65,7 +65,7 @@ $(function () {
       data: {method: "ucexist", userCode: userCode.val()},//请求参数
       dataType: "json",//ajax接口（请求url）返回的数据类型
       success: function (data) {//data：返回数据（json对象）
-        if (data.userCode == "exist") {//账号已存在，错误提示
+        if (data.userCode === "exist") {//账号已存在，错误提示
           validateTip(userCode.next(), {"color": "red"}, imgNo + " 该用户账号已存在", false);
         } else {//账号可用，正确提示
           validateTip(userCode.next(), {"color": "green"}, imgYes + " 该账号可以使用", true);
@@ -85,7 +85,7 @@ $(function () {
   userName.bind("focus", function () {
     validateTip(userName.next(), {"color": "#666666"}, "* 用户名长度必须是大于1小于10的字符", false);
   }).bind("blur", function () {
-    if (userName.val() != null && userName.val().length > 1
+    if (userName.val() != null && userName.val() !== "" && userName.val().length > 1
         && userName.val().length < 10) {
       validateTip(userName.next(), {"color": "green"}, imgYes, true);
     } else {
@@ -97,7 +97,7 @@ $(function () {
   userPassword.bind("focus", function () {
     validateTip(userPassword.next(), {"color": "#666666"}, "* 密码长度必须是大于6小于20", false);
   }).bind("blur", function () {
-    if (userPassword.val() != null && userPassword.val().length > 6
+    if (userPassword.val() != null && userPassword.val() !== "" && userPassword.val().length > 6
         && userPassword.val().length < 20) {
       validateTip(userPassword.next(), {"color": "green"}, imgYes, true);
     } else {
@@ -108,8 +108,8 @@ $(function () {
   ruserPassword.bind("focus", function () {
     validateTip(ruserPassword.next(), {"color": "#666666"}, "* 请输入与上面一只的密码", false);
   }).bind("blur", function () {
-    if (ruserPassword.val() != null && ruserPassword.val().length > 6
-        && ruserPassword.val().length < 20 && userPassword.val() == ruserPassword.val()) {
+    if (ruserPassword.val() != null && ruserPassword !== "" && ruserPassword.val().length > 6
+        && ruserPassword.val().length < 20 && userPassword.val() === ruserPassword.val()) {
       validateTip(ruserPassword.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(ruserPassword.next(), {"color": "red"}, imgNo + " 两次密码输入不一致，请重新输入", false);
@@ -120,7 +120,7 @@ $(function () {
   birthday.bind("focus", function () {
     validateTip(birthday.next(), {"color": "#666666"}, "* 点击输入框，选择日期", false);
   }).bind("blur", function () {
-    if (birthday.val() != null && birthday.val() != "") {
+    if (birthday.val() != null && birthday.val() !== "") {
       validateTip(birthday.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(birthday.next(), {"color": "red"}, imgNo + " 选择的日期不正确,请重新输入", false);
@@ -149,19 +149,19 @@ $(function () {
   });
   
   addBtn.bind("click", function () {
-    if (userCode.attr("validateStatus") != "true") {
+    if (userCode.attr("validateStatus") !== "true") {
       userCode.blur();
-    } else if (userName.attr("validateStatus") != "true") {
+    } else if (userName.attr("validateStatus") !== "true") {
       userName.blur();
-    } else if (userPassword.attr("validateStatus") != "true") {
+    } else if (userPassword.attr("validateStatus") !== "true") {
       userPassword.blur();
-    } else if (ruserPassword.attr("validateStatus") != "true") {
+    } else if (ruserPassword.attr("validateStatus") !== "true") {
       ruserPassword.blur();
-    } else if (birthday.attr("validateStatus") != "true") {
+    } else if (birthday.attr("validateStatus") !== "true") {
       birthday.blur();
-    } else if (phone.attr("validateStatus") != "true") {
+    } else if (phone.attr("validateStatus") !== "true") {
       phone.blur();
-    } else if (userRole.attr("validateStatus") != "true") {
+    } else if (userRole.attr("validateStatus") !== "true") {
       userRole.blur();
     } else {
       if (confirm("是否确认提交数据")) {
@@ -171,10 +171,10 @@ $(function () {
   });
   
   backBtn.on("click", function () {
-    if (referer != undefined
+    if (referer !== undefined
         && null != referer
-        && "" != referer
-        && "null" != referer
+        && "" !== referer
+        && "null" !== referer
         && referer.length > 4) {
       window.location.href = referer;
     } else {

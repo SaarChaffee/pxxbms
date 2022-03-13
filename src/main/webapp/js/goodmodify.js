@@ -37,7 +37,7 @@ $(function () {
         for (var i = 0; i < data.length; i++) {
           //alert(data[i].id);
           //alert(data[i].typeName);
-          if (tid != null && tid != undefined && data[i].id == tid) {
+          if (tid !== null && tid !== undefined && data[i].id === tid) {
             options += "<option selected=\"selected\" value=\"" + data[i].id + "\" >" + data[i].typeName + "</option>";
           } else {
             options += "<option value=\"" + data[i].id + "\" >" + data[i].typeName + "</option>";
@@ -77,7 +77,7 @@ $(function () {
   goodName.on("focus", function () {
     validateTip(goodName.next(), {"color": "#666666"}, "* 商品名长度必须是大于1小于10的字符", false);
   }).on("blur", function () {
-    if (goodName.val() != null && goodName.val().length > 1
+    if (goodName.val() != null && goodName.val() !== "" && goodName.val().length > 1
         && goodName.val().length < 10) {
       validateTip(goodName.next(), {"color": "green"}, imgYes, true);
     } else {
@@ -89,7 +89,7 @@ $(function () {
   goodCode.on("focus", function () {
     validateTip(goodCode.next(), {"color": "#666666"}, "* 商品编号", false);
   }).on("blur", function () {
-    if (goodCode.val() != null) {
+    if (goodCode.val() != null && goodCode.val() !== "") {
       validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号输入的不符合规范，请重新输入", false);
@@ -100,7 +100,7 @@ $(function () {
     validateTip(inventory.next(), {"color": "#666666"}, "* 请输入库存，必须为0或正整数", false);
   }).on("blur", function () {
     var patrn = /^0|\d+$/;
-    if (inventory.val().match(patrn)) {
+    if (inventory.val() != null && inventory.val() !== "" && inventory.val().match(patrn)) {
       validateTip(inventory.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(inventory.next(), {"color": "red"}, imgNo + " 您输入的库存不正确", false);
@@ -110,7 +110,7 @@ $(function () {
   goodType.on("focus", function () {
     validateTip(goodType.next(), {"color": "#666666"}, "* 请选择商品类型", false);
   }).on("blur", function () {
-    if (goodType.val() != null && goodType.val() > 0) {
+    if (goodType.val() != null && goodType !== "" && goodType.val() > 0) {
       validateTip(goodType.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(goodType.next(), {"color": "red"}, imgNo + " 请重新选择商品类型", false);
@@ -124,10 +124,10 @@ $(function () {
     goodCode.blur();
     goodType.blur();
     console.log(goodType.attr("validateStatus"));
-    if (goodName.attr("validateStatus") == "true"
-        && inventory.attr("validateStatus") == "true"
-        && goodCode.attr("validateStatus") == "true"
-        && goodType.attr("validateStatus") == "true") {
+    if (goodName.attr("validateStatus") === "true"
+        && inventory.attr("validateStatus") === "true"
+        && goodCode.attr("validateStatus") === "true"
+        && goodType.attr("validateStatus") === "true") {
       if (confirm("是否确认要提交数据？")) {
         $("#goodForm").submit();
       }
@@ -136,10 +136,10 @@ $(function () {
   
   backBtn.on("click", function () {
     //alert("modify: "+referer);
-    if (referer != undefined
+    if (referer !== undefined
         && null != referer
-        && "" != referer
-        && "null" != referer
+        && "" !== referer
+        && "null" !== referer
         && referer.length > 4) {
       window.location.href = referer;
     } else {

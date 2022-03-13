@@ -66,7 +66,7 @@ $(function () {
         for (var i = 0; i < data.length; i++) {
           //alert(data[i].id);
           //alert(data[i].roleName);
-          if (rid != null && rid != undefined && data[i].id == rid) {
+          if (rid !== null && rid !== undefined && data[i].id === rid) {
             options += "<option selected=\"selected\" value=\"" + data[i].id + "\" >" + data[i].typeName + "</option>";
           } else {
             options += "<option value=\"" + data[i].id + "\" >" + data[i].typeName + "</option>";
@@ -111,7 +111,7 @@ $(function () {
   paymentMethod.on("focus", function () {
     validateTip(paymentMethod.next(), {"color": "#666666"}, "* 请选择付款方式", false);
   }).on("blur", function () {
-    if (paymentMethod.val() != null && paymentMethod.val() != "" && paymentMethod.val() != 0) {
+    if (paymentMethod.val() !== null && paymentMethod.val() !== "" && paymentMethod.val() !== 0) {
       validateTip(paymentMethod.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(paymentMethod.next(), {"color": "red"}, imgNo + " 付款方式不能为空，请选择", false);
@@ -122,7 +122,7 @@ $(function () {
   quantity.on("focus", function () {
     validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
-    if (this.value != null && goodPrice.val() != null) {
+    if (this.value !== "" && goodPrice.val() !== "" && this.value !== null && goodPrice.val() !== null) {
       totalPrice.val(accMul(this.value, goodPrice.val()));
     }
   });
@@ -133,7 +133,7 @@ $(function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
-    if (this.value != null && quantity.val() != null) {
+    if (this.value !== "" && quantity.val() !== "" && this.value !== null && quantity.val() !== null) {
       //解决精度丢失问题
       totalPrice.val(accMul(this.value, quantity.val()));
     }
@@ -144,7 +144,7 @@ $(function () {
     goodName.blur();
     customerCode.blur();
     paymentMethod.blur();
-    if (paymentMethod.attr("validateStatus") == "true") {
+    if (paymentMethod.attr("validateStatus") === "true") {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();
       }
@@ -153,10 +153,10 @@ $(function () {
   
   backBtn.on("click", function () {
     //alert("modify: "+referer);
-    if (referer != undefined
-        && null != referer
-        && "" != referer
-        && "null" != referer
+    if (referer !== undefined
+        && null !== referer
+        && "" !== referer
+        && "null" !== referer
         && referer.length > 4) {
       window.location.href = referer;
     } else {

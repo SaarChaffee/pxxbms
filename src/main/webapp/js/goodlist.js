@@ -7,12 +7,12 @@ function deleteGood(obj) {
     data: {method: "delGood", uid: obj.attr("goodid")},
     dataType: "json",
     success: function (data) {
-      if (data.delResult == "true") {//删除成功：移除删除行
+      if (data.delResult === "true") {//删除成功：移除删除行
         cancleBtn();
         obj.parents("tr").remove();
-      } else if (data.delResult == "false") {//删除失败
+      } else if (data.delResult === "false") {//删除失败
         changeDLGContent("对不起，删除商品【" + obj.attr("goodname") + "】失败");
-      } else if (data.delResult == "notexist") {
+      } else if (data.delResult === "notexist") {
         changeDLGContent("对不起，商品【" + obj.attr("goodname") + "】不存在");
       }
     },

@@ -65,7 +65,7 @@ $(function () {
    * jquery的方法传递
    */
   goodCode.on("blur", function () {
-    if (goodCode.val() != null && goodCode.val() != "" && /^\w/.test(goodCode.val())) {
+    if (goodCode.val() !== null && goodCode.val() !== "" && /^\w/.test(goodCode.val())) {
       validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号不能为空或格式错误，请重新输入", false);
@@ -78,7 +78,7 @@ $(function () {
   goodName.on("focus", function () {
     validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
   }).on("blur", function () {
-    if (goodName.val() != null && goodName.val() != "") {
+    if (goodName.val() != null && goodName.val() !== "") {
       validateTip(goodName.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(goodName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
@@ -89,7 +89,7 @@ $(function () {
   ownerCode.on("focus", function () {
     validateTip(ownerCode.next(), {"color": "#666666"}, "* 请输入商家账户", false);
   }).on("blur", function () {
-    if (ownerCode.val() != null && ownerCode.val() != "") {
+    if (ownerCode.val() != null && ownerCode.val() !== "") {
       $.ajax({
         type: "GET",
         url: path + "/jsp/user.do",
@@ -116,7 +116,7 @@ $(function () {
   goodType.on("focus", function () {
     validateTip(goodType.next(), {"color": "#666666"}, "* 请选择商品类型", false);
   }).on("blur", function () {
-    if (goodType.val() != null && goodType.val() != "" && goodType.val() != 0) {
+    if (goodType.val() != null && goodType.val() !== "" && goodType.val() !== 0) {
       validateTip(goodType.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(goodType.next(), {"color": "red"}, imgNo + " 商品类型不能为空，请选择", false);
@@ -127,7 +127,7 @@ $(function () {
   inventory.on("focus", function () {
     validateTip(inventory.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
-    if (this.value != null && inventory.val() != null && /^\d+/.test(this.value)) {
+    if (this.value != null && inventory.val() !== null && /^\d+/.test(this.value)) {
       validateTip(inventory.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(inventory.next(), {"color": "red"}, imgNo + " 库存不能为空或格式错误，请重新输入", false);
@@ -137,13 +137,13 @@ $(function () {
   
   
   addBtn.on("click", function () {
-    if (goodCode.attr("validateStatus") != "true") {
+    if (goodCode.attr("validateStatus") !== "true") {
       goodCode.blur();
-    } else if (goodName.attr("validateStatus") != "true") {
+    } else if (goodName.attr("validateStatus") !== "true") {
       goodName.blur();
-    } else if (ownerCode.attr("validateStatus") != "true") {
+    } else if (ownerCode.attr("validateStatus") !== "true") {
       ownerCode.blur();
-    } else if (goodType.attr("validateStatus") != "true") {
+    } else if (goodType.attr("validateStatus") !== "true") {
       goodType.blur();
     } else {
       if (confirm("是否确认提交数据")) {
@@ -153,10 +153,10 @@ $(function () {
   });
   
   backBtn.on("click", function () {
-    if (referer != undefined
+    if (referer !== undefined
         && null != referer
-        && "" != referer
-        && "null" != referer
+        && "" !== referer
+        && "null" !== referer
         && referer.length > 4) {
       window.location.href = referer;
     } else {

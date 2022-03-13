@@ -89,7 +89,7 @@ $(function () {
    * jquery的方法传递
    */
   billCode.on("blur", function () {
-    if (billCode.val() != null && billCode.val() != "") {
+    if (billCode.val() !== null && billCode.val() !== "") {
       validateTip(billCode.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(billCode.next(), {"color": "red"}, imgNo + " 订单号不能为空，请重新输入", false);
@@ -102,7 +102,7 @@ $(function () {
   goodName.on("focus", function () {
     validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
   }).on("blur", function () {
-    if (goodName.val() != null && goodName.val() != "") {
+    if (goodName.val() !== "" && goodName.val() !== null) {
       $.ajax({
         type: "GET",
         url: path + "/jsp/good.do",
@@ -128,7 +128,7 @@ $(function () {
   customerCode.on("focus", function () {
     validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
   }).on("blur", function () {
-    if (customerCode.val() != null && customerCode.val() != "") {
+    if (customerCode.val() !== "" && customerCode.val() !== null) {
       $.ajax({
         type: "GET",
         url: path + "/jsp/user.do",
@@ -156,7 +156,7 @@ $(function () {
   paymentMethod.on("focus", function () {
     validateTip(paymentMethod.next(), {"color": "#666666"}, "* 请选择支付方式", false);
   }).on("blur", function () {
-    if (paymentMethod.val() != null && paymentMethod.val() != "" && paymentMethod.val() != 0) {
+    if (paymentMethod.val() !== null && paymentMethod.val() !== "" && paymentMethod.val() !== 0) {
       validateTip(paymentMethod.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(paymentMethod.next(), {"color": "red"}, imgNo + " 支付方式不能为空，请选择", false);
@@ -165,15 +165,17 @@ $(function () {
   });
   
   quantity.on("focus", function () {
-    validateTip(quantity.next(), {"color": "red"}, "* 请输入正整数", false);
+    validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
-    if (this.value != null && goodPrice.val() != null) {
+    if (this.value !== "" && goodPrice.val() !== "" && this.value !== null && goodPrice.val() !== null) {
       if (this.value > inventory) {
         validateTip(quantity.next(), {"color": "red"}, "* 库存不足", false);
       } else {
         totalPrice.val(accMul(this.value, goodPrice.val()));
         validateTip(quantity.next(), {"color": "green"}, imgYes, true);
       }
+    } else {
+      validateTip(quantity.next(), {"color": "red"}, "* 格式错误", false);
     }
   });
   
@@ -183,7 +185,7 @@ $(function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
-    if (this.value != null && quantity.val() != null) {
+    if (this.value !== "" && quantity.val() !== "" && this.value !== null && quantity.val() !== null) {
       //解决精度丢失问题
       totalPrice.val(accMul(this.value, quantity.val()));
       validateTip(goodPrice.next(), {"color": "green"}, imgYes, true);
@@ -193,13 +195,13 @@ $(function () {
   });
   
   addBtn.on("click", function () {
-    if (billCode.attr("validateStatus") != "true") {
+    if (billCode.attr("validateStatus") !== "true") {
       billCode.blur();
-    } else if (goodName.attr("validateStatus") != "true") {
+    } else if (goodName.attr("validateStatus") !== "true") {
       goodName.blur();
-    } else if (customerCode.attr("validateStatus") != "true") {
+    } else if (customerCode.attr("validateStatus") !== "true") {
       customerCode.blur();
-    } else if (paymentMethod.attr("validateStatus") != "true") {
+    } else if (paymentMethod.attr("validateStatus") !== "true") {
       paymentMethod.blur();
     } else {
       if (confirm("是否确认提交数据")) {
@@ -209,10 +211,10 @@ $(function () {
   });
   
   backBtn.on("click", function () {
-    if (referer != undefined
-        && null != referer
-        && "" != referer
-        && "null" != referer
+    if (referer !== undefined
+        && null !== referer
+        && "" !== referer
+        && "null" !== referer
         && referer.length > 4) {
       window.location.href = referer;
     } else {
