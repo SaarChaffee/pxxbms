@@ -25,10 +25,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserServlet extends HttpServlet {
   @Override
@@ -59,6 +56,9 @@ public class UserServlet extends HttpServlet {
         }
         case "modifyexe" -> {
           this.modifyExe( req, resp );
+        }
+        case "isTraderExist" -> {
+          this.isTraderExist( req, resp );
         }
       }
     }
@@ -321,5 +321,32 @@ public class UserServlet extends HttpServlet {
     userService.updateUser( currentUser, user );
     
     resp.sendRedirect( req.getContextPath() + "/jsp/user.do?method=query" );
+  }
+  
+  protected void isTraderExist( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String traderName = req.getParameter( "traderName" );
+    UserService userService = new UserServiceImpl();
+    Map<String, Object> resultMap = new HashMap<>();
+    
+    User user = userService.getUserByName( traderName );
+    if( user != null ){
+      resultMap.put( "flag", true );
+      resultMap.put( "oid", user.getId() );
+    }
+    else{
+      resultMap.put( "flag", false );
+    }
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
   }
 }

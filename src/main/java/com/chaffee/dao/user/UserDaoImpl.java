@@ -239,6 +239,42 @@ public class UserDaoImpl implements UserDao {
     return user;
   }
   
+  @Override
+  public User getUserByName( Connection connection, String userName ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    User user = null;
+    
+    if( connection != null ){
+      String sql = "select u.*,r.roleName as userRoleName from user u,user_role r where u.userRole = r.id and " +
+          "u.userName = ?";
+      Object[] param = { userName };
+      rs = DaoUtils.execute( connection, pstm, rs, sql, param );
+      while( rs.next() ){
+        user = new User();
+        user.setId( rs.getInt( "id" ) );
+        user.setUserCode( rs.getString( "userCode" ) );
+        user.setUserName( rs.getString( "userName" ) );
+        user.setUserPassword( rs.getString( "userPassword" ) );
+        user.setGender( rs.getInt( "gender" ) );
+        user.setBirthday( rs.getDate( "birthday" ) );
+        user.setPhone( rs.getString( "phone" ) );
+        user.setAddress( rs.getString( "address" ) );
+        user.setUserRole( rs.getInt( "userRole" ) );
+        user.setCreatedBy( rs.getInt( "createdBy" ) );
+        user.setCreationDate( rs.getDate( "creationDate" ) );
+        user.setModifyBy( rs.getInt( "modifyBy" ) );
+        user.setModifyDate( rs.getDate( "modifyDate" ) );
+        user.setUserRoleName( rs.getString( "userRoleName" ) );
+      }
+    }
+    DaoUtils.close( null, pstm, rs );
+    
+    return user;
+    
+    
+  }
+  
   @Test
   public void test() throws Exception {
     Connection connection = DaoUtils.getConnection();

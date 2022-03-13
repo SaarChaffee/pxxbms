@@ -255,6 +255,24 @@ public class UserServiceImpl implements UserService {
     return user;
   }
   
+  @Override
+  public User getUserByName( String userName ) {
+    Connection connection = null;
+    User user = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      user = userDao.getUserByName( connection, userName );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return user;
+    
+  }
+  
   @Test
   public void test() {
     User user = new User();

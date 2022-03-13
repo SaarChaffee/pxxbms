@@ -26,4 +26,7 @@ public interface UserService {
   public boolean updateUser( int id, User user );
   
   public User getUserById( int id );
+  
+  public User getUserByName(String userName);
+  
 }
