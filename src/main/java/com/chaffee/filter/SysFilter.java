@@ -27,13 +27,13 @@ public class SysFilter implements Filter {
     
     Object o = request.getSession().getAttribute( Constants.USER_SESSION );
     
-    //if( o == null ){
-    //  System.out.println( "------------拦截成功-------------" );
-    //  response.sendRedirect( request.getContextPath() + "/error.jsp" );
-    //}
-    //else{
+    if( o == null ){
+      System.out.println( "------------拦截成功-------------" );
+      response.sendRedirect( request.getContextPath() + "/error.jsp" );
+    }
+    else{
       filterChain.doFilter( servletRequest, servletResponse );
-    //}
+    }
     
   }
 }
