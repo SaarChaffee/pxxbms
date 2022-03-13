@@ -63,6 +63,9 @@ public class UserServlet extends HttpServlet {
         case "getUserByCode" -> {
           this.getUserByCode( req, resp );
         }
+        case "view" -> {
+          this.view( req, resp );
+        }
       }
     }
   }
@@ -351,6 +354,23 @@ public class UserServlet extends HttpServlet {
       out.flush();
       out.close();
     }
+  }
+  
+  protected void view( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String uid = req.getParameter( "uid" );
+    int getId = 0;
+    UserService userService = new UserServiceImpl();
+    User user;
+    
+    try{
+      getId = Integer.parseInt( uid );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    user = userService.getUserById( getId );
+    req.setAttribute( "user", user );
+    req.getRequestDispatcher( "/jsp/userview.jsp" ).forward( req, resp );
   }
   
   protected void getUserByCode( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
