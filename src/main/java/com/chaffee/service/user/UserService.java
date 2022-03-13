@@ -29,4 +29,6 @@ public interface UserService {
   
   public User getUserByName(String userName);
   
+  public User getUserByCode(String userCode);
+  
 }

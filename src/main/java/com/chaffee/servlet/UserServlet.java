@@ -60,6 +60,9 @@ public class UserServlet extends HttpServlet {
         case "isTraderExist" -> {
           this.isTraderExist( req, resp );
         }
+        case "getUserByCode" -> {
+          this.getUserByCode( req, resp );
+        }
       }
     }
   }
@@ -333,6 +336,34 @@ public class UserServlet extends HttpServlet {
     if( user != null ){
       resultMap.put( "flag", true );
       resultMap.put( "oid", user.getId() );
+    }
+    else{
+      resultMap.put( "flag", false );
+    }
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
+  }
+  
+  protected void getUserByCode( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String userCode = req.getParameter( "userCode" );
+    UserService userService = new UserServiceImpl();
+    Map<String, Object> resultMap = new HashMap<>();
+    
+    User user = userService.getUserByName( userCode );
+    if( user != null ){
+      resultMap.put( "flag", true );
+      resultMap.put( "uid", user.getId() );
+      resultMap.put( "uname", user.getUserName() );
     }
     else{
       resultMap.put( "flag", false );

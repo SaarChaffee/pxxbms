@@ -273,6 +273,27 @@ public class UserServiceImpl implements UserService {
     
   }
   
+  @Override
+  public User getUserByCode( String userCode ) {
+    Connection connection = null;
+    User user = null;
+    
+    if( userCode != null ){
+      try{
+        connection = DaoUtils.getConnection();
+        user = userDao.getLoginUser( connection, userCode );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }finally{
+        DaoUtils.close( connection, null, null );
+      }
+    }
+    
+    return user;
+    
+    
+  }
+  
   @Test
   public void test() {
     User user = new User();
