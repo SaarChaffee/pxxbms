@@ -18,4 +18,6 @@ public interface GoodService {
   public Good getGoodById(int id);
   
   public boolean updateGood(int id,Good good);
+  
+  public Good getGoodByName(String name);
 }

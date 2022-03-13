@@ -110,4 +110,21 @@ public class GoodServiceImpl implements GoodService {
     
     return flag;
   }
+  
+  @Override
+  public Good getGoodByName( String name ) {
+    Connection connection = null;
+    Good good = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      good = goodDao.getGoodByName( connection, name );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return good;
+  }
 }

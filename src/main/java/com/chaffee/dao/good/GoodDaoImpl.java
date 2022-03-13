@@ -9,6 +9,7 @@ package com.chaffee.dao.good;
 import com.chaffee.dao.DaoUtils;
 import com.chaffee.entity.Good;
 import com.mysql.cj.util.StringUtils;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -163,5 +164,43 @@ public class GoodDaoImpl implements GoodDao {
     DaoUtils.close( null, pstm, rs );
     
     return good;
+  }
+  
+  @Override
+  public Good getGoodByName( Connection connection, String goodName ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    Good good = null;
+    
+    if( connection != null ){
+      String sql = "select g.*,t.typeName as goodTypeName,u.userName as ownerName " +
+          "from good g,good_type t,user u " +
+          "where g.goodType=t.id and g.owner=u.id and g.goodName = ?";
+      Object[] param = { goodName };
+      rs = DaoUtils.execute( connection, pstm, rs, sql, param );
+      while( rs.next() ){
+        good = new Good();
+        good.setId( rs.getInt( "id" ) );
+        good.setGoodName( rs.getString( "goodName" ) );
+        good.setGoodCode( rs.getString( "goodCode" ) );
+        good.setGoodType( rs.getInt( "goodType" ) );
+        good.setInventory( rs.getInt( "inventory" ) );
+        good.setOwner( rs.getInt( "owner" ) );
+        good.setCreatedBy( rs.getInt( "createdBy" ) );
+        good.setCreationDate( rs.getDate( "creationDate" ) );
+        good.setModifyBy( rs.getInt( "modifyBy" ) );
+        good.setModifyDate( rs.getDate( "modifyDate" ) );
+        good.setGoodTypeName( rs.getString( "goodTypeName" ) );
+        good.setOwnerName( rs.getString( "ownerName" ) );
+      }
+    }
+    DaoUtils.close( null, pstm, rs );
+    
+    return good;
+    
+  }
+  @Test
+  public void test() throws SQLException {
+    System.out.println(this.getGoodByName(DaoUtils.getConnection(),"脉动"));
   }
 }

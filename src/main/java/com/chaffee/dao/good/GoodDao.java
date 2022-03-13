@@ -22,4 +22,6 @@ public interface GoodDao {
   public int updateGood( Connection connection, int id, Good good ) throws SQLException;
   
   public Good getGoodById( Connection connection, int id ) throws SQLException;
+  
+  public Good getGoodByName( Connection connection, String goodName ) throws SQLException;
 }

@@ -24,7 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GoodServlet extends HttpServlet {
   @Override
@@ -43,6 +45,9 @@ public class GoodServlet extends HttpServlet {
       }
       case "gettypelist" -> {
         this.getTypeList( req, resp );
+      }
+      case "getGoodByName" -> {
+        this.getGoodByName( req, resp );
       }
     }
     
@@ -115,6 +120,33 @@ public class GoodServlet extends HttpServlet {
       resp.setContentType( "application/json" );
       Gson gson = new Gson();
       String json = gson.toJson( goodTypeList );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
+  }
+  
+  protected void getGoodByName( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String goodName = req.getParameter( "goodName" );
+    GoodService goodService = new GoodServiceImpl();
+    Map<String, Object> resultMap = new HashMap<>();
+    
+    Good good = goodService.getGoodByName( goodName );
+    if( good != null ){
+      resultMap.put( "flag", true );
+      resultMap.put( "gid", good.getId() );
+    }
+    else{
+      resultMap.put( "flag", false );
+    }
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
       out.write( json );
     }finally{
       out.flush();
