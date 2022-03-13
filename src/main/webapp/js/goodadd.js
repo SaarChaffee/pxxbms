@@ -65,14 +65,14 @@ $(function () {
    * jquery的方法传递
    */
   goodCode.on("blur", function () {
-    if (goodCode.val() != null && goodCode.val() != "") {
+    if (goodCode.val() != null && goodCode.val() != "" && /^\w+/.test(goodCode.val())) {
       validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 订单号不能为空，请重新输入", false);
+      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号不能为空，请重新输入", false);
     }
   }).on("focus", function () {
     //显示友情提示
-    validateTip(goodCode.next(), {"color": "#666666"}, "* 请输入订单号", false);
+    validateTip(goodCode.next(), {"color": "#666666"}, "* 请输入商品编号，由字母和数字组成", false);
   }).focus();
   
   goodName.on("focus", function () {
