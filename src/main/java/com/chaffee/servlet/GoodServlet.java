@@ -49,6 +49,9 @@ public class GoodServlet extends HttpServlet {
       case "getGoodByName" -> {
         this.getGoodByName( req, resp );
       }
+      case "add" -> {
+        this.add( req, resp );
+      }
     }
     
   }
@@ -152,6 +155,42 @@ public class GoodServlet extends HttpServlet {
       out.flush();
       out.close();
     }
+  }
+  
+  protected void add( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String goodCode = req.getParameter( "goodCode" );
+    String goodName = req.getParameter( "goodName" );
+    String tempInv = req.getParameter( "inventory" );
+    String ownerCode = req.getParameter( "ownerId" );
+    String type = req.getParameter( "goodType" );
+    int inventory = 0;
+    int goodType = 0;
+    int ownerId = 0;
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    
+    try{
+      inventory = Integer.parseInt( tempInv );
+      goodType = Integer.parseInt( type );
+      ownerId = Integer.parseInt( ownerCode );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    Good good = new Good();
+    good.setGoodCode( goodCode );
+    good.setGoodName( goodName );
+    good.setInventory( inventory );
+    good.setOwner( ownerId );
+    good.setGoodType( goodType );
+    System.out.println( good );
+    GoodService goodService = new GoodServiceImpl();
+    if( goodService.addGood( currentUser, good ) ){
+      resp.sendRedirect( req.getContextPath() + "/jsp/good.do?method=query" );
+    }
+    else{
+      req.getRequestDispatcher( "/goodadd.jsp" ).forward( req, resp );
+    }
+    
   }
   
   protected void query( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
