@@ -11,6 +11,7 @@ var paymentMethod = null;
 var address = null;
 var addBtn = null;
 var backBtn = null;
+var inventory = 0;
 
 function priceReg(value) {
   value = value.replace(/[^\d.]/g, "");  //清除“数字”和“.”以外的字符
@@ -110,7 +111,8 @@ $(function () {
         success: function (data) {
           if (data.flag) {
             goodCode.val(data.gid);
-            validateTip(goodName.next(), {"color": "green"}, imgYes, true);
+            inventory = data.inventory;
+            validateTip(goodName.next(), {"color": "green"}, imgYes + "商品剩余库存为：" + inventory, true);
           }
         },
         error: function (data) {
@@ -163,10 +165,15 @@ $(function () {
   });
   
   quantity.on("focus", function () {
-    validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
+    validateTip(quantity.next(), {"color": "red"}, "* 请输入正整数", false);
   }).on("blur", function () {
     if (this.value != null && goodPrice.val() != null) {
-      totalPrice.val(accMul(this.value, goodPrice.val()));
+      if (this.value > inventory) {
+        validateTip(quantity.next(), {"color": "red"}, "* 库存不足", false);
+      } else {
+        totalPrice.val(accMul(this.value, goodPrice.val()));
+        validateTip(quantity.next(), {"color": "green"}, imgYes, true);
+      }
     }
   });
   
@@ -179,6 +186,9 @@ $(function () {
     if (this.value != null && quantity.val() != null) {
       //解决精度丢失问题
       totalPrice.val(accMul(this.value, quantity.val()));
+      validateTip(goodPrice.next(), {"color": "green"}, imgYes, true);
+    } else {
+      validateTip(goodPrice.next(), {"color": "red"}, "* 格式错误请重新输入", false);
     }
   });
   
