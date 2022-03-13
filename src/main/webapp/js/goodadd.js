@@ -147,7 +147,7 @@ $(function () {
       goodType.blur();
     } else {
       if (confirm("是否确认提交数据")) {
-        $("#billForm").submit();
+        $("#goodForm").submit();
       }
     }
   });
