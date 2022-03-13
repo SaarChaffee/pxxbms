@@ -202,7 +202,7 @@ public class GoodServlet extends HttpServlet {
   
   protected void delGood( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
       IOException {
-    String goodId = req.getParameter( "goodid" );
+    String goodId = req.getParameter( "gid" );
     Map<String, Object> resultMap = new HashMap<>();
     int delId = 0;
     GoodService goodService = new GoodServiceImpl();
