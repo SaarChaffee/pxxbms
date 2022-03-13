@@ -15,6 +15,7 @@ import com.chaffee.service.good.GoodTypeService;
 import com.chaffee.service.good.GoodTypeServiceImpl;
 import com.chaffee.util.Constants;
 import com.chaffee.util.PageSupport;
+import com.google.gson.Gson;
 import com.mysql.cj.util.StringUtils;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 public class GoodServlet extends HttpServlet {
@@ -38,6 +40,9 @@ public class GoodServlet extends HttpServlet {
       }
       case "modifyexe" -> {
         this.modifyExe( req, resp );
+      }
+      case "gettypelist" -> {
+        this.getTypeList( req, resp );
       }
     }
     
@@ -98,6 +103,23 @@ public class GoodServlet extends HttpServlet {
     
     goodService.updateGood( currentUser, good );
     
+    resp.sendRedirect( req.getContextPath() + "/jsp/good.do?method=query" );
+  }
+  
+  protected void getTypeList( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    List<GoodType> goodTypeList = goodTypeService.getGoodTypeList();
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( goodTypeList );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
   }
   
   protected void query( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {

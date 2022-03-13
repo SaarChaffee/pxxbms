@@ -1,4 +1,4 @@
-var goodName = null;
+﻿var goodName = null;
 var goodCode = null;
 var inventory = null;
 var ownerName = null;
@@ -87,9 +87,9 @@ $(function () {
   });
   
   goodCode.on("focus", function () {
-    validateTip(goodCode.next(), {"color": "#666666"}, "* 商品编号度必须是大于1小于10的字符", false);
+    validateTip(goodCode.next(), {"color": "#666666"}, "* 商品编号", false);
   }).on("blur", function () {
-    if (goodCode.val() != null && goodCode.val().length > 1 && goodCode.val().length < 10) {
+    if (goodCode.val() != null) {
       validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号输入的不符合规范，请重新输入", false);
@@ -123,6 +123,7 @@ $(function () {
     inventory.blur();
     goodCode.blur();
     goodType.blur();
+    console.log(goodType.attr("validateStatus"));
     if (goodName.attr("validateStatus") == "true"
         && inventory.attr("validateStatus") == "true"
         && goodCode.attr("validateStatus") == "true"
