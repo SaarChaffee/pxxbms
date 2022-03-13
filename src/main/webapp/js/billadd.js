@@ -55,7 +55,7 @@ $(function () {
   
   //初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
   billCode.next().html("*");
-  goodName.next().html("*");
+  goodCode.next().html("*");
   customerCode.next().html("*");
   quantity.next().html("*");
   goodPrice.next().html("*");
@@ -99,28 +99,31 @@ $(function () {
     validateTip(billCode.next(), {"color": "#666666"}, "* 请输入订单号", false);
   }).focus();
   
-  goodName.on("focus", function () {
-    validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
+  goodCode.on("focus", function () {
+    validateTip(goodCode.next(), {"color": "#666666"}, "* 请输入商品编号", false);
   }).on("blur", function () {
-    if (goodName.val() !== "" && goodName.val() !== null) {
+    if (goodCode.val() !== "" && goodCode.val() !== null) {
       $.ajax({
         type: "GET",
         url: path + "/jsp/good.do",
-        data: {method: "getGoodByName", goodName: goodName.val()},
+        data: {method: "getGoodByCode", goodCode: goodCode.val()},
         dataType: "json",
         success: function (data) {
           if (data.flag) {
             goodCode.val(data.gid);
             inventory = data.inventory;
-            validateTip(goodName.next(), {"color": "green"}, imgYes + "商品剩余库存为：" + inventory, true);
+            goodName.val(data.gName);
+            validateTip(goodCode.next(), {"color": "green"}, imgYes + "商品剩余库存为：" + inventory, true);
+          } else {
+            validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品不存在，请重新输入", false);
           }
         },
         error: function (data) {
-          validateTip(goodName.next(), {"color": "red"}, imgNo + " 获取商品信息error", false);
+          validateTip(goodCode.next(), {"color": "red"}, imgNo + " 获取商品信息error", false);
         }
       })
     } else {
-      validateTip(goodName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
+      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号称不能为空，请重新输入", false);
     }
     
   });
@@ -197,8 +200,8 @@ $(function () {
   addBtn.on("click", function () {
     if (billCode.attr("validateStatus") !== "true") {
       billCode.blur();
-    } else if (goodName.attr("validateStatus") !== "true") {
-      goodName.blur();
+    } else if (goodCode.attr("validateStatus") !== "true") {
+      goodCode.blur();
     } else if (customerCode.attr("validateStatus") !== "true") {
       customerCode.blur();
     } else if (paymentMethod.attr("validateStatus") !== "true") {

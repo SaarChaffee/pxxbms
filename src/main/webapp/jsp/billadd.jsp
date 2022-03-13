@@ -18,10 +18,13 @@
                 <font color="red"></font>
             </div>
             <div>
-                <label for="goodName">商品名称：</label>
-                <input type="text" name="goodName" id="goodName" value="">
+                <label for="goodCode">商品编号</label>
+                <input type="text" name="goodCode" id="goodCode" value="">
                 <font color="red"></font>
-                <input type="hidden" name="goodCode" id="goodCode" value="">
+            </div>
+            <div>
+                <label for="goodName">商品名称：</label>
+                <input type="text" name="goodName" id="goodName" readonly="readonly" value="">
             </div>
             <div>
                 <label for="goodPrice">商品单价：</label>
