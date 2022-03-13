@@ -13,6 +13,7 @@ import com.chaffee.entity.Good;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class GoodServiceImpl implements GoodService {
@@ -126,5 +127,83 @@ public class GoodServiceImpl implements GoodService {
     }
     
     return good;
+  }
+  
+  @Override
+  public boolean addGood( int id, Good good ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''addGood''''Open transaction''''''''''" );
+      good.setCreatedBy( id );
+      good.setCreationDate( new Date( System.currentTimeMillis() ) );
+      int i = goodDao.addGood( connection, good );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''addGood''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''addGood''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''addGood''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+        System.out.println( "'''''''''addGood''''Close transaction''''''''''" );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+  }
+  
+  @Override
+  public boolean deleteGood( int id ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''delGood''''Open transaction''''''''''" );
+      int i = goodDao.deleteGood( connection, id );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''delGood''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''delGood''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''delGood''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    return flag;
   }
 }

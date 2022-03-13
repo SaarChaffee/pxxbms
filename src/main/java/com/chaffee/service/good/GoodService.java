@@ -15,9 +15,13 @@ public interface GoodService {
   
   public int getGoodCount( String goodName, String ownerName, int goodType );
   
-  public Good getGoodById(int id);
+  public Good getGoodById( int id );
   
-  public boolean updateGood(int id,Good good);
+  public boolean updateGood( int id, Good good );
   
-  public Good getGoodByName(String name);
+  public Good getGoodByName( String name );
+  
+  public boolean addGood( int id, Good good );
+  
+  public boolean deleteGood( int id );
 }

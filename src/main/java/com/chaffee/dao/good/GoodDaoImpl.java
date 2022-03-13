@@ -199,8 +199,43 @@ public class GoodDaoImpl implements GoodDao {
     return good;
     
   }
+  
+  @Override
+  public int addGood( Connection connection, Good good ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "insert into good (goodName, goodCode, goodType, inventory, " +
+          "owner, createdBy, creationDate, modifyBy, modifyDate) values (?,?,?,?,?,?,?,?,?);";
+      Object[] param = {
+          good.getGoodName(), good.getGoodCode(), good.getGoodType(), good.getInventory(),
+          good.getOwner(), good.getCreatedBy(), good.getCreationDate(), good.getModifyBy(), good.getModifyDate()
+      };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
+  @Override
+  public int deleteGood( Connection connection, int id ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "delete from good where id = ?";
+      Object[] param = { id };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
   @Test
   public void test() throws SQLException {
-    System.out.println(this.getGoodByName(DaoUtils.getConnection(),"脉动"));
+    System.out.println( this.getGoodByName( DaoUtils.getConnection(), "脉动" ) );
   }
 }
