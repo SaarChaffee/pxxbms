@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 public class BillServiceImpl implements BillService {
@@ -114,8 +115,87 @@ public class BillServiceImpl implements BillService {
     return bill;
   }
   
+  @Override
+  public boolean addBill( int id, Bill bill ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''addBill''''Open transaction''''''''''" );
+      bill.setCreatedBy( id );
+      bill.setCreationDate( new Date( System.currentTimeMillis() ) );
+      int i = billDao.addBill( connection, bill );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''addBill''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''addBill''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''addBill''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+        System.out.println( "'''''''''addBill''''Close transaction''''''''''" );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+  }
+  
+  @Override
+  public boolean deleteBill( int id ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''delBill''''Open transaction''''''''''" );
+      int i = billDao.deleteBill( connection, id );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''delBill''''success''''''''''" );
+      }
+      else{
+        System.out.println( "'''''''''delBill''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''delBill''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    return flag;
+    
+  }
+  
   @Test
-  public void test(){
-    System.out.println(this.getBillById( 1 ));
+  public void test() {
+    System.out.println( this.getBillById( 1 ) );
   }
 }

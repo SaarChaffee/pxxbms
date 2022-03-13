@@ -186,6 +186,44 @@ public class BillDaoImpl implements BillDao {
     return bill;
   }
   
+  @Override
+  public int addBill( Connection connection, Bill bill ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "insert into bill (billCode, goodCode, quantity, goodPrice, totalPrice, " +
+          "customerCode, address, billTime, paymentMethod,deliveryTime, createdBy, " +
+          "creationDate, modifyBy, modifyDate)values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      
+      Object[] param = {
+          bill.getBillCode(), bill.getGoodCode(), bill.getQuantity(), bill.getGoodPrice(), bill.getTotalPrice(),
+          bill.getCustomerCode(), bill.getAddress(), bill.getBillTime(), bill.getPaymentMethod(),
+          bill.getDeliveryTime(),
+          bill.getCreatedBy(), bill.getCreationDate(), bill.getModifyBy(), bill.getModifyDate()
+      };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
+  @Override
+  public int deleteBill( Connection connection, int id ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "delete from bill where id = ?";
+      Object[] param = { id };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
+  }
+  
   @Test
   public void test() throws Exception {
     System.out.println( this.getBillById( DaoUtils.getConnection(), 1 ) );

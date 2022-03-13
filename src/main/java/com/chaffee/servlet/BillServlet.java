@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 public class BillServlet extends HttpServlet {
@@ -43,6 +44,9 @@ public class BillServlet extends HttpServlet {
       }
       case "modifysave" -> {
         this.modifyExec( req, resp );
+      }
+      case "add" -> {
+        this.add( req, resp );
       }
     }
     
@@ -140,6 +144,54 @@ public class BillServlet extends HttpServlet {
     bill = billService.getBillById( id );
     req.setAttribute( "bill", bill );
     req.getRequestDispatcher( "/jsp/billmodify.jsp" ).forward( req, resp );
+  }
+  
+  protected void add( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String billCode = req.getParameter( "billCode" );
+    String tempGoodId = req.getParameter( "goodCode" );
+    String tempQuantity = req.getParameter( "quantity" );
+    String tempPrice = req.getParameter( "goodPrice" );
+    String tempTotal = req.getParameter( "totalPrice" );
+    String tempCId = req.getParameter( "customerId" );
+    String address = req.getParameter( "address" );
+    String tempMethod = req.getParameter( "paymentMethod" );
+    int goodId = 0;
+    int quantity = 0;
+    double goodPrice = 0;
+    double totalPrice = 0;
+    int cid = 0;
+    int paymentMethod = 0;
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    
+    try{
+      goodId = Integer.parseInt( tempGoodId );
+      quantity = Integer.parseInt( tempQuantity );
+      goodPrice = Double.parseDouble( tempPrice );
+      totalPrice = Double.parseDouble( tempTotal );
+      cid = Integer.parseInt( tempCId );
+      paymentMethod = Integer.parseInt( tempMethod );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    Bill bill = new Bill();
+    bill.setBillCode( billCode );
+    bill.setGoodCode( goodId );
+    bill.setQuantity( quantity );
+    bill.setGoodPrice( goodPrice );
+    bill.setTotalPrice( totalPrice );
+    bill.setCustomerCode( cid );
+    bill.setAddress( address );
+    bill.setPaymentMethod( paymentMethod );
+    bill.setBillTime( new Date( System.currentTimeMillis() ) );
+    
+    BillService billService = new BillServiceImpl();
+    if( billService.addBill( currentUser, bill ) ){
+      resp.sendRedirect( req.getContextPath() + "/jsp/bill.do?method=query" );
+    }
+    else{
+      req.getRequestDispatcher( "/useradd.jsp" ).forward( req, resp );
+    }
   }
   
   protected void modifyExec( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {

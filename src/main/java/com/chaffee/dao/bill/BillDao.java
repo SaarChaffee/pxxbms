@@ -23,4 +23,8 @@ public interface BillDao {
   public int updateBill( Connection connection, int id, Bill bill ) throws SQLException;
   
   public Bill getBillById( Connection connection, int id ) throws SQLException;
+  
+  public int addBill( Connection connection, Bill bill ) throws SQLException;
+  
+  public int deleteBill( Connection connection, int id ) throws SQLException;
 }

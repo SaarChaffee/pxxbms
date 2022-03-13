@@ -19,5 +19,9 @@ public interface BillService {
   
   public boolean updateBill( int id, Bill bill );
   
-  public Bill getBillById(int id);
+  public Bill getBillById( int id );
+  
+  public boolean addBill( int id, Bill bill );
+  
+  public boolean deleteBill( int id );
 }
