@@ -123,7 +123,7 @@ $(function () {
     validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
     if (this.value != null && goodPrice.val() != null) {
-      totalPrice.val(this.value * goodPrice.val());
+      totalPrice.val(accMul(this.value, goodPrice.val()));
     }
   });
   
