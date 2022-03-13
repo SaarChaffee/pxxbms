@@ -1,6 +1,8 @@
 var goodName = null;
 var goodCode = null;
 var inventory = null;
+var ownerName = null;
+var owner = null;
 var goodType = null;
 var saveBtn = null;
 var backBtn = null;
@@ -9,6 +11,8 @@ $(function () {
   goodName = $("#goodName");
   goodCode = $("#goodCode");
   inventory = $("#inventory");
+  ownerName = $("#ownerName");
+  owner = $("#owner");
   goodType = $("#goodType");
   saveBtn = $("#save");
   backBtn = $("#back");
@@ -16,6 +20,7 @@ $(function () {
   goodName.next().html("*");
   goodCode.next().html("*");
   inventory.next().html("*");
+  ownerName.next().html("*");
   goodType.next().html("*");
   
   
@@ -47,6 +52,27 @@ $(function () {
     }
   });
   
+  ownerName.on("focus", function () {
+    validateTip(ownerName.next(), {"color": "#666666"}, "* 所有者姓名必须是大于1小于10的字符", false);
+  }).on("blur", function () {
+    $.ajax({
+      type: "GET",
+      url: path + "/jsp/user.do",
+      data: {method: "isTraderExist", traderName: ownerName.val()},
+      dataType: "json",
+      success: function (data) {
+        if (data.flag) {
+          validateTip(ownerName.next(), {"color": "green"}, imgYes, true);
+          owner.val(data.oid);
+        } else {
+          validateTip(ownerName.next(), {"color": "red"}, imgNo + " 所有者姓名错误或不存在，请重新输入", false);
+        }
+      },
+      error: function (data) {
+        validateTip(ownerName.next(), {"color": "red"}, imgNo + " 获取所有者姓名error", false);
+      }
+    })
+  })
   
   goodName.on("focus", function () {
     validateTip(goodName.next(), {"color": "#666666"}, "* 商品名长度必须是大于1小于10的字符", false);

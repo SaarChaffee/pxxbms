@@ -33,6 +33,8 @@
             <div>
                 <label for="ownerName">所有者：</label>
                 <input type="text" name="ownerName" id="ownerName" value="${good.ownerName }">
+                <input type="hidden" name="owner" id="owner" value="${good.owner}">
+                <font color="red"></font>
             </div>
             <div class="providerAddBtn">
                 <input type="button" name="save" id="save" value="保存"/>
