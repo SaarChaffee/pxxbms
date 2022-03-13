@@ -236,6 +236,6 @@ public class GoodDaoImpl implements GoodDao {
   
   @Test
   public void test() throws SQLException {
-    System.out.println( this.getGoodByName( DaoUtils.getConnection(), "脉动" ) );
+    System.out.println( this.getGoodList( DaoUtils.getConnection(),"","",0,1,5 ) );
   }
 }
