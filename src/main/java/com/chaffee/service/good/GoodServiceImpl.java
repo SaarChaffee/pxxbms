@@ -206,4 +206,23 @@ public class GoodServiceImpl implements GoodService {
     }
     return flag;
   }
+  
+  @Override
+  public Good getGoodByCode( String code ) {
+    Connection connection = null;
+    Good good = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      good = goodDao.getGoodByCode( connection, code );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return good;
+    
+    
+  }
 }

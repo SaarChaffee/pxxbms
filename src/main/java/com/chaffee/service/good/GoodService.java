@@ -24,4 +24,6 @@ public interface GoodService {
   public boolean addGood( int id, Good good );
   
   public boolean deleteGood( int id );
+  
+  public Good getGoodByCode(String code);
 }

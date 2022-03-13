@@ -55,6 +55,9 @@ public class GoodServlet extends HttpServlet {
       case "delGood" -> {
         this.delGood( req, resp );
       }
+      case "getGoodByCode" -> {
+        this.getGoodByCode( req, resp );
+      }
     }
     
   }
@@ -232,6 +235,34 @@ public class GoodServlet extends HttpServlet {
       out.close();
     }
     
+  }
+  
+  protected void getGoodByCode( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String goodCode = req.getParameter( "goodCode" );
+    GoodService goodService = new GoodServiceImpl();
+    Map<String, Object> resultMap = new HashMap<>();
+    
+    Good good = goodService.getGoodByCode( goodCode );
+    if( good != null ){
+      resultMap.put( "flag", true );
+      resultMap.put( "gid", good.getId() );
+      resultMap.put( "inventory", good.getInventory() );
+    }
+    else{
+      resultMap.put( "flag", false );
+    }
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
   }
   
   protected void query( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {

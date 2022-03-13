@@ -28,4 +28,6 @@ public interface GoodDao {
   public int addGood( Connection connection, Good good ) throws SQLException;
   
   public int deleteGood( Connection connection, int id ) throws SQLException;
+  
+  public Good getGoodByCode( Connection connection, String code ) throws SQLException;
 }
