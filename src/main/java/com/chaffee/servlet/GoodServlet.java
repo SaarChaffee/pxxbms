@@ -58,6 +58,9 @@ public class GoodServlet extends HttpServlet {
       case "getGoodByCode" -> {
         this.getGoodByCode( req, resp );
       }
+      case "view" -> {
+        this.view( req, resp );
+      }
     }
     
   }
@@ -264,6 +267,22 @@ public class GoodServlet extends HttpServlet {
       out.flush();
       out.close();
     }
+  }
+  
+  protected void view( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String gid = req.getParameter( "gid" );
+    int getId = 0;
+    GoodService goodService = new GoodServiceImpl();
+    Good good;
+    
+    try{
+      getId = Integer.parseInt( gid );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    good = goodService.getGoodById( getId );
+    req.setAttribute( "good", good );
+    req.getRequestDispatcher( "/jsp/goodview.jsp" ).forward( req, resp );
   }
   
   protected void query( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
