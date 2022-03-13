@@ -91,7 +91,7 @@ $(function () {
       $.ajax({
         type: "GET",
         url: path + "/jsp/good.do",
-        data: {method: "getGoodByCode"},
+        data: {method: "getGoodByCode", goodCode: goodCode.val()},
         dataType: "json",
         success: function (data) {
           if (data != null) {

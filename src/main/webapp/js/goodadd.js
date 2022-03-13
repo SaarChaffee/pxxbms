@@ -69,11 +69,12 @@ $(function () {
       $.ajax({
         type: "GET",
         url: path + "/jsp/good.do",
-        data: {method: "getGoodByCode"},
+        data: {method: "getGoodByCode", goodCode: goodCode.val()},
         dataType: "json",
         success: function (data) {
           if (data != null) {
             if (data.flag === false) {
+              console.log(data.gid)
               validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
             } else {
               validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号已存在，请重新输入", false);
