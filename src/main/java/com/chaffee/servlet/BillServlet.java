@@ -8,10 +8,12 @@ package com.chaffee.servlet;
 
 import com.chaffee.entity.Bill;
 import com.chaffee.entity.PaymentMethod;
+import com.chaffee.entity.User;
 import com.chaffee.service.bill.BillService;
 import com.chaffee.service.bill.BillServiceImpl;
 import com.chaffee.service.bill.PaymentMethodService;
 import com.chaffee.service.bill.PaymentMethodServiceImpl;
+import com.chaffee.util.Constants;
 import com.chaffee.util.PageSupport;
 import com.google.gson.Gson;
 import com.mysql.cj.util.StringUtils;
@@ -38,6 +40,9 @@ public class BillServlet extends HttpServlet {
       }
       case "getPaymentMethodList" -> {
         this.getPaymentMethodList( req, resp );
+      }
+      case "modifysave" -> {
+        this.modifyExec( req, resp );
       }
     }
     
@@ -121,13 +126,6 @@ public class BillServlet extends HttpServlet {
     
   }
   
-  /**
-   * @param req
-   * @param resp
-   * @throws ServletException
-   * @throws IOException
-   * @TODO 修改顾客账号
-   */
   protected void modify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String billId = req.getParameter( "billid" );
     int id = 0;
@@ -144,4 +142,43 @@ public class BillServlet extends HttpServlet {
     req.getRequestDispatcher( "/jsp/billmodify.jsp" ).forward( req, resp );
   }
   
+  protected void modifyExec( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    String id = req.getParameter( "id" );
+    String billCode = req.getParameter( "billCode" );
+    String tempQuantity = req.getParameter( "quantity" );
+    String tempPrice = req.getParameter( "goodPrice" );
+    String tempTotal = req.getParameter( "totalPrice" );
+    String method = req.getParameter( "paymentMethod" );
+    String address = req.getParameter( "address" );
+    int bid = 0;
+    int quantity = 0;
+    double goodPrice = 0;
+    double totalPrice = 0;
+    int paymentMethod = 0;
+    BillService billService = new BillServiceImpl();
+    
+    try{
+      bid = Integer.parseInt( id );
+      quantity = Integer.parseInt( tempQuantity );
+      goodPrice = Double.parseDouble( tempPrice );
+      totalPrice = Double.parseDouble( tempTotal );
+      paymentMethod = Integer.parseInt( method );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    
+    Bill bill = billService.getBillById( bid );
+    bill.setBillCode( billCode );
+    bill.setQuantity( quantity );
+    bill.setGoodPrice( goodPrice );
+    bill.setTotalPrice( totalPrice );
+    bill.setPaymentMethod( paymentMethod );
+    bill.setAddress( address );
+    
+    billService.updateBill( currentUser, bill );
+    
+    resp.sendRedirect( req.getContextPath() + "/jsp/bill.do?method=query" );
+  }
 }

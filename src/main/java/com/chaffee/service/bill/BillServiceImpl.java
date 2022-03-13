@@ -60,7 +60,7 @@ public class BillServiceImpl implements BillService {
   }
   
   @Override
-  public boolean updateUser( int id, Bill bill ) {
+  public boolean updateBill( int id, Bill bill ) {
     Connection connection = null;
     boolean flag = false;
     
