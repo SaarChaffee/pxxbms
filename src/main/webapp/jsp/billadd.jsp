@@ -55,6 +55,7 @@
             <div>
                 <label for="paymentMethod">付款方式：</label>
                 <select name="paymentMethod" id="paymentMethod"></select>
+                <font color="red"></font>
             </div>
             <div class="providerAddBtn">
                 <input type="button" name="add" id="add" value="保存">

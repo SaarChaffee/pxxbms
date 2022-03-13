@@ -105,12 +105,12 @@ $(function () {
       $.ajax({
         type: "GET",
         url: path + "/jsp/good.do",
-        data: {method: "getGoodByName"},
+        data: {method: "getGoodByName", goodName: goodName.val()},
         dataType: "json",
         success: function (data) {
           if (data.flag) {
-            validateTip(goodName.next(), {"color": "green"}, imgYes, true);
             goodCode.val(data.gid);
+            validateTip(goodName.next(), {"color": "green"}, imgYes, true);
           }
         },
         error: function (data) {
