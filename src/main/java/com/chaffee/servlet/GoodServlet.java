@@ -143,6 +143,7 @@ public class GoodServlet extends HttpServlet {
     if( good != null ){
       resultMap.put( "flag", true );
       resultMap.put( "gid", good.getId() );
+      resultMap.put( "inventory", good.getInventory() );
     }
     else{
       resultMap.put( "flag", false );
