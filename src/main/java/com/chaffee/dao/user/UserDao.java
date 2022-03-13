@@ -100,6 +100,14 @@ public interface UserDao {
    */
   public User getUserById( Connection connection, int id ) throws SQLException;
   
-  public User getUserByName(Connection connection,String userName) throws SQLException;
+  /**
+   * 通过用户名获取用户
+   *
+   * @param connection
+   * @param userName
+   * @return
+   * @throws SQLException
+   */
+  public User getUserByName( Connection connection, String userName ) throws SQLException;
   
 }
