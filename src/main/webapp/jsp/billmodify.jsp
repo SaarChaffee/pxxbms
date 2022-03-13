@@ -5,7 +5,7 @@
 <div class="right">
     <div class="location">
         <strong>你现在所在的位置是:</strong>
-        <span>订单管理页面 >> 订单添加页面</span>
+        <span>订单管理页面 >> 修改订单页面</span>
     </div>
     <div class="providerAdd">
         <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill.do">
@@ -39,10 +39,15 @@
                 <input type="text" name="totalPrice" readonly="readonly" id="totalPrice" value="${bill.totalPrice}">
             </div>
             <div>
-                <label>付款方式：</label>
+                <label for="paymentMethod">付款方式：</label>
                 <!-- 列出所有的角色分类 -->
                 <input type="hidden" value="${bill.paymentMethod }" id="rid"/>
                 <select name="paymentMethod" id="paymentMethod"></select>
+                <font color="red"></font>
+            </div>
+            <div>
+                <label for="address">地址：</label>
+                <input type="text" id="address" name="address" value="${bill.address}">
                 <font color="red"></font>
             </div>
             <div class="providerAddBtn">
