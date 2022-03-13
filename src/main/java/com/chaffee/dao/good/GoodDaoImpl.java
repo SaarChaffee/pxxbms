@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class GoodDaoImpl implements GoodDao {
@@ -110,5 +111,56 @@ public class GoodDaoImpl implements GoodDao {
     }
     return count;
     
+  }
+  
+  @Override
+  public int updateGood( Connection connection, int id, Good good ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "update good g set g.goodName = ?,g.goodCode = ?,g.inventory = ?,g.owner = ?," +
+          "g.createdBy = ?,g.creationDate = ?,g.modifyBy = ?,g.modifyDate  = ? where g.id = ?";
+      Object[] param = {
+          good.getGoodName(), good.getGoodCode(), good.getInventory(), good.getOwner(), good.getCreatedBy(),
+          good.getCreationDate(), id, new Date( System.currentTimeMillis() ), good.getId()
+      };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    return result;
+  }
+  
+  @Override
+  public Good getGoodById( Connection connection, int id ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    Good good = null;
+    
+    if( connection != null ){
+      String sql = "select g.*,t.typeName as goodTypeName,u.userName as ownerName " +
+          "from good g,good_type t,user u " +
+          "where g.goodType=t.id and g.owner=u.id and g.id = ?";
+      Object[] param = { id };
+      rs = DaoUtils.execute( connection, pstm, rs, sql, param );
+      while( rs.next() ){
+        good = new Good();
+        good.setId( rs.getInt( "id" ) );
+        good.setGoodName( rs.getString( "goodName" ) );
+        good.setGoodCode( rs.getString( "goodCode" ) );
+        good.setGoodType( rs.getInt( "goodType" ) );
+        good.setInventory( rs.getInt( "inventory" ) );
+        good.setOwner( rs.getInt( "owner" ) );
+        good.setCreatedBy( rs.getInt( "createdBy" ) );
+        good.setCreationDate( rs.getDate( "creationDate" ) );
+        good.setModifyBy( rs.getInt( "modifyBy" ) );
+        good.setModifyDate( rs.getDate( "modifyDate" ) );
+        good.setGoodTypeName( rs.getString( "goodTypeName" ) );
+        good.setOwnerName( rs.getString( "ownerName" ) );
+      }
+    }
+    DaoUtils.close( null, pstm, rs );
+    
+    return good;
   }
 }

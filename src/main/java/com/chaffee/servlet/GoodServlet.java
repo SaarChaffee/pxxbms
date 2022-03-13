@@ -8,10 +8,12 @@ package com.chaffee.servlet;
 
 import com.chaffee.entity.Good;
 import com.chaffee.entity.GoodType;
+import com.chaffee.entity.User;
 import com.chaffee.service.good.GoodService;
 import com.chaffee.service.good.GoodServiceImpl;
 import com.chaffee.service.good.GoodTypeService;
 import com.chaffee.service.good.GoodTypeServiceImpl;
+import com.chaffee.util.Constants;
 import com.chaffee.util.PageSupport;
 import com.mysql.cj.util.StringUtils;
 
@@ -31,6 +33,12 @@ public class GoodServlet extends HttpServlet {
       case "query" -> {
         this.query( req, resp );
       }
+      case "modify" -> {
+        this.modify( req, resp );
+      }
+      case "modifyexe" -> {
+        this.modifyExe( req, resp );
+      }
     }
     
   }
@@ -38,6 +46,58 @@ public class GoodServlet extends HttpServlet {
   @Override
   protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     doGet( req, resp );
+  }
+  
+  protected void modify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String gid = req.getParameter( "gid" );
+    int getId = 0;
+    GoodService goodService = new GoodServiceImpl();
+    Good good = null;
+    
+    try{
+      getId = Integer.parseInt( gid );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    good = goodService.getGoodById( getId );
+    req.setAttribute( "good", good );
+    req.getRequestDispatcher( "/jsp/goodmodify.jsp" ).forward( req, resp );
+    
+  }
+  
+  protected void modifyExe( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String gid = req.getParameter( "gid" );
+    String goodName = req.getParameter( "goodName" );
+    String goodCode = req.getParameter( "goodCode" );
+    String goodType = req.getParameter( "goodType" );
+    String inventory = req.getParameter( "inventory" );
+    String owner = req.getParameter( "owner" );
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    int id = 0;
+    int type = 0;
+    int inv = 0;
+    int ownerId = 0;
+    GoodServiceImpl goodService = new GoodServiceImpl();
+    
+    try{
+      id = Integer.parseInt( gid );
+      type = Integer.parseInt( goodType );
+      inv = Integer.parseInt( inventory );
+      ownerId = Integer.parseInt( owner );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    
+    Good good = goodService.getGoodById( id );
+    good.setGoodName( goodName );
+    good.setGoodCode( goodCode );
+    good.setGoodType( type );
+    good.setInventory( inv );
+    good.setOwner( ownerId );
+    
+    goodService.updateGood( currentUser, good );
+    
   }
   
   protected void query( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {

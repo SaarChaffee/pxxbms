@@ -18,4 +18,8 @@ public interface GoodDao {
                                  int pageSize ) throws SQLException;
   
   public int getGoodCount( Connection connection, String goodName, String ownerName, int goodType ) throws SQLException;
+  
+  public int updateGood( Connection connection, int id, Good good ) throws SQLException;
+  
+  public Good getGoodById( Connection connection, int id ) throws SQLException;
 }

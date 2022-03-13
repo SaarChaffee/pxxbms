@@ -54,4 +54,60 @@ public class GoodServiceImpl implements GoodService {
     }
     return count;
   }
+  
+  @Override
+  public Good getGoodById( int id ) {
+    Connection connection = null;
+    Good good = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      good = goodDao.getGoodById( connection, id );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return good;
+  }
+  
+  @Override
+  public boolean updateGood( int id, Good good ) {
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      System.out.println( "'''''''''updateGood''''Open transaction''''''''''" );
+      int i = goodDao.updateGood( connection, id, good );
+      if( i > 0 ){
+        flag = true;
+        System.out.println( "'''''''''updateGood''''success''''''''''" );
+        
+      }
+      else{
+        System.out.println( "'''''''''updateGood''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        System.out.println( "'''''''''updateGood''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return flag;
+  }
 }

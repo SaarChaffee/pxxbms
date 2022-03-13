@@ -14,4 +14,8 @@ public interface GoodService {
   public List<Good> getGoodList( String goodName, String ownerName, int goodType, int currentPageNo, int pageSize );
   
   public int getGoodCount( String goodName, String ownerName, int goodType );
+  
+  public Good getGoodById(int id);
+  
+  public boolean updateGood(int id,Good good);
 }
