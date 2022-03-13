@@ -14,15 +14,15 @@
             <!--div的class 为error是验证错误，ok是验证成功-->
             <div class="">
                 <label for="billCode">订单编号：</label>
-                <input type="text" name="billCode" id="billCode" value="${bill.billCode }" readonly="readonly">
+                <input type="text" name="billCode" id="billCode" value="${bill.billCode }">
             </div>
             <div>
                 <label>顾客姓名：</label>
-                <span style="color: black" id="customerCode">${bill.customerName }</span>
+                <input style="color: black" id="customerCode" readonly="readonly" value="${bill.customerName }">
             </div>
             <div>
                 <label for="goodName">商品名称：</label>
-                <span style="color: black" id="goodName">${bill.goodName }</span>
+                <input style="color: black" id="goodName" readonly="readonly" value="${bill.goodName }">
             </div>
             <div>
                 <label for="quantity">商品数量：</label>
@@ -36,7 +36,7 @@
             </div>
             <div>
                 <label for="totalPrice">总金额：</label>
-                <input type="text" name="totalPrice" id="totalPrice" value="${bill.totalPrice}">
+                <input type="text" name="totalPrice" readonly="readonly" id="totalPrice" value="${bill.totalPrice}">
             </div>
             <div>
                 <label>付款方式：</label>
