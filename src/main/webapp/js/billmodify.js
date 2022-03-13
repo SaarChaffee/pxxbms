@@ -19,6 +19,19 @@ function priceReg(value) {
   return value;
 }
 
+//解决精度丢失问题
+function accMul(arg1, arg2) {
+  var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+  try {
+    m += s1.split(".")[1].length
+  } catch (e) {
+  }
+  try {
+    m += s2.split(".")[1].length
+  } catch (e) {
+  }
+  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+}
 
 $(function () {
   billCode = $("#billCode");
@@ -108,12 +121,9 @@ $(function () {
   
   quantity.on("focus", function () {
     validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
-  }).on("keyup", function () {
-    this.value = priceReg(this.value);
   }).on("blur", function () {
-    this.value = priceReg(this.value);
     if (this.value != null && goodPrice.val() != null) {
-      totalPrice.val(priceReg(this.value * goodPrice.val() + ""));
+      totalPrice.val(this.value * goodPrice.val());
     }
   });
   
@@ -124,7 +134,8 @@ $(function () {
   }).on("blur", function () {
     this.value = priceReg(this.value);
     if (this.value != null && quantity.val() != null) {
-      totalPrice.val(priceReg(this.value * quantity.val() + ""));
+      //解决精度丢失问题
+      totalPrice.val(accMul(this.value, quantity.val()));
     }
   });
   
