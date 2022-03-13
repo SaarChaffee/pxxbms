@@ -6,6 +6,8 @@
 body {
   font-size: 12px;
   background: #4287c2;
+  box-sizing: border-box;
+
 }
 
 .clear:after {
@@ -101,6 +103,7 @@ li {
 /*公共部分主体内容*/
 .publicMian {
   border-top: 1px solid #c2ccd5;
+  height: 90%;
   display: flex; /*变为弹性盒模型*/
   display: -webkit-flex;
   background: #fff;
@@ -290,8 +293,8 @@ li {
 /*底部*/
 .footer {
   width: 100%;
-  line-height: 40px;
   text-align: center;
+  /*overflow: hidden;*/
   color: #fff;
 }
 

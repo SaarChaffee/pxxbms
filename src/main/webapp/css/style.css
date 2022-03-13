@@ -352,8 +352,9 @@ input[type='reset']:active, input[type='reset']:focus, .providerView a:hover, .p
   width: 400px;
   height: 190px;
   position: absolute;
-  top: 200px;
-  left: 500px;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
   background: #fff;
   border-radius: 4px;
 }
