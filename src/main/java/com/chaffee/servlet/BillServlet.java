@@ -53,6 +53,9 @@ public class BillServlet extends HttpServlet {
       case "delbill" -> {
         this.del( req, resp );
       }
+      case "view" -> {
+        this.view( req, resp );
+      }
     }
     
     
@@ -234,6 +237,22 @@ public class BillServlet extends HttpServlet {
       out.close();
     }
     
+  }
+  
+  protected void view( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+    String billId = req.getParameter( "billid" );
+    int getId = 0;
+    BillService billService = new BillServiceImpl();
+    Bill bill;
+    
+    try{
+      getId = Integer.parseInt( billId );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    bill = billService.getBillById( getId );
+    req.setAttribute( "bill", bill );
+    req.getRequestDispatcher( "/jsp/billview.jsp" ).forward( req, resp );
   }
   
   protected void modifyExec( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
