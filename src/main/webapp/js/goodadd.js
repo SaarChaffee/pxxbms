@@ -65,10 +65,10 @@ $(function () {
    * jquery的方法传递
    */
   goodCode.on("blur", function () {
-    if (goodCode.val() != null && goodCode.val() != "" && /^\w+/.test(goodCode.val())) {
+    if (goodCode.val() != null && goodCode.val() != "" && /^\w/.test(goodCode.val())) {
       validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号不能为空，请重新输入", false);
+      validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号不能为空或格式错误，请重新输入", false);
     }
   }).on("focus", function () {
     //显示友情提示
@@ -127,10 +127,10 @@ $(function () {
   inventory.on("focus", function () {
     validateTip(inventory.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
-    if (this.value != null && inventory.val() != null) {
+    if (this.value != null && inventory.val() != null && /^\d+/.test(this.value)) {
       validateTip(inventory.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(inventory.next(), {"color": "red"}, imgNo + " 库存不能为空，请选择", false);
+      validateTip(inventory.next(), {"color": "red"}, imgNo + " 库存不能为空或格式错误，请重新输入", false);
       
     }
   });
