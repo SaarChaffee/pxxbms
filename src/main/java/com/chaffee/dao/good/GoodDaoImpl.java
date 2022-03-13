@@ -119,10 +119,11 @@ public class GoodDaoImpl implements GoodDao {
     int result = 0;
     
     if( connection != null ){
-      String sql = "update good g set g.goodName = ?,g.goodCode = ?,g.inventory = ?,g.owner = ?," +
+      String sql = "update good g set g.goodName = ?,g.goodCode = ?,g.goodType = ?,g.inventory = ?,g.owner = ?," +
           "g.createdBy = ?,g.creationDate = ?,g.modifyBy = ?,g.modifyDate  = ? where g.id = ?";
       Object[] param = {
-          good.getGoodName(), good.getGoodCode(), good.getInventory(), good.getOwner(), good.getCreatedBy(),
+          good.getGoodName(), good.getGoodCode(), good.getGoodType(), good.getInventory(), good.getOwner(),
+          good.getCreatedBy(),
           good.getCreationDate(), id, new Date( System.currentTimeMillis() ), good.getId()
       };
       result = DaoUtils.execute( connection, pstm, sql, param );
