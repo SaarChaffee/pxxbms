@@ -10,7 +10,7 @@ function deleteBill(obj) {
     success: function (data) {
       if (data.delResult === "true") {//删除成功：移除删除行
         cancleBtn();
-        obj.parents("tr").remove();
+        window.location.href = path + "/jsp/bill.do?method=query";
       } else if (data.delResult === "false") {//删除失败
         //alert("对不起，删除订单【"+obj.attr("billcc")+"】失败");
         changeDLGContent("对不起，删除订单【" + obj.attr("billcc") + "】失败");
