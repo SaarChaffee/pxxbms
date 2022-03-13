@@ -1,4 +1,4 @@
-var goodObj;
+﻿var goodObj;
 
 function deleteGood(obj) {
   $.ajax({

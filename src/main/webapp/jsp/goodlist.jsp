@@ -80,7 +80,7 @@
 
 <!--点击删除按钮后弹出的页面-->
 <div class="zhezhao"></div>
-<div class="remove" id="removeGood">
+<div class="remove" id="removeUse">
     <div class="removerChid">
         <h2>提示</h2>
         <div class="removeMain">
