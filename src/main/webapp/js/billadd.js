@@ -1,9 +1,14 @@
 ﻿var billCode = null;
+var goodCode = null;
 var goodName = null;
+var goodPrice = null;
 var customerCode = null;
-var quality = null;
+var customerId = null;
+var customerName = null;
+var quantity = null;
 var totalPrice = null;
 var paymentMethod = null;
+var address = null;
 var addBtn = null;
 var backBtn = null;
 
@@ -18,23 +23,43 @@ function priceReg(value) {
   return value;
 }
 
+//解决精度丢失问题
+function accMul(arg1, arg2) {
+  var m = 0, s1 = arg1.toString(), s2 = arg2.toString();
+  try {
+    m += s1.split(".")[1].length
+  } catch (e) {
+  }
+  try {
+    m += s2.split(".")[1].length
+  } catch (e) {
+  }
+  return Number(s1.replace(".", "")) * Number(s2.replace(".", "")) / Math.pow(10, m)
+}
 
 $(function () {
   billCode = $("#billCode");
+  goodCode = $("#goodCode");
   goodName = $("#goodName");
+  goodPrice = $("#goodPrice");
   customerCode = $("#customerCode");
-  quality = $("#quality");
+  customerId = $("#customerId");
+  customerName = $("#customerName");
+  quantity = $("#quantity");
   totalPrice = $("#totalPrice");
   paymentMethod = $("#paymentMethod");
+  address = $("#address");
   addBtn = $("#add");
   backBtn = $("#back");
+  
   //初始化的时候，要把所有的提示信息变为：* 以提示必填项，更灵活，不要写在页面上
   billCode.next().html("*");
   goodName.next().html("*");
   customerCode.next().html("*");
-  quality.next().html("*");
-  totalPrice.next().html("*");
+  quantity.next().html("*");
+  goodPrice.next().html("*");
   paymentMethod.next().html("*");
+  address.next().html("*")
   
   $.ajax({
     type: "GET",//请求类型
@@ -47,8 +72,8 @@ $(function () {
         var options = "<option value=\"0\">请选择</option>";
         for (var i = 0; i < data.length; i++) {
           //alert(data[i].id);
-          //alert(data[i].proName);
-          options += "<option value=\"" + data[i].id + "\">" + data[i].proName + "</option>";
+          //alert(data[i].typeName);
+          options += "<option value=\"" + data[i].id + "\">" + data[i].typeName + "</option>";
         }
         $("select").html(options);
       }
@@ -66,18 +91,32 @@ $(function () {
     if (billCode.val() != null && billCode.val() != "") {
       validateTip(billCode.next(), {"color": "green"}, imgYes, true);
     } else {
-      validateTip(billCode.next(), {"color": "red"}, imgNo + " 编码不能为空，请重新输入", false);
+      validateTip(billCode.next(), {"color": "red"}, imgNo + " 订单号不能为空，请重新输入", false);
     }
   }).on("focus", function () {
     //显示友情提示
-    validateTip(billCode.next(), {"color": "#666666"}, "* 请输入订单编码", false);
+    validateTip(billCode.next(), {"color": "#666666"}, "* 请输入订单号", false);
   }).focus();
   
   goodName.on("focus", function () {
     validateTip(goodName.next(), {"color": "#666666"}, "* 请输入商品名称", false);
   }).on("blur", function () {
     if (goodName.val() != null && goodName.val() != "") {
-      validateTip(goodName.next(), {"color": "green"}, imgYes, true);
+      $.ajax({
+        type: "GET",
+        url: path + "/jsp/good.do",
+        data: {method: "getGoodByName"},
+        dataType: "json",
+        success: function (data) {
+          if (data.flag) {
+            validateTip(goodName.next(), {"color": "green"}, imgYes, true);
+            goodCode.val(data.gid);
+          }
+        },
+        error: function (data) {
+          validateTip(goodName.next(), {"color": "red"}, imgNo + " 获取商品信息error", false);
+        }
+      })
     } else {
       validateTip(goodName.next(), {"color": "red"}, imgNo + " 商品名称不能为空，请重新输入", false);
     }
@@ -88,7 +127,24 @@ $(function () {
     validateTip(customerCode.next(), {"color": "#666666"}, "* 请输入顾客账户", false);
   }).on("blur", function () {
     if (customerCode.val() != null && customerCode.val() != "") {
-      validateTip(customerCode.next(), {"color": "green"}, imgYes, true);
+      $.ajax({
+        type: "GET",
+        url: path + "/jsp/user.do",
+        data: {method: "getUserByCode", userCode: customerCode.val()},
+        dataType: "json",
+        success: function (data) {
+          if (data.flag) {
+            customerId.val(data.uid);
+            customerName.val(data.uname);
+            validateTip(customerCode.next(), {"color": "green"}, imgYes, true);
+          } else {
+            validateTip(customerCode.next(), {"color": "red"}, imgNo + " 顾客姓名错误或不存在，请重新输入", false);
+          }
+        },
+        error: function (data) {
+          validateTip(customerCode.next(), {"color": "red"}, imgNo + " 获取顾客姓名error", false);
+        }
+      })
     } else {
       validateTip(customerCode.next(), {"color": "red"}, imgNo + " 顾客账户不能为空，请重新输入", false);
     }
@@ -106,20 +162,24 @@ $(function () {
     
   });
   
-  quality.on("focus", function () {
-    validateTip(quality.next(), {"color": "#666666"}, "* 请输入正整数", false);
-  }).on("keyup", function () {
-    this.value = priceReg(this.value);
+  quantity.on("focus", function () {
+    validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
-    this.value = priceReg(this.value);
+    if (this.value != null && goodPrice.val() != null) {
+      totalPrice.val(accMul(this.value, goodPrice.val()));
+    }
   });
   
-  totalPrice.on("focus", function () {
-    validateTip(totalPrice.next(), {"color": "#666666"}, "* 请输入大于0的正自然数，小数点后保留2位", false);
+  goodPrice.on("focus", function () {
+    validateTip(goodPrice.next(), {"color": "#666666"}, "* 请输入大于0的正自然数，小数点后保留2位", false);
   }).on("keyup", function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
+    if (this.value != null && quantity.val() != null) {
+      //解决精度丢失问题
+      totalPrice.val(accMul(this.value, quantity.val()));
+    }
   });
   
   addBtn.on("click", function () {

@@ -12,37 +12,49 @@
             <!--div的class 为error是验证错误，ok是验证成功-->
             <input type="hidden" name="method" value="add">
             <div class="">
-                <label for="billCode">订单编码：</label>
+                <label for="billCode">订单编号：</label>
                 <input type="text" name="billCode" class="text" id="billCode" value="">
                 <!-- 放置提示信息 -->
                 <font color="red"></font>
             </div>
             <div>
-                <label for="productName">商品名称：</label>
-                <input type="text" name="productName" id="productName" value="">
+                <label for="goodName">商品名称：</label>
+                <input type="text" name="goodName" id="goodName" value="">
+                <font color="red"></font>
+                <input type="hidden" name="goodCode" id="goodCode" value="">
+            </div>
+            <div>
+                <label for="goodPrice">商品单价：</label>
+                <input type="text" name="goodPrice" id="goodPrice" value="">
                 <font color="red"></font>
             </div>
             <div>
-                <label for="productCount">商品数量：</label>
-                <input type="text" name="productCount" id="productCount" value="">
+                <label for="quantity">商品数量：</label>
+                <input type="text" name="quantity" id="quantity" value="">
                 <font color="red"></font>
             </div>
             <div>
                 <label for="totalPrice">总金额：</label>
-                <input type="text" name="totalPrice" id="totalPrice" value="">
+                <input type="text" name="totalPrice" id="totalPrice" value="" readonly="readonly">
+            </div>
+            <div>
+                <label for="customerCode">顾客账号：</label>
+                <input type="text" name="customerCode" id="customerCode" value="">
                 <font color="red"></font>
             </div>
             <div>
-                <label>顾客账号：</label>
-                <select name="customerCode" id="customerCode">
-                </select>
+                <label for="customerName">顾客姓名：</label>
+                <input type="text" name="customerName" id="customerName" value="" readonly="readonly">
+                <input type="hidden" name="customerId" id="customerId" value="">
+            </div>
+            <div>
+                <label for="address">地址：</label>
+                <input type="text" name="address" id="address" value="">
                 <font color="red"></font>
             </div>
             <div>
-                <label>付款方式：</label>
-                <input type="radio" name="paymentMethod" value="1" checked="checked">微信
-                <input type="radio" name="paymentMethod" value="2">支付宝
-                <input type="radio" name="paymentMethod" value="3">信用卡
+                <label for="paymentMethod">付款方式：</label>
+                <select name="paymentMethod" id="paymentMethod"></select>
             </div>
             <div class="providerAddBtn">
                 <input type="button" name="add" id="add" value="保存">
