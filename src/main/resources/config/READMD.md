@@ -4,9 +4,10 @@
 > 这个文件夹的配置文件不会同步到仓库
 
 ```properties
-driverClassName = com.mysql.cj.jdbc.Driver
-url = jdbc:mysql://数据库地址:端口/PXX?useUnicode=true&characterEncoding=utf-8&useSSL=true
-username = 数据库用户名
-password = 数据库密码
-filter = log4j
+driverClassName = net.sf.log4jdbc.DriverSpy
+url = jdbc:log4jdbc:mysql://localhost:3306/PXX?useUnicode=true&characterEncoding=utf-8&useSSL=true
+username = pxx_admin
+password = 123456
+filter = slf4j
+testWhileIdle = false
 ```
