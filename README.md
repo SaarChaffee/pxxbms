@@ -11,7 +11,7 @@ PXX background management system
 
 ```
 pxxbms
-├─src
+└─src
    └─main
        ├─java
        │  └─com
