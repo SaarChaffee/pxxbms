@@ -10,6 +10,7 @@ import com.chaffee.dao.DaoUtils;
 import com.chaffee.dao.user.UserDao;
 import com.chaffee.dao.user.UserDaoImpl;
 import com.chaffee.entity.User;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
   private final UserDao userDao;
+  private final Logger logger = Logger.getRootLogger();
   
   public UserServiceImpl() {
     userDao = new UserDaoImpl();
@@ -85,10 +87,6 @@ public class UserServiceImpl implements UserService {
     }catch( SQLException e ){
       e.printStackTrace();
     }finally{
-      System.out.println( "------------getUserCount-service--------------" );
-      System.out.println( count );
-      System.out.println( "==============================================" );
-      System.out.println();
       DaoUtils.close( connection, null, null );
     }
     
@@ -106,10 +104,6 @@ public class UserServiceImpl implements UserService {
     }catch( SQLException e ){
       e.printStackTrace();
     }finally{
-      System.out.println( "------------getUserList-service--------------" );
-      System.out.println( userList );
-      System.out.println( "=============================================" );
-      System.out.println();
       DaoUtils.close( connection, null, null );
     }
     
@@ -124,19 +118,19 @@ public class UserServiceImpl implements UserService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''addUser''''Open transaction''''''''''" );
+      logger.info( "'''''''''addUser''''Open transaction''''''''''" );
       int i = userDao.addUser( connection, user );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''addUser''''success''''''''''" );
+        logger.info( "'''''''''addUser''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''addUser''''failed''''''''''" );
+        logger.info( "'''''''''addUser''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''addUser''''rollback''''''''''" );
+        logger.info( "'''''''''addUser''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -145,7 +139,7 @@ public class UserServiceImpl implements UserService {
       try{
         assert connection != null;
         connection.setAutoCommit( true );
-        System.out.println( "'''''''''addUser''''Close transaction''''''''''" );
+        logger.info( "'''''''''addUser''''Close transaction''''''''''" );
       }catch( SQLException e ){
         e.printStackTrace();
       }
@@ -163,19 +157,19 @@ public class UserServiceImpl implements UserService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''delUser''''Open transaction''''''''''" );
+      logger.info( "'''''''''delUser''''Open transaction''''''''''" );
       int i = userDao.deleteUser( connection, id );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''delUser''''success''''''''''" );
+        logger.info( "'''''''''delUser''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''delUser''''failed''''''''''" );
+        logger.info( "'''''''''delUser''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''delUser''''rollback''''''''''" );
+        logger.info( "'''''''''delUser''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -184,7 +178,7 @@ public class UserServiceImpl implements UserService {
       try{
         assert connection != null;
         connection.setAutoCommit( true );
-        System.out.println( "'''''''''delUser''''Close transaction''''''''''" );
+        logger.info( "'''''''''delUser''''Close transaction''''''''''" );
       }catch( SQLException e ){
         e.printStackTrace();
       }
@@ -202,19 +196,19 @@ public class UserServiceImpl implements UserService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''updateUser''''Open transaction''''''''''" );
+      logger.info( "'''''''''updateUser''''Open transaction''''''''''" );
       int i = userDao.updateUser( connection, id, user );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''updateUser''''success''''''''''" );
+        logger.info( "'''''''''updateUser''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''updateUser''''failed''''''''''" );
+        logger.info( "'''''''''updateUser''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''updateUser''''rollback''''''''''" );
+        logger.info( "'''''''''updateUser''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -223,7 +217,7 @@ public class UserServiceImpl implements UserService {
       try{
         assert connection != null;
         connection.setAutoCommit( true );
-        System.out.println( "'''''''''updateUser''''Close transaction''''''''''" );
+        logger.info( "'''''''''updateUser''''Close transaction''''''''''" );
       }catch( SQLException e ){
         e.printStackTrace();
       }
@@ -245,10 +239,6 @@ public class UserServiceImpl implements UserService {
     }catch( SQLException e ){
       e.printStackTrace();
     }finally{
-      System.out.println( "------------getUserById-service--------------" );
-      System.out.println( user );
-      System.out.println( "=======================================" );
-      System.out.println();
       DaoUtils.close( connection, null, null );
     }
     
@@ -302,6 +292,6 @@ public class UserServiceImpl implements UserService {
     user.setUserPassword( "123" );
     user.setUserRole( 1 );
     user.setBirthday( new Date( System.currentTimeMillis() ) );
-    System.out.println( this.updatePwd( 1, "123" ) );
+    logger.info( this.updatePwd( 1, "123" ) );
   }
 }

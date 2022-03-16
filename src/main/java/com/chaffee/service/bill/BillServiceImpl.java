@@ -10,6 +10,7 @@ import com.chaffee.dao.DaoUtils;
 import com.chaffee.dao.bill.BillDao;
 import com.chaffee.dao.bill.BillDaoImpl;
 import com.chaffee.entity.Bill;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import java.util.List;
 
 public class BillServiceImpl implements BillService {
   private final BillDao billDao;
+  private final Logger logger = Logger.getRootLogger();
   
   public BillServiceImpl() {
     billDao = new BillDaoImpl();
@@ -68,19 +70,19 @@ public class BillServiceImpl implements BillService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''updateBill''''Open transaction''''''''''" );
+      logger.info( "'''''''''updateBill''''Open transaction''''''''''" );
       int i = billDao.updateBill( connection, id, bill );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''updateBill''''success''''''''''" );
+        logger.info( "'''''''''updateBill''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''updateBill''''failed''''''''''" );
+        logger.info( "'''''''''updateBill''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''updateBill''''rollback''''''''''" );
+        logger.info( "'''''''''updateBill''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -89,7 +91,7 @@ public class BillServiceImpl implements BillService {
       try{
         assert connection != null;
         connection.setAutoCommit( true );
-        System.out.println( "'''''''''updateBill''''Close transaction''''''''''" );
+        logger.info( "'''''''''updateBill''''Close transaction''''''''''" );
       }catch( SQLException e ){
         e.printStackTrace();
       }
@@ -123,21 +125,21 @@ public class BillServiceImpl implements BillService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''addBill''''Open transaction''''''''''" );
+      logger.info( "'''''''''addBill''''Open transaction''''''''''" );
       bill.setCreatedBy( id );
       bill.setCreationDate( new Date( System.currentTimeMillis() ) );
       int i = billDao.addBill( connection, bill );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''addBill''''success''''''''''" );
+        logger.info( "'''''''''addBill''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''addBill''''failed''''''''''" );
+        logger.info( "'''''''''addBill''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''addBill''''rollback''''''''''" );
+        logger.info( "'''''''''addBill''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -146,7 +148,7 @@ public class BillServiceImpl implements BillService {
       try{
         assert connection != null;
         connection.setAutoCommit( true );
-        System.out.println( "'''''''''addBill''''Close transaction''''''''''" );
+        logger.info( "'''''''''addBill''''Close transaction''''''''''" );
       }catch( SQLException e ){
         e.printStackTrace();
       }
@@ -164,19 +166,19 @@ public class BillServiceImpl implements BillService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''delBill''''Open transaction''''''''''" );
+      logger.info( "'''''''''delBill''''Open transaction''''''''''" );
       int i = billDao.deleteBill( connection, id );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''delBill''''success''''''''''" );
+        logger.info( "'''''''''delBill''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''delBill''''failed''''''''''" );
+        logger.info( "'''''''''delBill''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''delBill''''rollback''''''''''" );
+        logger.info( "'''''''''delBill''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -196,6 +198,6 @@ public class BillServiceImpl implements BillService {
   
   @Test
   public void test() {
-    System.out.println( this.getBillById( 1 ) );
+    logger.info( this.getBillById( 1 ) );
   }
 }

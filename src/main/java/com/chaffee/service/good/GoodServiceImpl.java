@@ -10,6 +10,7 @@ import com.chaffee.dao.DaoUtils;
 import com.chaffee.dao.good.GoodDao;
 import com.chaffee.dao.good.GoodDaoImpl;
 import com.chaffee.entity.Good;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class GoodServiceImpl implements GoodService {
   private final GoodDao goodDao;
+  private final Logger logger = Logger.getRootLogger();
   
   public GoodServiceImpl() {
     goodDao = new GoodDaoImpl();
@@ -81,20 +83,20 @@ public class GoodServiceImpl implements GoodService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''updateGood''''Open transaction''''''''''" );
+      logger.info( "'''''''''updateGood''''Open transaction''''''''''" );
       int i = goodDao.updateGood( connection, id, good );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''updateGood''''success''''''''''" );
+        logger.info( "'''''''''updateGood''''success''''''''''" );
         
       }
       else{
-        System.out.println( "'''''''''updateGood''''failed''''''''''" );
+        logger.info( "'''''''''updateGood''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''updateGood''''rollback''''''''''" );
+        logger.info( "'''''''''updateGood''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -137,21 +139,21 @@ public class GoodServiceImpl implements GoodService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''addGood''''Open transaction''''''''''" );
+      logger.info( "'''''''''addGood''''Open transaction''''''''''" );
       good.setCreatedBy( id );
       good.setCreationDate( new Date( System.currentTimeMillis() ) );
       int i = goodDao.addGood( connection, good );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''addGood''''success''''''''''" );
+        logger.info( "'''''''''addGood''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''addGood''''failed''''''''''" );
+        logger.info( "'''''''''addGood''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''addGood''''rollback''''''''''" );
+        logger.info( "'''''''''addGood''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
@@ -160,7 +162,7 @@ public class GoodServiceImpl implements GoodService {
       try{
         assert connection != null;
         connection.setAutoCommit( true );
-        System.out.println( "'''''''''addGood''''Close transaction''''''''''" );
+        logger.info( "'''''''''addGood''''Close transaction''''''''''" );
       }catch( SQLException e ){
         e.printStackTrace();
       }
@@ -178,19 +180,19 @@ public class GoodServiceImpl implements GoodService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
-      System.out.println( "'''''''''delGood''''Open transaction''''''''''" );
+      logger.info( "'''''''''delGood''''Open transaction''''''''''" );
       int i = goodDao.deleteGood( connection, id );
       if( i > 0 ){
         flag = true;
-        System.out.println( "'''''''''delGood''''success''''''''''" );
+        logger.info( "'''''''''delGood''''success''''''''''" );
       }
       else{
-        System.out.println( "'''''''''delGood''''failed''''''''''" );
+        logger.info( "'''''''''delGood''''failed''''''''''" );
       }
     }catch( SQLException e ){
       try{
         connection.rollback();
-        System.out.println( "'''''''''delGood''''rollback''''''''''" );
+        logger.info( "'''''''''delGood''''rollback''''''''''" );
       }catch( SQLException ex ){
         ex.printStackTrace();
       }
