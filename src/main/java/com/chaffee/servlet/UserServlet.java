@@ -16,6 +16,7 @@ import com.chaffee.util.Constants;
 import com.chaffee.util.PageSupport;
 import com.google.gson.Gson;
 import com.mysql.cj.util.StringUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,25 +81,25 @@ public class UserServlet extends HttpServlet {
     Object o = req.getSession().getAttribute( Constants.USER_SESSION );
     String newpassword = req.getParameter( "newpassword" );
     boolean flag = false;
-    
+    Logger logger = Logger.getRootLogger();
     if( o != null && !StringUtils.isNullOrEmpty( newpassword ) ){
       UserService service = new UserServiceImpl();
       flag = service.updatePwd( ( ( User ) o ).getId(), newpassword );
-      System.out.println( "--------UserServlet---------" + flag + "-----------" );
+      logger.info( "--------UserServlet---------" + flag + "-----------" );
       if( flag ){
         req.setAttribute( Constants.MSG, "密码修改成功，请用新密码登录" );
-        System.out.println( "--------UserServlet---------清除旧Session-----------" );
+        logger.info( "--------UserServlet---------清除旧Session-----------" );
         req.getSession().removeAttribute( Constants.USER_SESSION );
-        System.out.println( "--------UserServlet---------清除完成-----------" );
+        logger.info( "--------UserServlet---------清除完成-----------" );
       }
       else{
         req.setAttribute( Constants.MSG, "修改密码失败" );
-        System.out.println( "--------UserServlet---------修改密码失败-----------" );
+        logger.info( "--------UserServlet---------修改密码失败-----------" );
       }
     }
     else{
       req.setAttribute( Constants.MSG, "新密码有问题" );
-      System.out.println( "--------UserServlet---------新密码有问题-----------" );
+      logger.info( "--------UserServlet---------新密码有问题-----------" );
     }
     req.getRequestDispatcher( "/jsp/pwdmodify.jsp" ).forward( req, resp );
   }
