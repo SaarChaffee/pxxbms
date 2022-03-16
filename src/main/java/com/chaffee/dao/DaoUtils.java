@@ -37,6 +37,11 @@ public class DaoUtils {
     }
   }
   
+  /**
+   * 获取连接
+   *
+   * @return Connection
+   */
   public static Connection getConnection() {
     Connection connection = null;
     try{
@@ -47,6 +52,17 @@ public class DaoUtils {
     return connection;
   }
   
+  /**
+   * 查
+   *
+   * @param connection
+   * @param pstm
+   * @param rs
+   * @param sql
+   * @param param
+   * @return ResultSet
+   * @throws SQLException
+   */
   public static ResultSet execute( Connection connection, PreparedStatement pstm, ResultSet rs,
                                    String sql, Object[] param ) throws SQLException {
     
@@ -59,6 +75,16 @@ public class DaoUtils {
     return rs;
   }
   
+  /**
+   * 改
+   *
+   * @param connection
+   * @param pstm
+   * @param sql
+   * @param param
+   * @return int：受影响行数
+   * @throws SQLException
+   */
   public static int execute( Connection connection, PreparedStatement pstm, String sql, Object[] param ) throws SQLException {
     
     pstm = connection.prepareStatement( sql );
@@ -69,6 +95,15 @@ public class DaoUtils {
     return pstm.executeUpdate();
   }
   
+  /**
+   * 关闭连接
+   * 由德鲁伊回收连接
+   *
+   * @param connection
+   * @param pstm
+   * @param rs
+   * @return
+   */
   public static boolean close( Connection connection, PreparedStatement pstm, ResultSet rs ) {
     boolean flag = true;
     try{
