@@ -31,6 +31,7 @@ public class AccessFilter implements Filter {
       filterChain.doFilter( servletRequest, servletResponse );
     }
     else{
+      request.getSession().removeAttribute( Constants.USER_SESSION );
       System.out.println( "------------拦截成功-------------" );
       response.sendRedirect( request.getContextPath() + "/error.jsp" );
     }
