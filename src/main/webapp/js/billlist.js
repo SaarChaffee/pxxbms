@@ -4,13 +4,13 @@
 function deleteBill(obj) {
   $.ajax({
     type: "GET",
-    url: path + "/jsp/bill.do",
+    url: path + "/jsp/bill",
     data: {method: "delbill", billid: obj.attr("billid")},
     dataType: "json",
     success: function (data) {
       if (data.delResult === "true") {//删除成功：移除删除行
         cancleBtn();
-        window.location.href = path + "/jsp/bill.do?method=query";
+        window.location.href = path + "/jsp/bill?method=query";
       } else if (data.delResult === "false") {//删除失败
         //alert("对不起，删除订单【"+obj.attr("billcc")+"】失败");
         changeDLGContent("对不起，删除订单【" + obj.attr("billcc") + "】失败");
@@ -44,12 +44,12 @@ $(function () {
   $(".viewBill").on("click", function () {
     //将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
     var obj = $(this);
-    window.location.href = path + "/jsp/bill.do?method=view&billid=" + obj.attr("billid");
+    window.location.href = path + "/jsp/bill?method=view&billid=" + obj.attr("billid");
   });
   
   $(".modifyBill").on("click", function () {
     var obj = $(this);
-    window.location.href = path + "/jsp/bill.do?method=modify&billid=" + obj.attr("billid");
+    window.location.href = path + "/jsp/bill?method=modify&billid=" + obj.attr("billid");
   });
   $('#no').click(function () {
     cancleBtn();

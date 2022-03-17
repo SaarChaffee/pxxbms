@@ -7,7 +7,7 @@
         <span>商品管理页面 >> 商品修改页面</span>
     </div>
     <div class="providerAdd">
-        <form id="goodForm" name="goodForm" method="post" action="${pageContext.request.contextPath }/jsp/good.do">
+        <form id="goodForm" name="goodForm" method="post" action="${pageContext.request.contextPath }/jsp/good">
             <input type="hidden" name="method" value="modifyexe">
             <input type="hidden" name="gid" value="${good.id }"/>
             <div>

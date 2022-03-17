@@ -8,7 +8,7 @@
         <span>商品管理页面 >> 商品添加页面</span>
     </div>
     <div class="providerAdd">
-        <form id="goodForm" name="goodForm" method="post" action="${pageContext.request.contextPath }/jsp/good.do">
+        <form id="goodForm" name="goodForm" method="post" action="${pageContext.request.contextPath }/jsp/good">
             <!--div的class 为error是验证错误，ok是验证成功-->
             <input type="hidden" name="method" value="add">
             <div class="">

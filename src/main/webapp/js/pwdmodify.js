@@ -16,7 +16,7 @@ $(function () {
   oldpassword.on("blur", function () {
     $.ajax({
       type: "GET",
-      url: path + "/jsp/user.do",
+      url: path + "/jsp/user",
       data: {method: "pwdmodify", oldpassword: oldpassword.val()}, //ajax传递的参数
       dataType: "json",
       success: function (data) {

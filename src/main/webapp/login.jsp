@@ -13,7 +13,7 @@
         <h1>拼夕夕商家后台管理系统</h1>
     </header>
     <section class="loginCont">
-        <form class="loginForm" action="${pageContext.request.contextPath}/login.do" method="post" name="actionForm"
+        <form class="loginForm" action="${pageContext.request.contextPath}/login" method="post" name="actionForm"
               id="actionForm">
             <div class="info">${error}</div>
             <div class="inputbox">

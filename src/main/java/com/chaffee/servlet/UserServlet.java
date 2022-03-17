@@ -213,7 +213,7 @@ public class UserServlet extends HttpServlet {
     
     UserServiceImpl userService = new UserServiceImpl();
     if( userService.addUser( user ) ){
-      resp.sendRedirect( req.getContextPath() + "/jsp/user.do?method=query" );
+      resp.sendRedirect( req.getContextPath() + "/jsp/user?method=query" );
     }
     else{
       req.getRequestDispatcher( "/useradd.jsp" ).forward( req, resp );
@@ -327,7 +327,7 @@ public class UserServlet extends HttpServlet {
     
     userService.updateUser( currentUser, user );
     
-    resp.sendRedirect( req.getContextPath() + "/jsp/user.do?method=query" );
+    resp.sendRedirect( req.getContextPath() + "/jsp/user?method=query" );
   }
   
   protected void isTraderExist( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,

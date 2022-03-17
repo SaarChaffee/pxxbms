@@ -8,7 +8,7 @@
         <span>订单管理页面 >> 修改订单页面</span>
     </div>
     <div class="providerAdd">
-        <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill.do">
+        <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill">
             <input type="hidden" name="method" value="modifysave">
             <input type="hidden" name="id" value="${bill.id }">
             <!--div的class 为error是验证错误，ok是验证成功-->

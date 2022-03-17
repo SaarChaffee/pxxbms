@@ -3,13 +3,13 @@
 function deleteGood(obj) {
   $.ajax({
     type: "GET",
-    url: path + "/jsp/good.do",
+    url: path + "/jsp/good",
     data: {method: "delGood", gid: obj.attr("goodid")},
     dataType: "json",
     success: function (data) {
       if (data.delResult === "true") {//删除成功：移除删除行
         cancleBtn();
-        window.location.href = path + "/jsp/good.do?method=query";
+        window.location.href = path + "/jsp/good?method=query";
       } else if (data.delResult === "false") {//删除失败
         changeDLGContent("对不起，删除商品【" + obj.attr("goodname") + "】失败");
       } else if (data.delResult === "notexist") {
@@ -47,12 +47,12 @@ $(function () {
   $(".viewGood").on("click", function () {
     //将被绑定的元素（a）转换成jquery对象，可以使用jquery方法
     var obj = $(this);
-    window.location.href = path + "/jsp/good.do?method=view&gid=" + obj.attr("goodid");
+    window.location.href = path + "/jsp/good?method=view&gid=" + obj.attr("goodid");
   });
   
   $(".modifyGood").on("click", function () {
     var obj = $(this);
-    window.location.href = path + "/jsp/good.do?method=modify&gid=" + obj.attr("goodid");
+    window.location.href = path + "/jsp/good?method=modify&gid=" + obj.attr("goodid");
   });
   
   $('#no').click(function () {

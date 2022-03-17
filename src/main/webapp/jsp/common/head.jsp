@@ -16,7 +16,7 @@
     <div class="publicHeaderR">
         <p><span>下午好！</span><span style="color: #fff21b"> ${userSession.userName }</span> , 欢迎你！</p>
         <a href="${pageContext.request.contextPath }/jsp/frame.jsp">主页</a>
-        <a href="${pageContext.request.contextPath }/jsp/logout.do">退出</a>
+        <a href="${pageContext.request.contextPath }/jsp/logout">退出</a>
     </div>
 </header>
 <!--时间-->
@@ -29,11 +29,11 @@
         <h2 class="leftH2"><span class="span1"></span>功能列表 <span></span></h2>
         <nav>
             <ul class="list">
-                <li><a href="${pageContext.request.contextPath }/jsp/bill.do?method=query">订单管理</a></li>
-                <li><a href="${pageContext.request.contextPath }/jsp/good.do?method=query">商品管理</a></li>
-                <li><a href="${pageContext.request.contextPath }/jsp/user.do?method=query">用户管理</a></li>
+                <li><a href="${pageContext.request.contextPath }/jsp/bill?method=query">订单管理</a></li>
+                <li><a href="${pageContext.request.contextPath }/jsp/good?method=query">商品管理</a></li>
+                <li><a href="${pageContext.request.contextPath }/jsp/user?method=query">用户管理</a></li>
                 <li><a href="${pageContext.request.contextPath }/jsp/pwdmodify.jsp">密码修改</a></li>
-                <li><a href="${pageContext.request.contextPath }/jsp/logout.do">退出系统</a></li>
+                <li><a href="${pageContext.request.contextPath }/jsp/logout">退出系统</a></li>
             </ul>
         </nav>
     </div>

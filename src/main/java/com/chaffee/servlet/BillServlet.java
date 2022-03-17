@@ -195,7 +195,7 @@ public class BillServlet extends HttpServlet {
     
     BillService billService = new BillServiceImpl();
     if( billService.addBill( currentUser, bill ) ){
-      resp.sendRedirect( req.getContextPath() + "/jsp/bill.do?method=query" );
+      resp.sendRedirect( req.getContextPath() + "/jsp/bill?method=query" );
     }
     else{
       req.getRequestDispatcher( "/useradd.jsp" ).forward( req, resp );
@@ -292,6 +292,6 @@ public class BillServlet extends HttpServlet {
     
     billService.updateBill( currentUser, bill );
     
-    resp.sendRedirect( req.getContextPath() + "/jsp/bill.do?method=query" );
+    resp.sendRedirect( req.getContextPath() + "/jsp/bill?method=query" );
   }
 }

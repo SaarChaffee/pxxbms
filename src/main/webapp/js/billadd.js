@@ -64,7 +64,7 @@ $(function () {
   
   $.ajax({
     type: "GET",//请求类型
-    url: path + "/jsp/bill.do",//请求的url
+    url: path + "/jsp/bill",//请求的url
     data: {method: "getPaymentMethodList"},//请求参数
     dataType: "json",//ajax接口（请求url）返回的数据类型
     success: function (data) {//data：返回数据（json对象）
@@ -105,7 +105,7 @@ $(function () {
     if (goodCode.val() !== "" && goodCode.val() !== null) {
       $.ajax({
         type: "GET",
-        url: path + "/jsp/good.do",
+        url: path + "/jsp/good",
         data: {method: "getGoodByCode", goodCode: goodCode.val()},
         dataType: "json",
         success: function (data) {
@@ -134,7 +134,7 @@ $(function () {
     if (customerCode.val() !== "" && customerCode.val() !== null) {
       $.ajax({
         type: "GET",
-        url: path + "/jsp/user.do",
+        url: path + "/jsp/user",
         data: {method: "getUserByCode", userCode: customerCode.val()},
         dataType: "json",
         success: function (data) {

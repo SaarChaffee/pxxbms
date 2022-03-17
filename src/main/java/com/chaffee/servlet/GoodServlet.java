@@ -120,7 +120,7 @@ public class GoodServlet extends HttpServlet {
     
     goodService.updateGood( currentUser, good );
     
-    resp.sendRedirect( req.getContextPath() + "/jsp/good.do?method=query" );
+    resp.sendRedirect( req.getContextPath() + "/jsp/good?method=query" );
   }
   
   protected void getTypeList( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
@@ -195,7 +195,7 @@ public class GoodServlet extends HttpServlet {
     System.out.println( good );
     GoodService goodService = new GoodServiceImpl();
     if( goodService.addGood( currentUser, good ) ){
-      resp.sendRedirect( req.getContextPath() + "/jsp/good.do?method=query" );
+      resp.sendRedirect( req.getContextPath() + "/jsp/good?method=query" );
     }
     else{
       req.getRequestDispatcher( "/goodadd.jsp" ).forward( req, resp );

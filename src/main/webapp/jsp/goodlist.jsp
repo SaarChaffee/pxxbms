@@ -7,7 +7,7 @@
         <span>商品管理页面</span>
     </div>
     <div class="search">
-        <form method="get" action="${pageContext.request.contextPath }/jsp/good.do">
+        <form method="get" action="${pageContext.request.contextPath }/jsp/good">
             <input name="method" value="query" class="input-text" type="hidden">
             <span>商品名：</span>
             <input name="queryGoodName" class="input-text" type="text" value="${queryGoodName}">
