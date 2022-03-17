@@ -111,7 +111,7 @@ $(function () {
   paymentMethod.on("focus", function () {
     validateTip(paymentMethod.next(), {"color": "#666666"}, "* 请选择付款方式", false);
   }).on("blur", function () {
-    if (paymentMethod.val() !== null && paymentMethod.val() !== "" && paymentMethod.val() !== 0) {
+    if (paymentMethod.val() !== null && paymentMethod.val() !== "" && paymentMethod.val() > 0) {
       validateTip(paymentMethod.next(), {"color": "green"}, imgYes, true);
     } else {
       validateTip(paymentMethod.next(), {"color": "red"}, imgNo + " 付款方式不能为空，请选择", false);
