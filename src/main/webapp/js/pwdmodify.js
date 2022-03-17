@@ -14,28 +14,32 @@ $(function () {
   rnewpassword.next().html("*");
   
   oldpassword.on("blur", function () {
-    $.ajax({
-      type: "GET",
-      url: path + "/jsp/user",
-      data: {method: "pwdmodify", oldpassword: oldpassword.val()}, //ajax传递的参数
-      dataType: "json",
-      success: function (data) {
-        if (data.result === "true") {//旧密码正确
-          validateTip(oldpassword.next(), {"color": "green"}, imgYes, true);
-        } else if (data.result === "false") {//旧密码输入不正确
-          validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 原密码输入不正确", false);
-        } else if (data.result === "sessionerror") {//当前用户session过期，请重新登录
-          validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 当前用户session过期，请重新登录", false);
-        } else if (data.result === "error") {//旧密码输入为空
-          validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 请输入旧密码", false);
+    if (oldpassword.val() !== "" && oldpassword.val() !== null) {
+      $.ajax({
+        type: "GET",
+        url: path + "/jsp/user",
+        data: {method: "pwdmodify", oldpassword: oldpassword.val()}, //ajax传递的参数
+        dataType: "json",
+        success: function (data) {
+          if (data.result === "true") {//旧密码正确
+            validateTip(oldpassword.next(), {"color": "green"}, imgYes, true);
+          } else if (data.result === "false") {//旧密码输入不正确
+            validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 原密码输入不正确", false);
+          } else if (data.result === "sessionerror") {//当前用户session过期，请重新登录
+            validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 当前用户session过期，请重新登录", false);
+          } else if (data.result === "error") {//旧密码输入为空
+            validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 请输入旧密码", false);
+          }
+        },
+        error: function (data) {
+          //请求出错
+          validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 请求错误", false);
         }
-      },
-      error: function (data) {
-        //请求出错
-        validateTip(oldpassword.next(), {"color": "red"}, imgNo + " 请求错误", false);
-      }
-    });
-    
+      });
+    } else {
+      validateTip(oldpassword.next(), {"color": "red"}, "* 请输入正确的原密码", false);
+      
+    }
     
   }).on("focus", function () {
     validateTip(oldpassword.next(), {"color": "#666666"}, "* 请输入原密码", false);

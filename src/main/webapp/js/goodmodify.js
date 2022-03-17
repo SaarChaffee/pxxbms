@@ -53,7 +53,7 @@ $(function () {
   });
   
   ownerName.on("focus", function () {
-    validateTip(ownerName.next(), {"color": "#666666"}, "* 所有者姓名必须是大于1小于10的字符", false);
+    validateTip(ownerName.next(), {"color": "#666666"}, "* 商家姓名必须是大于1小于10的字符", false);
   }).on("blur", function () {
     $.ajax({
       type: "GET",
@@ -65,11 +65,11 @@ $(function () {
           validateTip(ownerName.next(), {"color": "green"}, imgYes, true);
           owner.val(data.oid);
         } else {
-          validateTip(ownerName.next(), {"color": "red"}, imgNo + " 所有者姓名错误或不存在，请重新输入", false);
+          validateTip(ownerName.next(), {"color": "red"}, imgNo + " 商家姓名错误或不存在，请重新输入", false);
         }
       },
       error: function (data) {
-        validateTip(ownerName.next(), {"color": "red"}, imgNo + " 获取所有者姓名error", false);
+        validateTip(ownerName.next(), {"color": "red"}, imgNo + " 获取商家姓名error", false);
       }
     })
   })
@@ -95,7 +95,7 @@ $(function () {
         dataType: "json",
         success: function (data) {
           if (data != null) {
-            if (data.flag === false) {
+            if (data.flag === false || goodCode.val() === data.gCode) {
               validateTip(goodCode.next(), {"color": "green"}, imgYes, true);
             } else {
               validateTip(goodCode.next(), {"color": "red"}, imgNo + " 商品编号已存在，请重新输入", false);
