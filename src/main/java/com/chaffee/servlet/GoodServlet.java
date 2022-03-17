@@ -32,7 +32,6 @@ public class GoodServlet extends HttpServlet {
   @Override
   protected void doGet( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String method = req.getParameter( "method" );
-    
     switch( method ){
       case "query" -> {
         this.query( req, resp );
@@ -40,17 +39,11 @@ public class GoodServlet extends HttpServlet {
       case "modify" -> {
         this.modify( req, resp );
       }
-      case "modifyexe" -> {
-        this.modifyExe( req, resp );
-      }
       case "gettypelist" -> {
         this.getTypeList( req, resp );
       }
       case "getGoodByName" -> {
         this.getGoodByName( req, resp );
-      }
-      case "add" -> {
-        this.add( req, resp );
       }
       case "delGood" -> {
         this.delGood( req, resp );
@@ -67,7 +60,16 @@ public class GoodServlet extends HttpServlet {
   
   @Override
   protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
-    doGet( req, resp );
+    String method = req.getParameter( "method" );
+    switch( method ){
+      case "add" -> {
+        this.add( req, resp );
+      }
+      case "modifyexe" -> {
+        this.modifyExe( req, resp );
+      }
+    }
+    
   }
   
   protected void modify( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
@@ -252,6 +254,7 @@ public class GoodServlet extends HttpServlet {
       resultMap.put( "gid", good.getId() );
       resultMap.put( "inventory", good.getInventory() );
       resultMap.put( "gName", good.getGoodName() );
+      resultMap.put( "gCode", good.getGoodCode() );
     }
     else{
       resultMap.put( "flag", false );

@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
   
   
   @Override
-  protected void doGet( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
+  protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     
     String userCode = req.getParameter( "userCode" );
     String userPassword = req.getParameter( "userPassword" );
@@ -35,11 +35,6 @@ public class LoginServlet extends HttpServlet {
       req.setAttribute( "error", "用户名或密码错误" );
       req.getRequestDispatcher( "login.jsp" ).forward( req, resp );
     }
-  }
-  
-  @Override
-  protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
-    doGet( req, resp );
   }
   
 }

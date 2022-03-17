@@ -37,14 +37,8 @@ public class UserServlet extends HttpServlet {
         case "savepwd" -> {
           this.savePwd( req, resp );
         }
-        case "pwdmodify" -> {
-          this.pwdModify( req, resp );
-        }
         case "query" -> {
           this.query( req, resp );
-        }
-        case "add" -> {
-          this.add( req, resp );
         }
         case "getrolelist" -> {
           this.getRoleList( req, resp );
@@ -54,9 +48,6 @@ public class UserServlet extends HttpServlet {
         }
         case "modify" -> {
           this.modify( req, resp );
-        }
-        case "modifyexe" -> {
-          this.modifyExe( req, resp );
         }
         case "isTraderExist" -> {
           this.isTraderExist( req, resp );
@@ -73,7 +64,18 @@ public class UserServlet extends HttpServlet {
   
   @Override
   protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
-    doGet( req, resp );
+    String method = req.getParameter( "method" );
+    switch( method ){
+      case "add" -> {
+        this.add( req, resp );
+      }
+      case "modifyexe" -> {
+        this.modifyExe( req, resp );
+      }
+      case "pwdmodify" -> {
+        this.pwdModify( req, resp );
+      }
+    }
   }
   
   //修改密码
