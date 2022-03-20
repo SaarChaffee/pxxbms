@@ -33,10 +33,6 @@ public class UserRoleServiceImpl implements UserRoleService {
     }catch( SQLException e ){
       e.printStackTrace();
     }finally{
-      System.out.println( "------------getRoleList-service--------------" );
-      System.out.println( roleList );
-      System.out.println( "=============================================" );
-      System.out.println();
       DaoUtils.close( connection, null, null );
     }
     return roleList;
