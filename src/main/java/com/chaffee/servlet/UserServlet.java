@@ -382,7 +382,7 @@ public class UserServlet extends HttpServlet {
     UserService userService = new UserServiceImpl();
     Map<String, Object> resultMap = new HashMap<>();
     
-    User user = userService.getUserByName( userCode );
+    User user = userService.getUserByCode( userCode );
     if( user != null ){
       resultMap.put( "flag", true );
       resultMap.put( "uid", user.getId() );
