@@ -216,8 +216,9 @@ public class GoodServlet extends HttpServlet {
       delId = Integer.parseInt( goodId );
     }catch( NumberFormatException e ){
       e.printStackTrace();
+      delId = 0;
     }
-    if( delId < 0 ){
+    if( delId <= 0 ){
       resultMap.put( "delResult", "notexist" );
     }
     else{

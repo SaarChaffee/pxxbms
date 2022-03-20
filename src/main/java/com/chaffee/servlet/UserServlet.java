@@ -252,7 +252,7 @@ public class UserServlet extends HttpServlet {
       e.printStackTrace();
       delId = 0;
     }
-    if( delId < 0 ){
+    if( delId <= 0 ){
       resultMap.put( "delResult", "notexist" );
     }
     else{
