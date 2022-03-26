@@ -171,10 +171,15 @@ li {
 }
 
 .list li:nth-child(4) {
+  background: url("../images/gys.png") 0 center no-repeat;
+
+}
+
+.list li:nth-last-child(2) {
   background: url("../images/mm.png") 0 center no-repeat;
 }
 
-.list li:nth-child(5) {
+.list li:nth-last-child(1) {
   background: url("../images/tc.png") 0 center no-repeat;
 }
 
