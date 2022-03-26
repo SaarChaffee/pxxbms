@@ -12,4 +12,14 @@ import java.util.List;
 
 public interface GoodTypeService {
   public List<GoodType> getGoodTypeList();
+  
+  public GoodType getGoodTypeById( int id );
+  
+  public GoodType getGoodTypeByCode( String typeCode );
+  
+  public boolean addGoodType( int id, GoodType goodType );
+  
+  public boolean updGoodType( int id, GoodType goodType );
+  
+  public boolean delGoodType( int id );
 }
