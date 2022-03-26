@@ -468,7 +468,7 @@ public class GoodServlet extends HttpServlet {
       resultMap.put( "flag", true );
       resultMap.put( "gTId", goodType.getId() );
       resultMap.put( "typeName", goodType.getTypeName() );
-      resultMap.put( "typeCode", goodType.getTypeCode() );
+      resultMap.put( "typeCode", goodType.getTypeCode().toString() );
     }
     else{
       resultMap.put( "flag", false );
