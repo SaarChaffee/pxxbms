@@ -57,6 +57,12 @@ public class GoodServlet extends HttpServlet {
       case "querygoodtype" -> {
         this.queryGoodType( req, resp );
       }
+      case "delGoodType" -> {
+        this.delGoodType( req, resp );
+      }
+      case "modifygoodtype" -> {
+        this.modifyGoodType( req, resp );
+      }
     }
     
   }
@@ -352,5 +358,51 @@ public class GoodServlet extends HttpServlet {
     List<GoodType> goodTypeList = goodTypeService.getGoodTypeList();
     req.setAttribute( "goodTypeList", goodTypeList );
     req.getRequestDispatcher( "/jsp/goodtypelist.jsp" ).forward( req, resp );
+  }
+  
+  protected void delGoodType( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String tempGoodTypeId = req.getParameter( "gtid" );
+    Map<String, Object> resultMap = new HashMap<>();
+    int delId = 0;
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    
+    try{
+      delId = Integer.parseInt( tempGoodTypeId );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+      delId = 0;
+    }
+    if( delId <= 0 ){
+      resultMap.put( "delResult", "notexist" );
+    }
+    else{
+      boolean flag = goodTypeService.delGoodType( delId );
+      if( flag ){
+        resultMap.put( "delResult", "true" );
+      }
+      else{
+        resultMap.put( "delResult", "false" );
+      }
+    }
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
+  }
+  
+  protected void modifyGoodType( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException{
+    String tempGTId = req.getParameter( "gtid" );
+    int getId = 0;
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    
+    
   }
 }
