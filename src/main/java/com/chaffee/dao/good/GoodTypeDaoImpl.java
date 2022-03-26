@@ -132,8 +132,22 @@ public class GoodTypeDaoImpl implements GoodTypeDao {
   }
   
   @Override
-  public int updGoodType( Connection connection,int id, GoodType goodType ) throws SQLException {
-    return 0;
+  public int updGoodType( Connection connection, int id, GoodType goodType ) throws SQLException {
+    PreparedStatement pstm = null;
+    int result = 0;
+    
+    if( connection != null ){
+      String sql = "update good_type set typeCode = ?,typeName = ?,createdBy = ?,creationDate = ?,modifyBy = ?," +
+          "modifyDate = ? where id = ?";
+      Object[] param = {
+          goodType.getTypeCode(), goodType.getTypeName(), goodType.getCreatedBy(), goodType.getCreationDate(),
+          goodType.getModifyBy(), goodType.getModifyDate(), goodType.getId()
+      };
+      result = DaoUtils.execute( connection, pstm, sql, param );
+    }
+    DaoUtils.close( null, pstm, null );
+    
+    return result;
   }
   
   @Test
