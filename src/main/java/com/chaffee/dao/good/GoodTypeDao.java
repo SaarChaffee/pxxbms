@@ -23,5 +23,5 @@ public interface GoodTypeDao {
   
   public int delGoodType( Connection connection, int id ) throws SQLException;
   
-  public int updGoodType( Connection connection, int id, GoodType goodType ) throws SQLException;
+  public int updGoodType( Connection connection, GoodType goodType ) throws SQLException;
 }

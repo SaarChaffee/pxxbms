@@ -132,7 +132,7 @@ public class GoodTypeDaoImpl implements GoodTypeDao {
   }
   
   @Override
-  public int updGoodType( Connection connection, int id, GoodType goodType ) throws SQLException {
+  public int updGoodType( Connection connection, GoodType goodType ) throws SQLException {
     PreparedStatement pstm = null;
     int result = 0;
     
