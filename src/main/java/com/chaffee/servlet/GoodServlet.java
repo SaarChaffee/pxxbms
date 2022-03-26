@@ -63,6 +63,9 @@ public class GoodServlet extends HttpServlet {
       case "modifygoodtype" -> {
         this.modifyGoodType( req, resp );
       }
+      case "getGoodTypeByCode" -> {
+        this.getGoodTypeByCode( req, resp );
+      }
     }
     
   }
@@ -76,6 +79,9 @@ public class GoodServlet extends HttpServlet {
       }
       case "modifyexe" -> {
         this.modifyExe( req, resp );
+      }
+      case "goodtypemodifyexe" -> {
+        this.goodTypeModifyExe( req, resp );
       }
     }
     
@@ -413,5 +419,67 @@ public class GoodServlet extends HttpServlet {
     req.setAttribute( "goodType", goodType );
     req.getRequestDispatcher( "/jsp/goodtypemodify.jsp" ).forward( req, resp );
     
+  }
+  
+  protected void goodTypeModifyExe( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String tempGTId = req.getParameter( "gtid" );
+    String typeName = req.getParameter( "typeName" );
+    String tempTypeCode = req.getParameter( "typeCode" );
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    int gTId = 0;
+    int typeCode = 0;
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    
+    try{
+      gTId = Integer.parseInt( tempGTId );
+      typeCode = Integer.parseInt( tempTypeCode );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    
+    GoodType goodType = goodTypeService.getGoodTypeById( gTId );
+    goodType.setTypeName( typeName );
+    goodType.setTypeCode( typeCode );
+    
+    goodTypeService.updGoodType( currentUser, goodType );
+    resp.sendRedirect( req.getContextPath() + "/jsp/good?method=queryGoodType" );
+  }
+  
+  protected void getGoodTypeByCode( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String tempCode = req.getParameter( "typeCode" );
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    Map<String, Object> resultMap = new HashMap<>();
+    GoodType goodType = null;
+    int typeCode = 0;
+    try{
+      typeCode = Integer.parseInt( tempCode );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    
+    goodType = goodTypeService.getGoodTypeByCode( typeCode );
+    if( goodType != null ){
+      resultMap.put( "flag", true );
+      resultMap.put( "gTId", goodType.getId() );
+      resultMap.put( "typeName", goodType.getTypeName() );
+      resultMap.put( "typeCode", goodType.getTypeCode() );
+    }
+    else{
+      resultMap.put( "flag", false );
+    }
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
   }
 }
