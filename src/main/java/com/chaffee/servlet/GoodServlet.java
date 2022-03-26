@@ -54,6 +54,9 @@ public class GoodServlet extends HttpServlet {
       case "view" -> {
         this.view( req, resp );
       }
+      case "querygoodtype" -> {
+        this.queryGoodType( req, resp );
+      }
     }
     
   }
@@ -341,5 +344,13 @@ public class GoodServlet extends HttpServlet {
     req.setAttribute( "totalPageCount", totalPageCount );
     
     req.getRequestDispatcher( "/jsp/goodlist.jsp" ).forward( req, resp );
+  }
+  
+  protected void queryGoodType( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    List<GoodType> goodTypeList = goodTypeService.getGoodTypeList();
+    req.setAttribute( "goodTypeList", goodTypeList );
+    req.getRequestDispatcher( "/jsp/goodtypelist.jsp" ).forward( req, resp );
   }
 }
