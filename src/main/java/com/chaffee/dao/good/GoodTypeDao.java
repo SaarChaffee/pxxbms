@@ -14,4 +14,14 @@ import java.util.List;
 
 public interface GoodTypeDao {
   public List<GoodType> getGoodTypeList( Connection connection ) throws SQLException;
+  
+  public GoodType getGoodTypeById( Connection connection, int id ) throws SQLException;
+  
+  public GoodType getGoodTypeByCode( Connection connection, String typeCode ) throws SQLException;
+  
+  public int addGoodType( Connection connection, GoodType goodType ) throws SQLException;
+  
+  public int delGoodType( Connection connection, int id ) throws SQLException;
+  
+  public int updGoodType( Connection connection, int id, GoodType goodType ) throws SQLException;
 }
