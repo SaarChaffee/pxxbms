@@ -398,11 +398,20 @@ public class GoodServlet extends HttpServlet {
   }
   
   protected void modifyGoodType( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
-      IOException{
+      IOException {
     String tempGTId = req.getParameter( "gtid" );
     int getId = 0;
     GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    GoodType goodType = null;
     
+    try{
+      getId = Integer.parseInt( tempGTId );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    goodType = goodTypeService.getGoodTypeById( getId );
+    req.setAttribute( "goodType", goodType );
+    req.getRequestDispatcher( "/jsp/goodtypemodify.jsp" ).forward( req, resp );
     
   }
 }
