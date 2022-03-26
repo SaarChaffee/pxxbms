@@ -83,6 +83,9 @@ public class GoodServlet extends HttpServlet {
       case "goodtypemodifyexe" -> {
         this.goodTypeModifyExe( req, resp );
       }
+      case "addtype" -> {
+        this.addType( req, resp );
+      }
     }
     
   }
@@ -480,6 +483,33 @@ public class GoodServlet extends HttpServlet {
     }finally{
       out.flush();
       out.close();
+    }
+  }
+  
+  protected void addType( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String typeName = req.getParameter( "typeName" );
+    String tempTypeCode = req.getParameter( "typeCode" );
+    User o = ( User ) req.getSession().getAttribute( Constants.USER_SESSION );
+    int currentUser = o.getId();
+    int gTId = 0;
+    int typeCode = 0;
+    GoodTypeService goodTypeService = new GoodTypeServiceImpl();
+    
+    try{
+      typeCode = Integer.parseInt( tempTypeCode );
+    }catch( NumberFormatException e ){
+      e.printStackTrace();
+    }
+    
+    GoodType goodType = new GoodType();
+    goodType.setTypeName( typeName );
+    goodType.setTypeCode( typeCode );
+    if( goodTypeService.addGoodType( currentUser, goodType ) ){
+      resp.sendRedirect( req.getContextPath() + "/jsp/good?method=queryGoodType" );
+    }
+    else{
+      req.getRequestDispatcher( "/goodtypeadd.jsp" ).forward( req, resp );
     }
   }
 }
