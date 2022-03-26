@@ -33,7 +33,7 @@ $(function () {
         dataType: "json",
         success: function (data) {
           if (data != null) {
-            if (data.flag === false || typeCode.val() === data.gtCode) {
+            if (data.flag === false || typeCode.val() === data.typeCode) {
               validateTip(typeCode.next(), {"color": "green"}, imgYes, true);
             } else {
               validateTip(typeCode.next(), {"color": "red"}, imgNo + " 商品类型编号已存在，请重新输入", false);
