@@ -73,7 +73,7 @@ public class GoodTypeDaoImpl implements GoodTypeDao {
   }
   
   @Override
-  public GoodType getGoodTypeByCode( Connection connection, String typeCode ) throws SQLException {
+  public GoodType getGoodTypeByCode( Connection connection, int typeCode ) throws SQLException {
     PreparedStatement pstm = null;
     ResultSet rs = null;
     GoodType goodType = null;

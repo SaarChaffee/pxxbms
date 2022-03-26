@@ -62,7 +62,7 @@ public class GoodTypeServiceImpl implements GoodTypeService {
   }
   
   @Override
-  public GoodType getGoodTypeByCode( String typeCode ) {
+  public GoodType getGoodTypeByCode( int typeCode ) {
     Connection connection = null;
     GoodType goodType = null;
     

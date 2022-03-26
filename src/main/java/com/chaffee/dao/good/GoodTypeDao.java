@@ -17,7 +17,7 @@ public interface GoodTypeDao {
   
   public GoodType getGoodTypeById( Connection connection, int id ) throws SQLException;
   
-  public GoodType getGoodTypeByCode( Connection connection, String typeCode ) throws SQLException;
+  public GoodType getGoodTypeByCode( Connection connection, int typeCode ) throws SQLException;
   
   public int addGoodType( Connection connection, GoodType goodType ) throws SQLException;
   

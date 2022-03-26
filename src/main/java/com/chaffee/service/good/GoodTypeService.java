@@ -15,7 +15,7 @@ public interface GoodTypeService {
   
   public GoodType getGoodTypeById( int id );
   
-  public GoodType getGoodTypeByCode( String typeCode );
+  public GoodType getGoodTypeByCode( int typeCode );
   
   public boolean addGoodType( int id, GoodType goodType );
   
