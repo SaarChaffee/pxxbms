@@ -16,7 +16,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class GoodDaoImpl implements GoodDao {
@@ -115,7 +114,7 @@ public class GoodDaoImpl implements GoodDao {
   }
   
   @Override
-  public int updateGood( Connection connection, int id, Good good ) throws SQLException {
+  public int updateGood( Connection connection, Good good ) throws SQLException {
     PreparedStatement pstm = null;
     int result = 0;
     
@@ -125,7 +124,7 @@ public class GoodDaoImpl implements GoodDao {
       Object[] param = {
           good.getGoodName(), good.getGoodCode(), good.getGoodType(), good.getInventory(), good.getOwner(),
           good.getCreatedBy(),
-          good.getCreationDate(), id, new Date( System.currentTimeMillis() ), good.getId()
+          good.getCreationDate(), good.getModifyBy(), good.getModifyDate(), good.getId()
       };
       result = DaoUtils.execute( connection, pstm, sql, param );
     }
@@ -239,7 +238,7 @@ public class GoodDaoImpl implements GoodDao {
     PreparedStatement pstm = null;
     ResultSet rs = null;
     Good good = null;
-  
+    
     if( connection != null ){
       String sql = "select g.*,t.typeName as goodTypeName,u.userName as ownerName " +
           "from good g,good_type t,user u " +
@@ -263,7 +262,7 @@ public class GoodDaoImpl implements GoodDao {
       }
     }
     DaoUtils.close( null, pstm, rs );
-  
+    
     return good;
     
     
@@ -271,6 +270,6 @@ public class GoodDaoImpl implements GoodDao {
   
   @Test
   public void test() throws SQLException {
-    System.out.println( this.getGoodList( DaoUtils.getConnection(),"","",0,1,5 ) );
+    System.out.println( this.getGoodList( DaoUtils.getConnection(), "", "", 0, 1, 5 ) );
   }
 }

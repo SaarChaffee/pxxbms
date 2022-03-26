@@ -83,8 +83,10 @@ public class GoodServiceImpl implements GoodService {
     try{
       connection = DaoUtils.getConnection();
       connection.setAutoCommit( false );
+      good.setModifyBy( id );
+      good.setModifyDate( new Date( System.currentTimeMillis() ) );
       logger.info( "'''''''''updateGood''''Open transaction''''''''''" );
-      int i = goodDao.updateGood( connection, id, good );
+      int i = goodDao.updateGood( connection, good );
       if( i > 0 ){
         flag = true;
         logger.info( "'''''''''updateGood''''success''''''''''" );

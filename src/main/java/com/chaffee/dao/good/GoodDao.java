@@ -50,7 +50,7 @@ public interface GoodDao {
    * @return
    * @throws SQLException
    */
-  public int updateGood( Connection connection, int id, Good good ) throws SQLException;
+  public int updateGood( Connection connection, Good good ) throws SQLException;
   
   /**
    * 通过id获得商品
