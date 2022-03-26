@@ -120,12 +120,79 @@ public class GoodTypeServiceImpl implements GoodTypeService {
   
   @Override
   public boolean updGoodType( int id, GoodType goodType ) {
-    return false;
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      goodType.setModifyBy( id );
+      goodType.setModifyDate( new Date( System.currentTimeMillis() ) );
+      logger.info( "'''''''''updateGoodType''''Open transaction''''''''''" );
+      int i = goodTypeDao.updGoodType( connection, goodType );
+      if( i > 0 ){
+        flag = true;
+        logger.info( "'''''''''updateGoodType''''success''''''''''" );
+        
+      }
+      else{
+        logger.info( "'''''''''updateGoodType''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        logger.info( "'''''''''updateGoodType''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    return flag;
   }
   
   @Override
   public boolean delGoodType( int id ) {
-    return false;
+    Connection connection = null;
+    boolean flag = false;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      connection.setAutoCommit( false );
+      logger.info( "'''''''''delGoodType''''Open transaction''''''''''" );
+      int i = goodTypeDao.delGoodType( connection, id );
+      if( i > 0 ){
+        flag = true;
+        logger.info( "'''''''''delGoodType''''success''''''''''" );
+      }
+      else{
+        logger.info( "'''''''''delGoodType''''failed''''''''''" );
+      }
+    }catch( SQLException e ){
+      try{
+        connection.rollback();
+        logger.info( "'''''''''delGoodType''''rollback''''''''''" );
+      }catch( SQLException ex ){
+        ex.printStackTrace();
+      }
+      e.printStackTrace();
+    }finally{
+      try{
+        assert connection != null;
+        connection.setAutoCommit( true );
+      }catch( SQLException e ){
+        e.printStackTrace();
+      }
+      DaoUtils.close( connection, null, null );
+    }
+    return flag;
   }
   
   @Test
