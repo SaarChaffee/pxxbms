@@ -8,7 +8,7 @@
   </div>
   <div class="providerAdd">
     <form id="goodTypeForm" name="goodTypeForm" method="post" action="${pageContext.request.contextPath }/jsp/good">
-      <input type="hidden" name="method" value="typemodifyexe">
+      <input type="hidden" name="method" value="goodtypemodifyexe">
       <input type="hidden" name="gtid" value="${goodType.id }"/>
       <div>
         <label for="typeName">商品类型名称：</label>
