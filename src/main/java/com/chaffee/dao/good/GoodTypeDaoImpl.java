@@ -110,6 +110,7 @@ public class GoodTypeDaoImpl implements GoodTypeDao {
           goodType.getTypeCode(), goodType.getTypeName(), goodType.getCreatedBy(), goodType.getCreationDate(),
           goodType.getModifyBy(), goodType.getModifyDate()
       };
+      result = DaoUtils.execute( connection, pstm, sql, param );
     }
     DaoUtils.close( null, pstm, null );
     
