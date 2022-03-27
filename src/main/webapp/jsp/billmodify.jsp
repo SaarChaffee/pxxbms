@@ -3,59 +3,60 @@
 <%@include file="/jsp/common/head.jsp" %>
 
 <div class="right">
-    <div class="location">
-        <strong>你现在所在的位置是:</strong>
-        <span>订单管理页面 >> 修改订单页面</span>
-    </div>
-    <div class="providerAdd">
-        <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill">
-            <input type="hidden" name="method" value="modifysave">
-            <input type="hidden" name="id" value="${bill.id }">
-            <!--div的class 为error是验证错误，ok是验证成功-->
-            <div class="">
-                <label for="billCode">订单编号：</label>
-                <input type="text" name="billCode" id="billCode" value="${bill.billCode }">
-            </div>
-            <div>
-                <label>顾客姓名：</label>
-                <input style="color: black" id="customerCode" readonly="readonly" value="${bill.customerName }">
-            </div>
-            <div>
-                <label for="goodName">商品名称：</label>
-                <input style="color: black" id="goodName" readonly="readonly" value="${bill.goodName }">
-            </div>
-            <div>
-                <label for="quantity">商品数量：</label>
-                <input type="text" name="quantity" id="quantity" value="${bill.quantity }">
-                <font color="red"></font>
-            </div>
-            <div>
-                <label for="goodPrice">商品价格：</label>
-                <input type="text" name="goodPrice" id="goodPrice" value="${bill.goodPrice }">
-                <font color="red"></font>
-            </div>
-            <div>
-                <label for="totalPrice">总金额：</label>
-                <input type="text" name="totalPrice" readonly="readonly" id="totalPrice" value="${bill.totalPrice}">
-            </div>
-            <div>
-                <label for="paymentMethod">付款方式：</label>
-                <!-- 列出所有的角色分类 -->
-                <input type="hidden" value="${bill.paymentMethod }" id="rid"/>
-                <select name="paymentMethod" id="paymentMethod"></select>
-                <font color="red"></font>
-            </div>
-            <div>
-                <label for="address">地址：</label>
-                <input type="text" id="address" name="address" value="${bill.address}">
-                <font color="red"></font>
-            </div>
-            <div class="providerAddBtn">
-                <input type="button" name="save" id="save" value="保存">
-                <input type="button" id="back" name="back" value="返回">
-            </div>
-        </form>
-    </div>
+  <div class="location">
+    <strong>你现在所在的位置是:</strong>
+    <span>订单管理页面 >> 修改订单页面</span>
+  </div>
+  <div class="providerAdd">
+    <form id="billForm" name="billForm" method="post" action="${pageContext.request.contextPath }/jsp/bill">
+      <input type="hidden" name="method" value="modifysave">
+      <input type="hidden" name="id" value="${bill.id }">
+      <!--div的class 为error是验证错误，ok是验证成功-->
+      <div class="">
+        <label for="billCode">订单编号：</label>
+        <input type="text" name="billCode" id="billCode" value="${bill.billCode }">
+        <font color="red"></font>
+      </div>
+      <div>
+        <label>顾客姓名：</label>
+        <input style="color: black" id="customerCode" readonly="readonly" value="${bill.customerName }">
+      </div>
+      <div>
+        <label for="goodName">商品名称：</label>
+        <input style="color: black" id="goodName" readonly="readonly" value="${bill.goodName }">
+      </div>
+      <div>
+        <label for="quantity">商品数量：</label>
+        <input type="text" name="quantity" id="quantity" value="${bill.quantity }">
+        <font color="red"></font>
+      </div>
+      <div>
+        <label for="goodPrice">商品价格：</label>
+        <input type="text" name="goodPrice" id="goodPrice" value="${bill.goodPrice }">
+        <font color="red"></font>
+      </div>
+      <div>
+        <label for="totalPrice">总金额：</label>
+        <input type="text" name="totalPrice" readonly="readonly" id="totalPrice" value="${bill.totalPrice}">
+      </div>
+      <div>
+        <label for="paymentMethod">付款方式：</label>
+        <!-- 列出所有的角色分类 -->
+        <input type="hidden" value="${bill.paymentMethod }" id="rid"/>
+        <select name="paymentMethod" id="paymentMethod"></select>
+        <font color="red"></font>
+      </div>
+      <div>
+        <label for="address">地址：</label>
+        <input type="text" id="address" name="address" value="${bill.address}">
+        <font color="red"></font>
+      </div>
+      <div class="providerAddBtn">
+        <input type="button" name="save" id="save" value="保存">
+        <input type="button" id="back" name="back" value="返回">
+      </div>
+    </form>
+  </div>
 
 </div>
 </section>
