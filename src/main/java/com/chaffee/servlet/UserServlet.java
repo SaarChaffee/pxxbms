@@ -34,9 +34,6 @@ public class UserServlet extends HttpServlet {
     String method = req.getParameter( "method" );
     if( method != null ){
       switch( method ){
-        case "savepwd" -> {
-          this.savePwd( req, resp );
-        }
         case "query" -> {
           this.query( req, resp );
         }
@@ -58,6 +55,9 @@ public class UserServlet extends HttpServlet {
         case "view" -> {
           this.view( req, resp );
         }
+        case "pwdmodify" -> {
+          this.pwdModify( req, resp );
+        }
       }
     }
   }
@@ -72,8 +72,8 @@ public class UserServlet extends HttpServlet {
       case "modifyexe" -> {
         this.modifyExe( req, resp );
       }
-      case "pwdmodify" -> {
-        this.pwdModify( req, resp );
+      case "savepwd" -> {
+        this.savePwd( req, resp );
       }
     }
   }
