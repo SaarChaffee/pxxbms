@@ -56,7 +56,7 @@ $(function () {
     if (typeName.attr("validateStatus") === "true"
         && typeCode.attr("validateStatus") === "true") {
       if (confirm("是否确认要提交数据？")) {
-        $("#typeForm").submit();
+        $("#goodTypeForm").submit();
       }
     }
   });
