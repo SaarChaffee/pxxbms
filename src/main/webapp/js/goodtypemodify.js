@@ -25,7 +25,7 @@ $(function () {
   });
   
   typeCode.on("blur", function () {
-    if (typeCode.val() !== null && typeCode.val() !== "" && /^\w/.test(typeCode.val())) {
+    if (typeCode.val() !== null && typeCode.val() !== "" && typeCode.val() > 0 && /^\d+$/.test(typeCode.val())) {
       $.ajax({
         type: "GET",
         url: path + "/jsp/good",
