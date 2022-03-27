@@ -62,7 +62,7 @@ $(function () {
       typeName.blur();
     } else {
       if (confirm("是否确认提交数据")) {
-        $("#typeForm").submit();
+        $("#goodTypeForm").submit();
       }
     }
   });
