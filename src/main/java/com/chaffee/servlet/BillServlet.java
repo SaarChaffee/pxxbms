@@ -49,6 +49,9 @@ public class BillServlet extends HttpServlet {
       case "view" -> {
         this.view( req, resp );
       }
+      case "getBillByCode" -> {
+        this.getBillByCode( req, resp );
+      }
     }
     
     
@@ -295,5 +298,33 @@ public class BillServlet extends HttpServlet {
     billService.updateBill( currentUser, bill );
     
     resp.sendRedirect( req.getContextPath() + "/jsp/bill?method=query" );
+  }
+  
+  protected void getBillByCode( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
+      IOException {
+    String billCode = req.getParameter( "billCode" );
+    BillService billService = new BillServiceImpl();
+    Map<String, Object> resultMap = new HashMap<>();
+    
+    Bill bill = billService.getBillByCode( billCode );
+    if( bill != null ){
+      resultMap.put( "flag", true );
+      resultMap.put( "bid", bill.getId() );
+      resultMap.put( "bCode", bill.getBillCode() );
+    }
+    else{
+      resultMap.put( "flag", false );
+    }
+    
+    PrintWriter out = resp.getWriter();
+    try{
+      resp.setContentType( "application/json" );
+      Gson gson = new Gson();
+      String json = gson.toJson( resultMap );
+      out.write( json );
+    }finally{
+      out.flush();
+      out.close();
+    }
   }
 }

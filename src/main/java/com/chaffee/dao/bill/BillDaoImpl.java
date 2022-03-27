@@ -224,9 +224,48 @@ public class BillDaoImpl implements BillDao {
     return result;
   }
   
+  @Override
+  public Bill getBillByCode( Connection connection, String billCode ) throws SQLException {
+    PreparedStatement pstm = null;
+    ResultSet rs = null;
+    Bill bill = null;
+    
+    if( connection != null ){
+      String sql = "select b.*,p.typeName as paymentMethodName,u.userName as customerName,g.goodName as goodName " +
+          "from bill b,payment_method p,user u,good g " +
+          "where b.paymentMethod = p.id and b.customerCode=u.id and b.goodCode = g.id and b.billCode = ?";
+      Object[] param = { billCode };
+      rs = DaoUtils.execute( connection, pstm, rs, sql, param );
+      while( rs.next() ){
+        bill = new Bill();
+        bill.setId( rs.getInt( "id" ) );
+        bill.setBillCode( rs.getString( "billCode" ) );
+        bill.setGoodCode( rs.getInt( "goodCode" ) );
+        bill.setQuantity( rs.getInt( "quantity" ) );
+        bill.setGoodPrice( rs.getDouble( "goodPrice" ) );
+        bill.setTotalPrice( rs.getDouble( "totalPrice" ) );
+        bill.setCustomerCode( rs.getInt( "customerCode" ) );
+        bill.setAddress( rs.getString( "address" ) );
+        bill.setBillTime( rs.getDate( "billTime" ) );
+        bill.setPaymentMethod( rs.getInt( "paymentMethod" ) );
+        bill.setDeliveryTime( rs.getDate( "deliveryTime" ) );
+        bill.setCreatedBy( rs.getInt( "createdBy" ) );
+        bill.setCreationDate( rs.getDate( "creationDate" ) );
+        bill.setModifyBy( rs.getInt( "modifyBy" ) );
+        bill.setModifyDate( rs.getDate( "modifyDate" ) );
+        bill.setPaymentMethodName( rs.getString( "paymentMethodName" ) );
+        bill.setCustomerName( rs.getString( "customerName" ) );
+        bill.setGoodName( rs.getString( "goodName" ) );
+      }
+    }
+    DaoUtils.close( null, pstm, rs );
+    
+    return bill;
+  }
+  
   @Test
   public void test() throws Exception {
-    System.out.println( this.getBillById( DaoUtils.getConnection(), 1 ) );
+    System.out.println( this.getBillByCode( DaoUtils.getConnection(), "10" ) );
   }
 }
 

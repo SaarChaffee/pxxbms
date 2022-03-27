@@ -108,6 +108,34 @@ $(function () {
   //
   // });
   
+  billCode.on("blur", function () {
+    if (billCode.val() !== null && billCode.val() !== "") {
+      $.ajax({
+        type: "GET",
+        url: path + "/jsp/bill",
+        data: {
+          method: "getBillByCode",
+          billCode: billCode.val(),
+        },
+        dataType: "json",
+        success: function (data) {
+          if (data != null) {
+            if (data.flag === false || billCode.val() === data.bCode) {
+              validateTip(billCode.next(), {"color": "green"}, imgYes, true);
+            } else {
+              validateTip(billCode.next(), {"color": "red"}, imgNo + " 订单号已被使用，请重新输入", false);
+            }
+          }
+        }
+      })
+    } else {
+      validateTip(billCode.next(), {"color": "red"}, imgNo + " 订单号不能为空，请重新输入", false);
+    }
+  }).on("focus", function () {
+    //显示友情提示
+    validateTip(billCode.next(), {"color": "#666666"}, "* 请输入订单号", false);
+  }).focus();
+  
   paymentMethod.on("focus", function () {
     validateTip(paymentMethod.next(), {"color": "#666666"}, "* 请选择付款方式", false);
   }).on("blur", function () {
@@ -122,8 +150,13 @@ $(function () {
   quantity.on("focus", function () {
     validateTip(quantity.next(), {"color": "#666666"}, "* 请输入正整数", false);
   }).on("blur", function () {
-    if (this.value !== "" && goodPrice.val() !== "" && this.value !== null && goodPrice.val() !== null) {
-      totalPrice.val(accMul(this.value, goodPrice.val()));
+    if (this.value !== "" && this.value !== null) {
+      if (goodPrice.val() !== null && goodPrice.val() !== "") {
+        totalPrice.val(accMul(this.value, goodPrice.val()));
+      }
+      validateTip(quantity.next(), {"color": "green"}, imgYes, true);
+    } else {
+      validateTip(quantity.next(), {"color": "red"}, "* 格式错误", false);
     }
   });
   
@@ -133,18 +166,31 @@ $(function () {
     this.value = priceReg(this.value);
   }).on("blur", function () {
     this.value = priceReg(this.value);
-    if (this.value !== "" && quantity.val() !== "" && this.value !== null && quantity.val() !== null) {
+    if (this.value !== "" && this.value !== null) {
       //解决精度丢失问题
-      totalPrice.val(accMul(this.value, quantity.val()));
+      validateTip(goodPrice.next(), {"color": "green"}, imgYes, true);
+      if (quantity.val() !== "" && quantity.val() !== null) {
+        totalPrice.val(accMul(this.value, quantity.val()));
+      }
+    } else {
+      validateTip(goodPrice.next(), {"color": "red"}, "* 格式错误请重新输入", false);
     }
   });
   
   
   addBtn.on("click", function () {
-    goodName.blur();
+    billCode.blur();
+    goodCode.blur();
+    goodPrice.blur();
+    quantity.blur();
     customerCode.blur();
     paymentMethod.blur();
-    if (paymentMethod.attr("validateStatus") === "true") {
+    if (billCode.attr("validateStatus") === "true" &&
+        goodCode.attr("validateStatus") === "true" &&
+        goodPrice.attr("validateStatus") === "true" &&
+        quantity.attr("validateStatus") === "true" &&
+        customerCode.attr("validateStatus") === "true" &&
+        paymentMethod.attr("validateStatus") === "true") {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();
       }

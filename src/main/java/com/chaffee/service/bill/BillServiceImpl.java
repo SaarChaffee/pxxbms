@@ -196,6 +196,23 @@ public class BillServiceImpl implements BillService {
     
   }
   
+  @Override
+  public Bill getBillByCode( String billCode ) {
+    Connection connection = null;
+    Bill bill = null;
+    
+    try{
+      connection = DaoUtils.getConnection();
+      bill = billDao.getBillByCode( connection, billCode );
+    }catch( SQLException e ){
+      e.printStackTrace();
+    }finally{
+      DaoUtils.close( connection, null, null );
+    }
+    
+    return bill;
+  }
+  
   @Test
   public void test() {
     logger.info( this.getBillById( 1 ) );

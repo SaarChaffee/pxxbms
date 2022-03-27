@@ -24,4 +24,6 @@ public interface BillService {
   public boolean addBill( int id, Bill bill );
   
   public boolean deleteBill( int id );
+  
+  public Bill getBillByCode(String billCode);
 }

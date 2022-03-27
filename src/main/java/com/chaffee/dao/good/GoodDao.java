@@ -45,7 +45,6 @@ public interface GoodDao {
    * 更新商品
    *
    * @param connection
-   * @param id
    * @param good
    * @return
    * @throws SQLException
