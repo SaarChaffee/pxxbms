@@ -180,16 +180,12 @@ $(function () {
   
   addBtn.on("click", function () {
     billCode.blur();
-    goodCode.blur();
     goodPrice.blur();
     quantity.blur();
-    customerCode.blur();
     paymentMethod.blur();
     if (billCode.attr("validateStatus") === "true" &&
-        goodCode.attr("validateStatus") === "true" &&
         goodPrice.attr("validateStatus") === "true" &&
         quantity.attr("validateStatus") === "true" &&
-        customerCode.attr("validateStatus") === "true" &&
         paymentMethod.attr("validateStatus") === "true") {
       if (confirm("是否确认提交数据")) {
         $("#billForm").submit();
