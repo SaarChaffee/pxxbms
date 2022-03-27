@@ -38,27 +38,3 @@ public class SysFilter implements Filter {
   }
 }
 
-/* @Override
-    public void init( FilterConfig filterConfig ) throws ServletException {
-        Filter.super.init( filterConfig );
-    }
-    
-    @Override
-    public void doFilter( ServletRequest servletRequest, ServletResponse servletResponse,
-    FilterChain filterChain ) throws IOException, ServletException {
-        HttpServletRequest request = ( HttpServletRequest ) servletRequest;
-        HttpServletResponse response = ( HttpServletResponse ) servletResponse;
-        Object session = request.getSession().getAttribute( Constant.USER_SESSION );
-        if( session == null ){
-            System.out.println("过滤成功");
-            response.sendRedirect( request.getContextPath()+"/login.jsp");
-        }
-    
-        
-        filterChain.doFilter( servletRequest, servletResponse );
-    }
-    
-    @Override
-    public void destroy() {
-        Filter.super.destroy();
-    }*/
