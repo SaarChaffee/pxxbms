@@ -29,10 +29,7 @@ li {
   height: 48px;
   line-height: 48px;
   font-size: 14px;
-  background: linear-gradient(to bottom, #60acf0, #64a5df, #62a0dd, #5994d6, #4f8ace, #4880ca);
-  background: -webkit-linear-gradient(to bottom, #60acf0, #64a5df, #62a0dd, #5994d6, #4f8ace, #4880ca);
-  background: -moz-linear-gradient(to bottom, #60acf0, #64a5df, #62a0dd, #5994d6, #4f8ace, #4880ca);
-  background: -ms-linear-gradient(to bottom, #60acf0, #64a5df, #62a0dd, #5994d6, #4f8ace, #4880ca);
+  background: #4287c2;
 }
 
 .publicHeader h1 {
@@ -75,7 +72,7 @@ li {
   border: 1px solid #192b02;
   border-radius: 4px;
   font-weight: bold;
-  background: linear-gradient(to bottom, #70b21c, #5c9613, #47740e, #3b6209, #2b4906);
+  background: #5c9613;
 }
 
 /*时间*/
@@ -83,7 +80,7 @@ li {
   height: 28px;
   line-height: 28px;
   font-size: 12px;
-  background: linear-gradient(to bottom, #f5f9f8, #eef2fb, #e2ecf5, #e2ecf5, #e0edf6);
+  background: #f5f9f8;
   padding-left: 20px;
   color: #808589;
 }
@@ -135,7 +132,7 @@ li {
   width: 10px;
   height: 10px;
   display: inline-block;
-  background: radial-gradient(#70c2f4, #3a8dc1, #035384, #4696c7, #83d1f5);
+  background: #4287c2;
   border-radius: 50%;
 }
 
@@ -212,7 +209,7 @@ li {
   line-height: 30px;
   border: 1px solid #e6eaf6;
   border-radius: 8px;
-  background: linear-gradient(to bottom, #fefefe, #ffffff, #f6fafd);
+  background: #ffffff;
   color: #4a4a4a;
   padding-left: 30px;
 }
