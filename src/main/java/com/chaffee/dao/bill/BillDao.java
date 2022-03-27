@@ -82,6 +82,14 @@ public interface BillDao {
    */
   public int deleteBill( Connection connection, int id ) throws SQLException;
   
+  /**
+   * 通过billCode获得订单
+   *
+   * @param connection
+   * @param billCode
+   * @return Bill
+   * @throws SQLException
+   */
   public Bill getBillByCode( Connection connection, String billCode ) throws SQLException;
   
 }
