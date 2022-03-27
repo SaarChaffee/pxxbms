@@ -46,7 +46,7 @@ public class GoodDaoImpl implements GoodDao {
         sql.append( " and g.goodType = ?" );
         list.add( goodType );
       }
-      sql.append( " order by g.id ASC limit ?,?" );
+      sql.append( " order by g.goodCode ASC limit ?,?" );
       currentPageNo = ( currentPageNo - 1 ) * pageSize;
       list.add( currentPageNo );
       list.add( pageSize );

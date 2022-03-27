@@ -39,7 +39,7 @@ public class UserDaoImpl implements UserDao {
         sql.append( " and u.userRole = ?" );
         list.add( userRole );
       }
-      sql.append( " order by u.id ASC limit ?,?" );
+      sql.append( " order by u.userCode ASC limit ?,?" );
       currentPageNo = ( currentPageNo - 1 ) * pageSize;
       list.add( currentPageNo );
       list.add( pageSize );

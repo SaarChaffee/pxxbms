@@ -51,7 +51,7 @@ public class BillDaoImpl implements BillDao {
         sql.append( " and b.paymentMethod = ?" );
         list.add( paymentMethod );
       }
-      sql.append( " order by p.id ASC limit ?,?" );
+      sql.append( " order by b.billCode ASC limit ?,?" );
       currentPageNo = ( currentPageNo - 1 ) * pageSize;
       list.add( currentPageNo );
       list.add( pageSize );
