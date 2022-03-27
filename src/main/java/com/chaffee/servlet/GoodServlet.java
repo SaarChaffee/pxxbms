@@ -447,7 +447,7 @@ public class GoodServlet extends HttpServlet {
     goodType.setTypeCode( typeCode );
     
     goodTypeService.updGoodType( currentUser, goodType );
-    resp.sendRedirect( req.getContextPath() + "/jsp/good?method=queryGoodType" );
+    resp.sendRedirect( req.getContextPath() + "/jsp/good?method=querygoodtype" );
   }
   
   protected void getGoodTypeByCode( HttpServletRequest req, HttpServletResponse resp ) throws ServletException,
