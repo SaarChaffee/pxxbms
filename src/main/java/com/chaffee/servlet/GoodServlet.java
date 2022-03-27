@@ -506,7 +506,7 @@ public class GoodServlet extends HttpServlet {
     goodType.setTypeName( typeName );
     goodType.setTypeCode( typeCode );
     if( goodTypeService.addGoodType( currentUser, goodType ) ){
-      resp.sendRedirect( req.getContextPath() + "/jsp/good?method=queryGoodType" );
+      resp.sendRedirect( req.getContextPath() + "/jsp/good?method=querygoodtype" );
     }
     else{
       req.getRequestDispatcher( "/goodtypeadd.jsp" ).forward( req, resp );
