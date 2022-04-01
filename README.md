@@ -2,7 +2,7 @@ PXX background management system
 
 ## 环境
 
-- `JDK 17`
+- `JDK 8`
 - `Maven 3.8.3`
 - `Tomcat 9`
 - `MySQL 8`
