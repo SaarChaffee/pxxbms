@@ -33,39 +33,39 @@ public class GoodServlet extends HttpServlet {
   protected void doGet( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String method = req.getParameter( "method" );
     switch( method ){
-      case "query" -> {
+      case "query":
         this.query( req, resp );
-      }
-      case "modify" -> {
+        break;
+      case "modify":
         this.modify( req, resp );
-      }
-      case "gettypelist" -> {
+        break;
+      case "gettypelist":
         this.getTypeList( req, resp );
-      }
-      case "getGoodByName" -> {
+        break;
+      case "getGoodByName":
         this.getGoodByName( req, resp );
-      }
-      case "delGood" -> {
+        break;
+      case "delGood":
         this.delGood( req, resp );
-      }
-      case "getGoodByCode" -> {
+        break;
+      case "getGoodByCode":
         this.getGoodByCode( req, resp );
-      }
-      case "view" -> {
+        break;
+      case "view":
         this.view( req, resp );
-      }
-      case "querygoodtype" -> {
+        break;
+      case "querygoodtype":
         this.queryGoodType( req, resp );
-      }
-      case "delGoodType" -> {
+        break;
+      case "delGoodType":
         this.delGoodType( req, resp );
-      }
-      case "modifygoodtype" -> {
+        break;
+      case "modifygoodtype":
         this.modifyGoodType( req, resp );
-      }
-      case "getGoodTypeByCode" -> {
+        break;
+      case "getGoodTypeByCode":
         this.getGoodTypeByCode( req, resp );
-      }
+        break;
     }
     
   }
@@ -74,18 +74,18 @@ public class GoodServlet extends HttpServlet {
   protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String method = req.getParameter( "method" );
     switch( method ){
-      case "add" -> {
+      case "add":
         this.add( req, resp );
-      }
-      case "modifyexe" -> {
+        break;
+      case "modifyexe":
         this.modifyExe( req, resp );
-      }
-      case "goodtypemodifyexe" -> {
+        break;
+      case "goodtypemodifyexe":
         this.goodTypeModifyExe( req, resp );
-      }
-      case "addtype" -> {
+        break;
+      case "addtype":
         this.addType( req, resp );
-      }
+        break;
     }
     
   }

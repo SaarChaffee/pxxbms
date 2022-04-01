@@ -34,30 +34,30 @@ public class UserServlet extends HttpServlet {
     String method = req.getParameter( "method" );
     if( method != null ){
       switch( method ){
-        case "query" -> {
+        case "query":
           this.query( req, resp );
-        }
-        case "getrolelist" -> {
+          break;
+        case "getrolelist":
           this.getRoleList( req, resp );
-        }
-        case "deluser" -> {
+          break;
+        case "deluser":
           this.delUser( req, resp );
-        }
-        case "modify" -> {
+          break;
+        case "modify":
           this.modify( req, resp );
-        }
-        case "isTraderExist" -> {
+          break;
+        case "isTraderExist":
           this.isTraderExist( req, resp );
-        }
-        case "getUserByCode" -> {
+          break;
+        case "getUserByCode":
           this.getUserByCode( req, resp );
-        }
-        case "view" -> {
+          break;
+        case "view":
           this.view( req, resp );
-        }
-        case "pwdmodify" -> {
+          break;
+        case "pwdmodify":
           this.pwdModify( req, resp );
-        }
+          break;
       }
     }
   }
@@ -66,15 +66,15 @@ public class UserServlet extends HttpServlet {
   protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String method = req.getParameter( "method" );
     switch( method ){
-      case "add" -> {
+      case "add":
         this.add( req, resp );
-      }
-      case "modifyexe" -> {
+        break;
+      case "modifyexe":
         this.modifyExe( req, resp );
-      }
-      case "savepwd" -> {
+        break;
+      case "savepwd":
         this.savePwd( req, resp );
-      }
+        break;
     }
   }
   

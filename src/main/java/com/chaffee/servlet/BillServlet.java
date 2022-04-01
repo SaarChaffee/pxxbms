@@ -34,24 +34,24 @@ public class BillServlet extends HttpServlet {
   protected void doGet( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String method = req.getParameter( "method" );
     switch( method ){
-      case "query" -> {
+      case "query":
         this.query( req, resp );
-      }
-      case "modify" -> {
+        break;
+      case "modify":
         this.modify( req, resp );
-      }
-      case "getPaymentMethodList" -> {
+        break;
+      case "getPaymentMethodList":
         this.getPaymentMethodList( req, resp );
-      }
-      case "delbill" -> {
+        break;
+      case "delbill":
         this.del( req, resp );
-      }
-      case "view" -> {
+        break;
+      case "view":
         this.view( req, resp );
-      }
-      case "getBillByCode" -> {
+        break;
+      case "getBillByCode":
         this.getBillByCode( req, resp );
-      }
+        break;
     }
     
     
@@ -61,12 +61,12 @@ public class BillServlet extends HttpServlet {
   protected void doPost( HttpServletRequest req, HttpServletResponse resp ) throws ServletException, IOException {
     String method = req.getParameter( "method" );
     switch( method ){
-      case "add" -> {
+      case "add":
         this.add( req, resp );
-      }
-      case "modifysave" -> {
+        break;
+      case "modifysave":
         this.modifyExec( req, resp );
-      }
+        break;
     }
   }
   
